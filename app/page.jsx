@@ -1,10 +1,15 @@
+"use client";
 import Card from "@components/Card/Card";
 import OverlayContainer from "@components/OverlayContainer/OverlayContainer";
 import LinkButton from "@components/Buttons/LinkButton";
+import SliderCarousel from "@components/Slider/SliderComponent";
 
 const Home = () => {
   return (
     <>
+      <section className="w-full flex-center flex-col">
+        <SliderCarousel />
+      </section>
       <section className="w-full flex-center flex-col">
         <h1 className="head_text text-center">
           Đồ án PBL6
@@ -61,7 +66,7 @@ const Home = () => {
               imgAlt="Women Collection"
             >
               <LinkButton href="" extraClass="absolute bottom-2 z-20">
-              Đồng Hồ Điện Tử
+                Đồng Hồ Điện Tử
               </LinkButton>
             </OverlayContainer>
           </div>
@@ -71,7 +76,7 @@ const Home = () => {
               imgAlt="Women Collection"
             >
               <LinkButton href="" extraClass="absolute bottom-2 z-20">
-              Đồng Hồ Cao Cấp
+                Đồng Hồ Cao Cấp
               </LinkButton>
             </OverlayContainer>
           </div>
@@ -91,7 +96,7 @@ const Home = () => {
               imgAlt="Women Collection"
             >
               <LinkButton href="" extraClass="absolute bottom-2 z-20">
-              Đồng Hồ Dây Da
+                Đồng Hồ Dây Da
               </LinkButton>
             </OverlayContainer>
           </div>
