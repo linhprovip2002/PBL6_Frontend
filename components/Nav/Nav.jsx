@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
+import styles from "./Nav.module.css";
+import cn from "classnames";
 const Nav = () => {
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -20,30 +21,30 @@ const Nav = () => {
       </div>
 
       <div className="flex gap-6 font-satoshi flex-center max-md:text-sm">
-        <Link href="" className="categories">
+        <Link href="" className={cn("categories", styles.navLink)}>
           Thương hiệu
         </Link>
-        <Link href="" className="categories">
+        <Link href="" className={cn("categories", styles.navLink)}>
           Nam
         </Link>
-        <Link href="" className="categories">
+        <Link href="" className={cn("categories", styles.navLink)}>
           Nữ
         </Link>
-        <Link href="" className="categories">
+        <Link href="" className={cn("categories", styles.navLink)}>
           Cặp đôi
         </Link>
-        <Link href="" className="categories">
+        <Link href="" className={cn("categories", styles.navLink)}>
           Phụ kiện
         </Link>
-        <Link href="" className="categories">
+        <Link href="" className={cn("categories", styles.navLink)}>
           Dịch vụ
         </Link>
-        <Link href="" className="categories">
+        <Link href="" className={cn("categories", styles.navLink)}>
           Liên hệ
         </Link>
       </div>
 
-      <div className="sm:flex hidden">
+      <div className="sm:flex">
         <div className="flex gap-3 md:gap-7">
           <form className="input-container">
             <input
