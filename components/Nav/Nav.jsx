@@ -4,11 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Nav.module.css";
 import cn from "classnames";
+import { navMenuList } from "@utils/data";
 const Nav = () => {
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <div className="md:mr-3">
-        <Link href="/" className="flex gap-2 flex-center max-md:hidden block">
+        <Link
+          href="/"
+          className={cn(
+            "flex gap-2 flex-center max-md:hidden block",
+            styles.navLink
+          )}
+        >
           <Image
             src="/assets/images/logo.svg"
             alt="logo"
@@ -19,31 +26,13 @@ const Nav = () => {
           <p className="logo_text">PBL6</p>
         </Link>
       </div>
-
       <div className="flex gap-6 font-satoshi flex-center max-md:text-sm">
-        <Link href="" className={cn("categories", styles.navLink)}>
-          Thương hiệu
-        </Link>
-        <Link href="" className={cn("categories", styles.navLink)}>
-          Nam
-        </Link>
-        <Link href="" className={cn("categories", styles.navLink)}>
-          Nữ
-        </Link>
-        <Link href="" className={cn("categories", styles.navLink)}>
-          Cặp đôi
-        </Link>
-        <Link href="" className={cn("categories", styles.navLink)}>
-          Phụ kiện
-        </Link>
-        <Link href="" className={cn("categories", styles.navLink)}>
-          Dịch vụ
-        </Link>
-        <Link href="" className={cn("categories", styles.navLink)}>
-          Liên hệ
-        </Link>
+        {navMenuList?.map((item, index) => (
+          <Link id={index} href="" className={cn("categories", styles.navLink)}>
+            {item}
+          </Link>
+        ))}
       </div>
-
       <div className="sm:flex">
         <div className="flex gap-3 md:gap-7">
           <form className="input-container">

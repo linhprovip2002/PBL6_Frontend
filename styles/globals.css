@@ -149,7 +149,7 @@
 
 /* Nav Component */
 .logo_text {
-  @apply max-md:hidden font-satoshi font-semibold text-lg text-black tracking-wide gap-3;
+  @apply max-md:hidden font-satoshi font-semibold text-lg text-black tracking-wide gap-3 -mb-1;
 }
 
 .dropdown {
