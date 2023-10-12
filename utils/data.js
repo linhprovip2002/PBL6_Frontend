@@ -10,21 +10,25 @@ export const navMenuList = [
 
 export const cardList = [
   {
+    id: 1,
     name: "Orient SK RA-AA0B02R19A",
     price: "20.000.000 đ",
     image: "/assets/images/watch1.jpg",
   },
   {
+    id: 2,
     name: "Orient SK RA-AA0B02R19B",
     price: "21.000.000 đ",
     image: "/assets/images/watch1.jpg",
   },
   {
+    id: 3,
     name: "Orient SK RA-AA0B02R19C",
     price: "22.000.000 đ",
     image: "/assets/images/watch1.jpg",
   },
   {
+    id: 4,
     name: "Orient SK RA-AA0B02R19D",
     price: "23.000.000 đ",
     image: "/assets/images/watch1.jpg",
