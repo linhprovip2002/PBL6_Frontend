@@ -7,30 +7,30 @@ export default function SliderCarousel() {
   const bootstrap = [
     {
       id: 1,
-      title: "Fashion",
-      body: "Đồng hồ cách làm nên con người bạn",
-      imageUrl: "/assets/images/men.jpg",
+      title: "Thời trang",
+      body: "Không gì có thể thay thế được những giá trị mà cỗ máy thời gian mang lại. Một người tinh tế, thời thượng là người biết cách tạo nên sự đặc biệt cho riêng mình.",
+      imageUrl: "/assets/images/slide0.jpg",
       docs: "https://getbootstrap.com/docs/4.0/components/carousel/",
     },
     {
       id: 2,
-      title: "Fashion",
-      body: "Đồng hồ cách làm nên con người bạn",
-      imageUrl: "/assets/images/men.jpg",
+      title: "Đẳng cấp",
+      body: "Hầu hết các tỷ phú, doanh nhân thành đạt, các ngôi sao danh tiếng trên thế giới đều sở hữu riêng cho mình rất nhiều đồng hồ đeo tay. Ở phạm trù này, nó mang tính biểu tượng và thể hiện quyền lực của người đàn ông.",
+      imageUrl: "/assets/images/slide1.jpg",
       docs: "https://getbootstrap.com/docs/4.0/components/carousel/",
     },
     {
       id: 3,
-      title: "Fashion",
-      body: "Đồng hồ cách làm nên con người bạn",
-      imageUrl: "/assets/images/men.jpg",
+      title: "Lịch sự",
+      body: "Việc đeo đồng hồ của bạn, đặc biệt nếu bạn là một doanh nhân, hay một nhân viên văn phòng còn phản ánh bạn là người coi trọng giờ giấc, đúng giờ. ",
+      imageUrl: "/assets/images/slide2.jpg",
       docs: "https://getbootstrap.com/docs/4.0/components/carousel/",
     },
     {
       id: 4,
-      title: "Fashion",
-      body: "Đồng hồ cách làm nên con người bạn",
-      imageUrl: "/assets/images/men.jpg",
+      title: "Đánh dấu",
+      body: "Kỉ niệm 1 ngày gì đó ý nghĩa như ngày cưới, ngày hoàn thành dự án,… thì đồng hồ đeo tay là món quà hàm chứa nhiều ý nghĩa. ",
+      imageUrl: "/assets/images/slide3.jpg",
       docs: "https://getbootstrap.com/docs/4.0/components/carousel/",
     },
   ];
@@ -47,7 +47,7 @@ export default function SliderCarousel() {
       pause={false}
     >
       {bootstrap.map((item) => (
-        <Carousel.Item key={item.id} className={styles.itemP} interval={1500}>
+        <Carousel.Item key={item.id} className={styles.itemP} interval={5000}>
           <img src={item.imageUrl} alt="slides" />
           <Carousel.Caption className={styles.caption}>
             <h3>{item.title}</h3>
