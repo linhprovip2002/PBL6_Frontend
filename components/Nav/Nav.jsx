@@ -39,7 +39,7 @@ const Nav = () => {
             <input
               type="text"
               placeholder="Tìm sản phẩm"
-              className="search_input peer"
+              className="search_input peer max-md:hidden"
               required
             />
           </form>

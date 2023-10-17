@@ -32,7 +32,7 @@ const Card = () => {
         <div className={styles.card} key={index}>
           <div className={styles.imageContainer}>
             <Link
-              href=""
+              href="/product"
               onMouseOver={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
