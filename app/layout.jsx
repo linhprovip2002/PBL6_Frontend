@@ -1,12 +1,18 @@
+"use client";
 import "@styles/globals.css";
 import Nav from "@components/Nav/Nav";
-
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 export const metadata = {
   title: "PBL6",
   description: "Đồ án PBL6",
 };
 
 const RootLayout = ({ children }) => {
+  const router = usePathname();
+  useEffect(() => {
+    console.log(router);
+  }, [router]);
   return (
     <html lang="en">
       <body>
@@ -15,7 +21,7 @@ const RootLayout = ({ children }) => {
         </div>
 
         <main className="app">
-          <Nav />
+          <Nav hiddenSearch={router.includes("cart")} />
           {children}
         </main>
       </body>

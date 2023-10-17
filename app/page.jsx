@@ -8,7 +8,7 @@ import { linkButtonList } from "@utils/data";
 const Home = () => {
   return (
     <>
-      <section className="w-full flex-center flex-col">
+      <section className="w-full flex-center flex-col rounded-2xl overflow-hidden">
         <SliderCarousel />
       </section>
       <section className="w-full flex-center flex-col">

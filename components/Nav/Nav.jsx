@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "./Nav.module.css";
 import cn from "classnames";
 import { navMenuList } from "@utils/data";
-const Nav = () => {
+const Nav = ({ hiddenSearch }) => {
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <div className="md:mr-3">
@@ -35,7 +35,7 @@ const Nav = () => {
       </div>
       <div className="sm:flex">
         <div className="flex gap-3 md:gap-7">
-          <form className="input-container">
+          <form className="input-container" hidden={hiddenSearch}>
             <input
               type="text"
               placeholder="Tìm sản phẩm"
