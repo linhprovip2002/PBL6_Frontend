@@ -1,12 +1,10 @@
 "use client";
 
-import { setCredential } from "@redux/reducers";
 import { AuthApi } from "@services/api";
-import { setHeaderConfigAxios } from "@services/api/axios";
 // import COVER_IMAGE from "./assets/images/watch1.jpg";
 // import GOOGLE_ICON from "./assets/images/watch1.jpg";
 
-import { LoginSchema } from "@services/validators";
+import { RegisterSchema } from "@services/validators";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,43 +12,55 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Toast } from "react-toastify";
 
-const Login = () => {
+const Signup = () => {
   const stateReducer = useSelector((state) => state.auth);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const [checked, setChecked] = useState(false);
 
-  const handleSubmit = useCallback(async (data) => {
-    try {
-      console.log("voday");
-      console.log(data);
-      setIsLoading(true);
-      const res = await AuthApi.login(data);
-      dispatch(
-        setCredential({
-          token: res.data.token,
-        })
-      );
-      setHeaderConfigAxios(res.data.token);
-      // const user = await AuthApi.getProfile();
-      // dispatch(setUser(user.data[0]));
-      router.push("/", { scroll: true });
-    } catch (error) {
-      Toast.show({
-        type: "error",
-        text1: "Thông tin đăng nhập không chính xác",
-        text2: "Vui lòng thử lại",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const handleSubmit = useCallback(
+    async (data) => {
+      try {
+        setIsLoading(true);
+        console.log(data);
+        if (!checked) {
+          Toast.show({
+            type: "error",
+            text1: "Bạn phải đồng ý với các điều khoản và điều kiện",
+            text2: "Vui lòng đồng ý",
+          });
+        } else {
+          const res = await AuthApi.register({
+            username: data.username,
+            email: data.email,
+            password: data.password,
+          });
+          Toast.show({
+            type: "success",
+            text1: "Tạo tài khoản thành công",
+          });
+        }
+      } catch (error) {
+        Toast.show({
+          type: "error",
+          text1: "Tạo tài khoản thất bại",
+          text2: "Vui lòng thử lại",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [checked]
+  );
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
+      email: "",
+      re_password: "",
     },
     onSubmit: handleSubmit,
-    validationSchema: LoginSchema,
+    validationSchema: RegisterSchema,
   });
   useEffect(() => {
     console.log(stateReducer);
@@ -73,20 +83,20 @@ const Login = () => {
       </div>
       <form
         onSubmit={formik.handleSubmit}
-        className="w-1/2 h-full flex flex-col p-20 items-center gap-7 z-10"
+        className="w-1/2 h-full flex flex-col p-20 items-center gap-7  z-10"
       >
         {/* <h1 className="text-xl text-[#141718] font-bold">Sign In</h1> */}
         <div className="w-full flex flex-col w-[500px]">
           <div className="w-full flex flex-col mb-2">
-            <h3 className="text-3xl font-semibold mb-2">Sign in</h3>
+            <h3 className="text-3xl font-semibold mb-2">Sign Up</h3>
             <div className="flex flex-row gap-1 ">
-              <p className="text-base mb-2">Bạn chưa có tài khoản?</p>
-              <Link href="/signup">
+              <p className="text-base mb-2">Bạn đã có tài khoản?</p>
+              <Link href="/login">
                 <p
                   className="text-base whitespace-nowrap cursor-pointer text-green-400
               "
                 >
-                  Sign up
+                  Sign in
                 </p>
               </Link>
             </div>
@@ -95,9 +105,10 @@ const Login = () => {
             <div>
               <input
                 type="email"
-                placeholder="Tài khoản"
-                name="username"
-                value={formik.values.username}
+                placeholder="Email"
+                name="email"
+                value={formik.values.email}
+                onBlur={formik.handleBlur("email")}
                 onChange={formik.handleChange}
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
@@ -112,10 +123,31 @@ const Login = () => {
             </div>
             <div>
               <input
+                type="email"
+                placeholder="Tài khoản"
+                name="username"
+                value={formik.values.username}
+                onBlur={formik.handleBlur("username")}
+                onChange={formik.handleChange}
+                className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
+              />
+              {formik.errors.username && (
+                <span
+                  className="text-red-500	
+"
+                >
+                  {formik.errors.username}
+                </span>
+              )}
+            </div>
+
+            <div>
+              <input
                 type="password"
-                placeholder="Password"
+                placeholder="Mật khẩu"
                 name="password"
                 value={formik.values.password}
+                onBlur={formik.handleBlur("password")}
                 onChange={formik.handleChange}
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
@@ -128,18 +160,33 @@ const Login = () => {
                 </span>
               )}
             </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Nhập lại mật khẩu"
+                name="re_password"
+                value={formik.values.re_password}
+                onBlur={formik.handleBlur("re_password")}
+                onChange={formik.handleChange}
+                className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
+              />
+              {formik.errors.re_password && (
+                <span
+                  className="text-red-500	
+"
+                >
+                  {formik.errors.re_password}
+                </span>
+              )}
+            </div>
           </div>
           <div className="w-full flex items-center justify-between">
             <div className="w-full flex items-center mt-1">
               <input type="checkbox" className="w-4 h-4 mr-2" />
-              <p className="text-sm">Remember me</p>
+              <p className="text-sm">
+                I agree with <b>Privacy Policy</b> and <b>Terms of Use</b>
+              </p>
             </div>
-            <p
-              className="text-sm font-medium whitespace-nowrap cursor-pointer
-              underline underline-offset-2"
-            >
-              Forgot Password ?
-            </p>
           </div>
           <div className="w-full flex flex-col my-4">
             <button
@@ -194,4 +241,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default Signup;
