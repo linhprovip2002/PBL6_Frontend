@@ -23,7 +23,7 @@ const LinkButton = ({
       href={href}
       role="button"
       aria-label={aria_label}
-      className={`bg-white group text-center inline-block cursor-pointe ${
+      className={`bg-white group text-center inline-block cursor-pointe text-decoration-none text-black  ${
         inverted ? "hover:bg-gray-500 hover:text-gray-100" : "hover:text-gray-400"
       } ${!noBorder && "border border-gray-500"} ${btnSize} ${extraClass}`}
     >
