@@ -1,5 +1,5 @@
 "use client";
-import SliderCarousel from "@components/Slider/SliderComponent";
+import PaymentLayout from "@layouts/PaymentLayout/PaymentLayout";
 import Image from "next/image";
 import { useState } from "react";
 const itemsCart = [
@@ -53,7 +53,7 @@ const Home = () => {
     }
   };
   return (
-    <>
+    <PaymentLayout>
       <section className="w-full flex">
         <section className="w-3/5">
           <div>
@@ -168,7 +168,7 @@ const Home = () => {
           </div>
         </section>
       </section>
-    </>
+    </PaymentLayout>
   );
 };
 

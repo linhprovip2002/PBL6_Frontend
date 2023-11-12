@@ -1,7 +1,7 @@
 "use client";
+import LinkButton from "@components/Buttons/LinkButton";
 import Card from "@components/Card/Card";
 import OverlayContainer from "@components/OverlayContainer/OverlayContainer";
-import LinkButton from "@components/Buttons/LinkButton";
 import SliderCarousel from "@components/Slider/SliderComponent";
 import { linkButtonList } from "@utils/data";
 
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <section className="w-full flex-center flex-col rounded-2xl overflow-hidden">
-        <SliderCarousel />
+        <SliderCarousel autoSlide autoSlideInterval={1500} />
       </section>
       <section className="w-full flex-center flex-col">
         <h1 className="head_text text-center">

@@ -26,6 +26,7 @@ const RootLayout = ({ children }) => {
           ) : (
             <main className="app">
               <Nav hiddenSearch={router.includes("cart")} />
+              {/* <VoiceSearchBox /> */}
               {children}
             </main>
           )}

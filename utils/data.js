@@ -69,3 +69,24 @@ export const linkButtonList = [
     image: "/assets/images/men.jpg",
   },
 ]
+
+export const paymentStatus = [
+  {
+    id : 1,
+    title : "Cart",
+    description :"Shopping cart",
+    path: "cart"
+  },  
+  {
+    id : 2,
+    title : "Check Out",
+    description :"Checkout details",
+    path: "checkout"
+  },  
+  {
+    id : 3,
+    title : "Complete!",
+    description :"Order complete",
+    path: "order-complete"
+  }
+]
