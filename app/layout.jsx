@@ -3,6 +3,8 @@ import Nav from "@components/Nav/Nav";
 import { Providers } from "@redux/reducer";
 import "@styles/globals.css";
 import { usePathname } from "next/navigation";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./login/page";
 import Signup from "./signup/page";
 export const metadata = {
@@ -16,6 +18,7 @@ const RootLayout = ({ children }) => {
     <html lang="en">
       <body>
         <Providers>
+          <ToastContainer />
           <div className="main">
             <div className="gradient" />
           </div>

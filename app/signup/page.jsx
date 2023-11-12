@@ -5,12 +5,12 @@ import { AuthApi } from "@services/api";
 // import GOOGLE_ICON from "./assets/images/watch1.jpg";
 
 import { RegisterSchema } from "@services/validators";
+import { toastError, toastSuccess } from "@utils/toastHelper";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
-import { Toast } from "react-toastify";
 
 const Signup = () => {
   const stateReducer = useSelector((state) => state.auth);
@@ -22,30 +22,30 @@ const Signup = () => {
     async (data) => {
       try {
         setIsLoading(true);
-        console.log(data);
         if (!checked) {
-          Toast.show({
-            type: "error",
-            text1: "Bạn phải đồng ý với các điều khoản và điều kiện",
-            text2: "Vui lòng đồng ý",
-          });
+          // Toast({
+          //   type: "error",
+          //   text1: "Bạn phải đồng ý với các điều khoản và điều kiện",
+          //   text2: "Vui lòng đồng ý",
+          // });
+          toastError(
+            "Bạn phải đồng ý với các điều khoản và điều kiện. Vui lòng đồng ý"
+          );
         } else {
           const res = await AuthApi.register({
             username: data.username,
             email: data.email,
             password: data.password,
           });
-          Toast.show({
-            type: "success",
-            text1: "Tạo tài khoản thành công",
-          });
+          toastSuccess("Tạo tài khoản thành công");
         }
       } catch (error) {
-        Toast.show({
-          type: "error",
-          text1: "Tạo tài khoản thất bại",
-          text2: "Vui lòng thử lại",
-        });
+        // Toast.show({
+        //   type: "error",
+        //   text1: "Tạo tài khoản thất bại",
+        //   text2: "Vui lòng thử lại",
+        // });
+        toastError("Tạo tài khoản thất bại. Vui lòng thử lại.");
       } finally {
         setIsLoading(false);
       }
@@ -78,12 +78,12 @@ const Signup = () => {
           className="w-full h-full object-cover"
         />
       </div>
-      <form
-        onSubmit={formik.handleSubmit}
-        className="w-1/2 h-full flex flex-col p-20 items-center gap-7  z-10"
-      >
+      <div className="w-1/2 h-full flex flex-col p-20 items-center gap-7  z-10">
         {/* <h1 className="text-xl text-[#141718] font-bold">Sign In</h1> */}
-        <div className="w-full flex flex-col w-[500px]">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="w-full flex flex-col w-[500px]"
+        >
           <div className="w-full flex flex-col mb-2">
             <h3 className="text-3xl font-semibold mb-2">Sign Up</h3>
             <div className="flex flex-row gap-1 ">
@@ -120,7 +120,7 @@ const Signup = () => {
             </div>
             <div>
               <input
-                type="email"
+                type="text"
                 placeholder="Tài khoản"
                 name="username"
                 value={formik.values.username}
@@ -179,7 +179,14 @@ const Signup = () => {
           </div>
           <div className="w-full flex items-center justify-between">
             <div className="w-full flex items-center mt-1">
-              <input type="checkbox" className="w-4 h-4 mr-2" />
+              <input
+                type="checkbox"
+                className="w-4 h-4 mr-2"
+                value={checked}
+                onChange={(e) => {
+                  setChecked(e.target.checked);
+                }}
+              />
               <p className="text-sm">
                 I agree with <b>Privacy Policy</b> and <b>Terms of Use</b>
               </p>
@@ -187,7 +194,7 @@ const Signup = () => {
           </div>
           <div className="w-full flex flex-col my-4">
             <button
-              // onClick={() => formik.handleSubmit()}
+              onClick={() => formik.handleSubmit()}
               type="submit"
               className="w-full text-white my-2 font-semibold bg-[#141718] rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
             >
@@ -195,7 +202,7 @@ const Signup = () => {
                 <div role="status">
                   <svg
                     aria-hidden="true"
-                    class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    class="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -212,7 +219,7 @@ const Signup = () => {
                   <span class="sr-only">Loading...</span>
                 </div>
               ) : (
-                "Log in"
+                "Sign up"
               )}
             </button>
             {/* <button className="w-full text-[#141718] my-2 font-semibold bg-white border-2 border-black rounded-md p-4 flex items-center justify-center cursor-pointer">
@@ -227,14 +234,14 @@ const Signup = () => {
             <img src={"/assets/images/watch1.jpg"} className="h-6 mr-2" />
             Sign in With Google
           </button> */}
-        </div>
+        </form>
         <div className="w-full flex items-center justify-center">
           <p className="text-sm font-normal text-[#141718]">
             Don't have a account?{" "}
             <span className="font-semibold underline underline-offset"></span>
           </p>
         </div>
-      </form>
+      </div>
     </div>
   );
 };
