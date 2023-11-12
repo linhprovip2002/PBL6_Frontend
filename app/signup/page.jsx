@@ -8,7 +8,7 @@ import { RegisterSchema } from "@services/validators";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { Toast } from "react-toastify";
 
@@ -62,9 +62,6 @@ const Signup = () => {
     onSubmit: handleSubmit,
     validationSchema: RegisterSchema,
   });
-  useEffect(() => {
-    console.log(stateReducer);
-  }, []);
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -112,12 +109,12 @@ const Signup = () => {
                 onChange={formik.handleChange}
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
-              {formik.errors.username && (
+              {formik.errors.email && (
                 <span
                   className="text-red-500	
 "
                 >
-                  {formik.errors.username}
+                  {formik.errors.email}
                 </span>
               )}
             </div>
