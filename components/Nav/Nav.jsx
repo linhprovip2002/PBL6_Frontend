@@ -5,9 +5,11 @@ import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import styles from "./Nav.module.css";
 const Nav = ({ hiddenSearch }) => {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const handleLinkTo = (path) => {
     router.push(path, { scroll: true });
   };
@@ -130,12 +132,33 @@ const Nav = ({ hiddenSearch }) => {
             width={30}
             height={30}
           />
-          <Image
-            className="cursor-pointer"
-            src="/assets/icons/user.svg"
-            width={25}
-            height={25}
-          />
+          <div className="relative self-center" onBlur={() => setOpen(false)}>
+            <Image
+              className="cursor-pointer"
+              src="/assets/icons/user.svg"
+              width={25}
+              height={25}
+              onClick={() => setOpen(!open)}
+            />
+            <ul
+              className={`absolute right-0 w-40 py-2 mt-2 rounded-lg bg-white	 shadow-xl border border-slate-200 z-10 ${
+                open ? "block" : "hidden"
+              }`}
+            >
+              <li
+                className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
+                onClick={() => {
+                  handleLinkTo("/profile");
+                  setOpen(false);
+                }}
+              >
+                Thông tin cá nhân
+              </li>
+              <li className="flex w-full items-center px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer">
+                Đăng xuất
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
