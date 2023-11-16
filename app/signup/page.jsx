@@ -20,6 +20,7 @@ const Signup = () => {
 
   const handleSubmit = useCallback(
     async (data) => {
+      console.log(data);
       try {
         setIsLoading(true);
         if (!checked) {
@@ -194,7 +195,6 @@ const Signup = () => {
           </div>
           <div className="w-full flex flex-col my-4">
             <button
-              onClick={() => formik.handleSubmit()}
               type="submit"
               className="w-full text-white my-2 font-semibold bg-[#141718] rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
             >
@@ -202,7 +202,7 @@ const Signup = () => {
                 <div role="status">
                   <svg
                     aria-hidden="true"
-                    class="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    className="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -216,7 +216,7 @@ const Signup = () => {
                       fill="currentFill"
                     />
                   </svg>
-                  <span class="sr-only">Loading...</span>
+                  <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 "Sign up"

@@ -18,19 +18,19 @@ const Profile = () => {
           )}
         >
           <div className="flex flex-col gap-1.5">
-            <div class="mx-auto w-20 h-20 text-center ">
-              <div class="relative w-full h-full">
+            <div className="mx-auto w-20 h-20 text-center ">
+              <div className="relative w-full h-full">
                 <img
-                  class="rounded-full absolute"
+                  className="rounded-full absolute"
                   src="https://images.pexels.com/photos/2690323/pexels-photo-2690323.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                   alt=""
                 />
                 <label
                   for="file-input"
-                  class="group w-full h-full p-5 hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500"
+                  className="group w-full h-full p-5 hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500"
                 >
                   <img
-                    class="invisible group-hover:visible"
+                    className="invisible group-hover:visible"
                     src="https://www.svgrepo.com/show/33565/upload.svg"
                     alt=""
                   />
