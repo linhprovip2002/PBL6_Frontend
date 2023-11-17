@@ -1,21 +1,17 @@
 "use client";
-
-import { setCredential } from "@redux/reducers";
+import { logout, setCredential, setUser } from "@redux/reducers";
 import { AuthApi } from "@services/api";
-import { setHeaderConfigAxios } from "@services/api/axios";
-// import COVER_IMAGE from "./assets/images/watch1.jpg";
-// import GOOGLE_ICON from "./assets/images/watch1.jpg";
-
 import { LoginSchema } from "@services/validators";
-import { toastError } from "@utils/toastHelper";
+import { deleteToken } from "@utils/LocalStorageHandle";
+import { toastError, toastSuccess } from "@utils/toastHelper";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const stateReducer = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -23,15 +19,17 @@ const Login = () => {
     try {
       setIsLoading(true);
       const res = await AuthApi.login(data);
+      console.log(res);
       dispatch(
         setCredential({
           token: res.data.token,
         })
       );
-      setHeaderConfigAxios(res.data.token);
-      // const user = await AuthApi.getProfile();
-      // dispatch(setUser(user.data[0]));
+      // setHeaderConfigAxios(res.data.token);
+      const user = await AuthApi.getProfile();
+      dispatch(setUser(user.data[0]));
       router.push("/", { scroll: true });
+      toastSuccess("Đăng nhập thành công");
     } catch (error) {
       toastError("Thông tin đăng nhập không chính xác. Vui lòng thử lại.");
     } finally {
@@ -50,6 +48,10 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prevState) => !prevState);
   };
+  useEffect(() => {
+    dispatch(logout());
+    deleteToken();
+  }, []);
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -186,7 +188,7 @@ const Login = () => {
                 <div role="status">
                   <svg
                     aria-hidden="true"
-                    class="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    className="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +202,7 @@ const Login = () => {
                       fill="currentFill"
                     />
                   </svg>
-                  <span class="sr-only">Loading...</span>
+                  <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 "Log in"

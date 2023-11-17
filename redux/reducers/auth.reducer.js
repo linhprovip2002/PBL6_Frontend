@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { saveToken } from '@utils/LocalStorageHandle';
 
 // export type AuthState = {
 //   loggedin: boolean;
@@ -9,6 +10,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   loggedin: false,
+  user: null,
+  credential: null,
 };
 
 const authSlice = createSlice({
@@ -16,6 +19,7 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     setCredential: (state, action) => {
+      saveToken(action.payload.token);
       state.loggedin = true;
       state.credential = action.payload;
     },

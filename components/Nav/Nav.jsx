@@ -1,13 +1,20 @@
 "use client";
 
+import { logout } from "@redux/reducers";
+import { deleteToken } from "@utils/LocalStorageHandle";
 import { navMenuList } from "@utils/data";
 import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Nav.module.css";
 const Nav = ({ hiddenSearch }) => {
   const router = useRouter();
+  const { loggedin } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
   const handleLinkTo = (path) => {
     router.push(path, { scroll: true });
   };
@@ -52,14 +59,14 @@ const Nav = ({ hiddenSearch }) => {
               disabled={hiddenSearch}
             />
           </form> */}
-          <form class="flex items-center">
-            <label for="voice-search" class="sr-only">
+          <form className="flex items-center">
+            <label for="voice-search" className="sr-only">
               Search
             </label>
-            <div class="relative w-full">
-              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <div className="relative w-full">
+              <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                 <svg
-                  class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                  className="w-5 h-5 text-gray-500 dark:text-gray-400"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -74,16 +81,16 @@ const Nav = ({ hiddenSearch }) => {
               <input
                 type="text"
                 id="voice-search"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Tìm sản phẩm"
                 required
               />
               <button
                 type="button"
-                class="flex absolute inset-y-0 right-0 items-center pr-3"
+                className="flex absolute inset-y-0 right-0 items-center pr-3"
               >
                 <svg
-                  class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,12 +103,12 @@ const Nav = ({ hiddenSearch }) => {
                 </svg>
               </button>
             </div>
-            <button
+            {/* <button
               type="submit"
-              class="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <svg
-                class="mr-2 -ml-1 w-5 h-5"
+                className="mr-2 -ml-1 w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -115,7 +122,7 @@ const Nav = ({ hiddenSearch }) => {
                 ></path>
               </svg>
               Search
-            </button>
+            </button> */}
           </form>
           <Image
             className="cursor-pointer"
@@ -130,12 +137,76 @@ const Nav = ({ hiddenSearch }) => {
             width={30}
             height={30}
           />
-          <Image
-            className="cursor-pointer"
-            src="/assets/icons/user.svg"
-            width={25}
-            height={25}
-          />
+          <div className="relative self-center">
+            {loggedin ? (
+              <Image
+                className="cursor-pointer rounded-full"
+                src="/assets/images/watch1.jpg"
+                alt="Rounded avatar"
+                width={30}
+                height={30}
+                onClick={() => setOpen(!open)}
+              />
+            ) : (
+              <Image
+                className="cursor-pointer"
+                src="/assets/icons/user.svg"
+                width={25}
+                height={25}
+                onClick={() => setOpen(!open)}
+              />
+            )}
+            <ul
+              className={`absolute right-0 w-40 py-2 mt-2 rounded-lg bg-white	 shadow-xl border border-slate-200 z-10 ${
+                open ? "block" : "hidden"
+              }`}
+            >
+              {loggedin ? (
+                <>
+                  <li
+                    className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      handleLinkTo("/profile");
+                      setOpen(false);
+                    }}
+                  >
+                    Thông tin cá nhân
+                  </li>{" "}
+                  <li
+                    className="flex w-full items-center px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      dispatch(logout());
+                      deleteToken();
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng xuất
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li
+                    className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      handleLinkTo("/login");
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng nhập
+                  </li>
+                  <li
+                    className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      handleLinkTo("/signup");
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng kí
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

@@ -1,0 +1,39 @@
+
+.profileHeader {
+  display: flex;
+  padding-bottom: 80px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  .profileTitle {
+    font-size: 54px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 58px; /* 107.407% */
+    letter-spacing: -1px;
+  }
+}
+
+.userNav {
+  border-radius: 8px;
+  background: var(--neutral-02100, #d2d5d8);
+  font-feature-settings: 'clig' off, 'liga' off;
+  /* Body 1 (Semi) */
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  .username {
+  color: #000;
+  font-size: 20px;
+  line-height: 32px;
+  }
+  .navItem {
+    color: var(--neutral-04100, #6C7275);
+    font-size: 16px;
+    line-height: 26px;
+    &.active {
+      color: var(--neutral-07100, #141718);
+      border-bottom: 1px solid var(--neutral-07100, #141718);
+    }
+  }
+}

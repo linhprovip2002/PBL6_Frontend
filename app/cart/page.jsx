@@ -140,10 +140,10 @@ const Home = () => {
         <section className="w-2/5 flex justify-end">
           <div className="w-11/12 p-3 bg-zinc-100	 h-fit">
             {/* <p>Gift card or discount code</p> */}
-            <div class="mb-6">
+            <div className="mb-6">
               <label
                 for="gift-card"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Gift card or discount code
               </label>
@@ -151,20 +151,20 @@ const Home = () => {
                 <input
                   type="text"
                   id="gift-card"
-                  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                   placeholder="Enter gift card or discount code"
                   required
                 />
                 <button
                   type="submit"
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-3 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Apply
                 </button>
               </div>
             </div>
-            <hr class="h-px my-8 bg-gray-700 border-0 dark:bg-gray-700"></hr>
-            <hr class="h-px my-8 bg-gray-700 border-0 dark:bg-gray-700"></hr>
+            <hr className="h-px my-8 bg-gray-700 border-0 dark:bg-gray-700"></hr>
+            <hr className="h-px my-8 bg-gray-700 border-0 dark:bg-gray-700"></hr>
           </div>
         </section>
       </section>
