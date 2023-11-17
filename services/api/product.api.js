@@ -1,4 +1,4 @@
-import instance from './axios';
+import request from './axios';
 
 const ENDPOINTS = {
   LISTPRODUCT: '/products',
@@ -6,15 +6,15 @@ const ENDPOINTS = {
 };
 
 const getListProduct = () => {
-  return instance.get(ENDPOINTS.LISTPRODUCT);
+  return request().get(ENDPOINTS.LISTPRODUCT);
 };
 
 const getReviewProduct = (id) => {
-  return instance.get(`${ENDPOINTS.LISTPRODUCT}/${id}/review`);
+  return request().get(`${ENDPOINTS.LISTPRODUCT}/${id}/review`);
 };
 
 const getCategories = () => {
-  return instance.get(ENDPOINTS.CATEGORY);
+  return request().get(ENDPOINTS.CATEGORY);
 };
 
 export const ProductApi = {

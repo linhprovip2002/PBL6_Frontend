@@ -1,9 +1,12 @@
+"use client";
 import AccountDetails from "@components/Profiles/AccountDetails/AccountDetails";
+import OrdersHistory from "@components/Profiles/OrdersHistory/OrdersHistory";
 import classNames from "classnames";
+import { useState } from "react";
 import styles from "./page.module.scss";
 
 const Profile = () => {
-  const current = "Account";
+  const [current, setCurrent] = useState("Account");
   const navList = ["Account", "Address", "Orders", "Wishlist", "Log out"];
   return (
     <section className="w-full pb-20">
@@ -44,6 +47,9 @@ const Profile = () => {
             {navList.map((item, idx) => (
               <div
                 id={idx}
+                onClick={() => {
+                  setCurrent(item);
+                }}
                 className={classNames(
                   styles.navItem,
                   "w-full flex flex-col py-2 items-start cursor-pointer",
@@ -58,7 +64,13 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-3/4">
-          <AccountDetails />
+          {current === "Account" ? (
+            <AccountDetails />
+          ) : current === "Orders" ? (
+            <OrdersHistory />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </section>

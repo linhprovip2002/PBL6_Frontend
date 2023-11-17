@@ -1,14 +1,19 @@
 "use client";
 
+import { logout } from "@redux/reducers";
+import { deleteToken } from "@utils/LocalStorageHandle";
 import { navMenuList } from "@utils/data";
 import cn from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Nav.module.css";
 const Nav = ({ hiddenSearch }) => {
   const router = useRouter();
+  const { loggedin } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleLinkTo = (path) => {
     router.push(path, { scroll: true });
@@ -98,7 +103,7 @@ const Nav = ({ hiddenSearch }) => {
                 </svg>
               </button>
             </div>
-            <button
+            {/* <button
               type="submit"
               className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
@@ -117,7 +122,7 @@ const Nav = ({ hiddenSearch }) => {
                 ></path>
               </svg>
               Search
-            </button>
+            </button> */}
           </form>
           <Image
             className="cursor-pointer"
@@ -132,31 +137,74 @@ const Nav = ({ hiddenSearch }) => {
             width={30}
             height={30}
           />
-          <div className="relative self-center" onBlur={() => setOpen(false)}>
-            <Image
-              className="cursor-pointer"
-              src="/assets/icons/user.svg"
-              width={25}
-              height={25}
-              onClick={() => setOpen(!open)}
-            />
+          <div className="relative self-center">
+            {loggedin ? (
+              <Image
+                className="cursor-pointer rounded-full"
+                src="/assets/images/watch1.jpg"
+                alt="Rounded avatar"
+                width={30}
+                height={30}
+                onClick={() => setOpen(!open)}
+              />
+            ) : (
+              <Image
+                className="cursor-pointer"
+                src="/assets/icons/user.svg"
+                width={25}
+                height={25}
+                onClick={() => setOpen(!open)}
+              />
+            )}
             <ul
               className={`absolute right-0 w-40 py-2 mt-2 rounded-lg bg-white	 shadow-xl border border-slate-200 z-10 ${
                 open ? "block" : "hidden"
               }`}
             >
-              <li
-                className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
-                onClick={() => {
-                  handleLinkTo("/profile");
-                  setOpen(false);
-                }}
-              >
-                Thông tin cá nhân
-              </li>
-              <li className="flex w-full items-center px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer">
-                Đăng xuất
-              </li>
+              {loggedin ? (
+                <>
+                  <li
+                    className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      handleLinkTo("/profile");
+                      setOpen(false);
+                    }}
+                  >
+                    Thông tin cá nhân
+                  </li>{" "}
+                  <li
+                    className="flex w-full items-center px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      dispatch(logout());
+                      deleteToken();
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng xuất
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li
+                    className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      handleLinkTo("/login");
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng nhập
+                  </li>
+                  <li
+                    className="flex w-full items-center px-3 py-2  text-sm hover:bg-gray-100 cursor-pointer"
+                    onClick={() => {
+                      handleLinkTo("/signup");
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng kí
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

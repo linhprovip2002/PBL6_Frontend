@@ -1,24 +1,24 @@
-import instance from './axios';
+import request from './axios';
 
 const ENDPOINTS = {
   LOGIN: '/auth/login',
-  PROFILE: '/user',
+  PROFILE: '/user/me',
   REGISTER: '/auth/register',
 };
 
 const login = (data) => {
-  return instance.post(ENDPOINTS.LOGIN, {
+  return request().post(ENDPOINTS.LOGIN, {
     username: data.username,
     password: data.password,
   });
 };
 
 const getProfile = () => {
-  return instance.get(ENDPOINTS.PROFILE);
+  return request().get(ENDPOINTS.PROFILE);
 };
 
 const register = (data) => {
-  return instance.post(ENDPOINTS.REGISTER, data);
+  return request().post(ENDPOINTS.REGISTER, data);
 };
 
 export const AuthApi = {
