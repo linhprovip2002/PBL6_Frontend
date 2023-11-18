@@ -1,4 +1,5 @@
 "use client";
+import ProtectedRoute from "@HOCs/ProtectedRoute";
 import Nav from "@components/Nav/Nav";
 import { Providers } from "@redux/reducer";
 import "@styles/globals.css";
@@ -28,9 +29,11 @@ const RootLayout = ({ children }) => {
             <Signup />
           ) : (
             <main className="app">
-              <Nav hiddenSearch={router.includes("cart")} />
-              {/* <VoiceSearchBox /> */}
-              {children}
+              <ProtectedRoute>
+                <Nav hiddenSearch={router.includes("cart")} />
+                {/* <VoiceSearchBox /> */}
+                {children}
+              </ProtectedRoute>
             </main>
           )}
         </Providers>

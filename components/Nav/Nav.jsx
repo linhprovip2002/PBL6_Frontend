@@ -175,8 +175,9 @@ const Nav = ({ hiddenSearch }) => {
                   <li
                     className="flex w-full items-center px-3 py-2 text-sm hover:bg-gray-100 cursor-pointer"
                     onClick={() => {
-                      dispatch(logout());
                       deleteToken();
+                      dispatch(logout());
+                      handleLinkTo("/login");
                       setOpen(false);
                     }}
                   >

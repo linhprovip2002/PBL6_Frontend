@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { saveToken } from '@utils/LocalStorageHandle';
+import { createSlice } from "@reduxjs/toolkit";
+import { getToken, saveToken } from "@utils/LocalStorageHandle";
+import { jwtDecode } from "jwt-decode";
 
 // export type AuthState = {
 //   loggedin: boolean;
@@ -7,15 +8,26 @@ import { saveToken } from '@utils/LocalStorageHandle';
 //   credential?: ICredential;
 //   fcmToken?: string;
 // };
-
+const  getUserInfFromToken = (token) => {
+  const {user} = jwtDecode(token);
+  return {
+    ...user?.account,
+    roles: user?.Roles
+  }
+} 
 const initialState = {
-  loggedin: false,
-  user: null,
-  credential: null,
+  loggedin: getToken() ? true : false,
+  user: getToken() ? getUserInfFromToken(getToken()) : null,
+  credential: getToken()
+    ? {
+        token: getToken(),
+      }
+    : null,
 };
 
+
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: initialState,
   reducers: {
     setCredential: (state, action) => {
@@ -24,18 +36,20 @@ const authSlice = createSlice({
       state.credential = action.payload;
     },
     setUser: (state, action) => {
+      const userInf= action.payload?.account;
+      const userRoles = action.payload?.Roles;
       state.loggedin = true;
-      state.user = action.payload;
+      state.user = {...userInf, roles: userRoles};
     },
     logout: (state, action) => {
       state.loggedin = false;
-      state.user = undefined;
-      state.credential = undefined;
+      state.user = null;
+      state.credential = null;
     },
   },
 });
 
 export const authSelector = (state) => state.auth;
 
-export const {logout, setCredential, setUser} = authSlice.actions;
+export const { logout, setCredential, setUser } = authSlice.actions;
 export default authSlice.reducer;
