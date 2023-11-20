@@ -1,13 +1,12 @@
 "use client";
-import { logout, setCredential, setUser } from "@redux/reducers";
+import { setCredential, setUser } from "@redux/reducers";
 import { AuthApi } from "@services/api";
 import { LoginSchema } from "@services/validators";
-import { deleteToken } from "@utils/LocalStorageHandle";
 import { toastError, toastSuccess } from "@utils/toastHelper";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
@@ -19,7 +18,6 @@ const Login = () => {
     try {
       setIsLoading(true);
       const res = await AuthApi.login(data);
-      console.log(res);
       dispatch(
         setCredential({
           token: res.data.token,
@@ -27,7 +25,7 @@ const Login = () => {
       );
       // setHeaderConfigAxios(res.data.token);
       const user = await AuthApi.getProfile();
-      dispatch(setUser(user.data[0]));
+      dispatch(setUser(user?.data));
       router.push("/", { scroll: true });
       toastSuccess("Đăng nhập thành công");
     } catch (error) {
@@ -45,13 +43,14 @@ const Login = () => {
     validationSchema: LoginSchema,
   });
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = (e) => {
     setIsPasswordVisible((prevState) => !prevState);
+    e.stopPropagation();
   };
-  useEffect(() => {
-    dispatch(logout());
-    deleteToken();
-  }, []);
+  // useEffect(() => {
+  //   dispatch(logout());
+  //   deleteToken();
+  // }, []);
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -116,8 +115,8 @@ const Login = () => {
                 onChange={formik.handleChange}
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
-              <button
-                className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600"
+              <div
+                className="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600 cursor-pointer"
                 onClick={togglePasswordVisibility}
               >
                 {isPasswordVisible ? (
@@ -156,7 +155,7 @@ const Login = () => {
                     />
                   </svg>
                 )}
-              </button>
+              </div>
             </div>
             {formik.errors.password && (
               <span

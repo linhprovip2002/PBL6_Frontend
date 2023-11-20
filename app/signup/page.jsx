@@ -1,17 +1,15 @@
 "use client";
 
-import { logout } from "@redux/reducers";
 import { AuthApi } from "@services/api";
 // import COVER_IMAGE from "./assets/images/watch1.jpg";
 // import GOOGLE_ICON from "./assets/images/watch1.jpg";
 
 import { RegisterSchema } from "@services/validators";
-import { deleteToken } from "@utils/LocalStorageHandle";
 import { toastError, toastSuccess } from "@utils/toastHelper";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Signup = () => {
@@ -66,10 +64,10 @@ const Signup = () => {
     onSubmit: handleSubmit,
     validationSchema: RegisterSchema,
   });
-  useEffect(() => {
-    dispatch(logout());
-    deleteToken();
-  }, []);
+  // useEffect(() => {
+  //   dispatch(logout());
+  //   deleteToken();
+  // }, []);
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">

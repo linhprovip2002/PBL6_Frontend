@@ -1,7 +1,13 @@
 import classNames from "classnames";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import styles from "./AccountDetails.module.scss";
 
 const AccountDetails = () => {
+  const userProfile = useSelector((state) => state.auth);
+  useEffect(() => {
+    console.log(userProfile);
+  }, [userProfile]);
   return (
     <form className="flex gap-10 flex-col items-start px-16">
       <div className={classNames(styles.form, "inline-flex flex-col gap-6")}>
