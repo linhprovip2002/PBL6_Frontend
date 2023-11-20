@@ -30,5 +30,10 @@
 }
 
 .description {
-  @apply border-t-2 mt-3 pt-3 mb-3 text-base max-lg:hidden;
+  height: 161px;
+  display: block;
+  max-width: 98%;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  @apply border-t-2 mt-3 pt-3 mb-3 text-base ;
 }

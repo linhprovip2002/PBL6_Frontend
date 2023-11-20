@@ -1,11 +1,8 @@
-.voice-search {
-    position: fixed !important;
-    width: 100%;
-    height: 100vh !important;
-    z-index: 9999;
-    background: rgba(0, 0, 0, 0.5);
+
+  .arrow{
+
   }
-  .voice-search .microphone {
+   .microphone {
     position: relative;
     width: 80px;
     height: 80px;
@@ -14,7 +11,7 @@
     z-index: 5;
     background: rgb(255, 6, 6);
   }
-  .voice-search .microphone::before {
+   .microphone::before {
     position: absolute;
     content: '';
     top: 0;
@@ -26,11 +23,11 @@
     border-radius: 50%;
     z-index: -2;
   }
-  .voice-search .microphone i {
+   .microphone i {
     font-size: 2.2rem;
     color: #fff;
   }
-  .voice-search .text {
+   .text {
     font-size: 2.1rem;
     font-weight: bold;
     color: rgb(28, 119, 224);

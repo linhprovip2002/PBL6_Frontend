@@ -3,28 +3,38 @@ import LinkButton from "@components/Buttons/LinkButton";
 import Card from "@components/Card/Card";
 import OverlayContainer from "@components/OverlayContainer/OverlayContainer";
 import SliderCarousel from "@components/Slider/SliderComponent";
+import {
+  getProductListSuccess,
+  productSelector,
+} from "@redux/reducers/product.reducer";
 import { ProductApi } from "@services/api/product.api";
-import { linkButtonList } from "@utils/data";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-
-  const handelGetListProduct = useCallback(async () => {
+  const { categoryList } = useSelector(productSelector);
+  const dispatch = useDispatch();
+  const handelGetAll = useCallback(async () => {
     try {
-      const res = await ProductApi.getListProduct();
-      setProducts(res.data);
+      const res = await Promise.all([
+        ProductApi.getListProduct(),
+        ProductApi.getCategories(),
+      ]);
+      dispatch(
+        getProductListSuccess({
+          products: res[0]?.data,
+          categories: res[1]?.data,
+        })
+      );
     } catch (error) {
       console.log(error);
     }
   }, []);
 
   useEffect(() => {
-    handelGetListProduct();
+    handelGetAll();
   }, []);
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+
   return (
     <>
       <section className="w-full flex-center flex-col rounded-2xl overflow-hidden">
@@ -57,11 +67,11 @@ const Home = () => {
           Chọn loại đồng hồ phù hợp
         </p>
         <div className="app-max-width app-x-padding h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-          {linkButtonList.map((item) => (
+          {categoryList.map((item) => (
             <div className="w-full">
-              <OverlayContainer imgSrc={item.image}>
+              <OverlayContainer imgSrc={"/assets/images/men.jpg"}>
                 <LinkButton href="" extraClass="absolute bottom-2 z-20">
-                  {item.name}
+                  {item.CategoryName}
                 </LinkButton>
               </OverlayContainer>
             </div>

@@ -1,8 +1,8 @@
-import request from './axios';
+import request from "./axios";
 
 const ENDPOINTS = {
-  LISTPRODUCT: '/products',
-  CATEGORY: '/category',
+  LISTPRODUCT: "/products",
+  CATEGORY: "/category",
 };
 
 const getListProduct = () => {

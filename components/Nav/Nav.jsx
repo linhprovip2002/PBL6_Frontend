@@ -1,6 +1,6 @@
 "use client";
 
-import { logout } from "@redux/reducers";
+import { authSelector, logout } from "@redux/reducers";
 import { deleteToken } from "@utils/LocalStorageHandle";
 import { navMenuList } from "@utils/data";
 import cn from "classnames";
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Nav.module.css";
 const Nav = ({ hiddenSearch }) => {
   const router = useRouter();
-  const { loggedin } = useSelector((state) => state.auth);
+  const { loggedin } = useSelector(authSelector);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleLinkTo = (path) => {
@@ -102,6 +102,7 @@ const Nav = ({ hiddenSearch }) => {
                   ></path>
                 </svg>
               </button>
+              {/* <VoiceSearchBox /> */}
             </div>
             {/* <button
               type="submit"
