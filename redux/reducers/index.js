@@ -1,10 +1,21 @@
 export {
-  authSelector, default as authSlice, logout,
+  authSelector,
+  default as authSlice,
+  logout,
   setCredential,
-  setUser
-} from './auth.reducer';
+  setUser,
+} from "./auth.reducer";
 
 export {
-  addToCart, cartSelector, default as cartSlice, deleteCartItem,
-  updateCart
-} from './cart.reducer';
+  addToCart,
+  cartSelector,
+  default as cartSlice,
+  deleteCartItem,
+  updateCart,
+} from "./cart.reducer";
+
+export {
+  getProductDetailsSuccess,
+  getProductListSuccess,
+  default as productSlice,
+} from "./product.reducer";

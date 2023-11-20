@@ -1,11 +1,13 @@
 "use client";
+import { productSelector } from "@redux/reducers/product.reducer";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import styles from "./Card.module.css";
-import Link from "next/link";
-import Image from "next/image";
-import { cardList } from "@utils/data";
 
+import { useSelector } from "react-redux";
 const Card = () => {
+  const { productList } = useSelector(productSelector);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(-1);
   const [wishListedCards, setWishListedCards] = useState([]);
   const [isHovered, setIsHovered] = useState(false);
@@ -28,11 +30,11 @@ const Card = () => {
 
   return (
     <>
-      {cardList?.map((item, index) => (
+      {productList?.map((item, index) => (
         <div className={styles.card} key={index}>
           <div className={styles.imageContainer}>
             <Link
-              href="/product"
+              href={`/product/${item._id}`}
               onMouseOver={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -79,7 +81,7 @@ const Card = () => {
           </div>
           <div className="content">
             <Link href="" className={styles.itemName}>
-              {item.name}
+              {item.nameProduct}
             </Link>
             <div className="text-gray-400">{item.price}</div>
             <button
