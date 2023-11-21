@@ -9,7 +9,7 @@ const Profile = () => {
   const [current, setCurrent] = useState("Account");
   const navList = ["Account", "Address", "Orders", "Wishlist", "Log out"];
   return (
-    <section className="w-full pb-20">
+    <section className="w-full pb-20 mt-32">
       <div className={styles.profileHeader}>
         <p className={styles.profileTitle}>My Account</p>
       </div>

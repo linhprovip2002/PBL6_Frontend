@@ -4,7 +4,7 @@ import styles from "./PaymentStatus.module.scss";
 
 const PaymentStatus = ({ statusActive }) => {
   return (
-    <section>
+    <section className=" mt-32">
       <div className={styles.psContainer}>
         <p className={styles.psTitle}>{statusActive.title}</p>
         <div className={styles.psProgress}>

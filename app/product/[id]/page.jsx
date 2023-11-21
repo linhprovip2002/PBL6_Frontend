@@ -35,7 +35,7 @@ export default function Product() {
   }, [id]);
 
   return (
-    <section className="w-full max-w-full flex">
+    <section className="w-full max-w-full flex  mt-32">
       <div className={styles.imageContainer}>
         <Image
           src="/assets/images/watch1.jpg"

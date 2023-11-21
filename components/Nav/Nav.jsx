@@ -1,9 +1,9 @@
 "use client";
 
-import { authSelector, logout } from "@redux/reducers";
+import { authSelector, cartSelector, logout } from "@redux/reducers";
 import { deleteToken } from "@utils/LocalStorageHandle";
 import { navMenuList } from "@utils/data";
-import cn from "classnames";
+import { default as classNames, default as cn } from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,13 +13,15 @@ import styles from "./Nav.module.css";
 const Nav = ({ hiddenSearch }) => {
   const router = useRouter();
   const { loggedin } = useSelector(authSelector);
+  const { items } = useSelector(cartSelector);
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const handleLinkTo = (path) => {
     router.push(path, { scroll: true });
   };
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
+    <nav className={classNames(styles.navHeader, "flex-between w-full mb-16")}>
       <div className="md:mr-3">
         <Link
           href="/"
@@ -125,13 +127,21 @@ const Nav = ({ hiddenSearch }) => {
               Search
             </button> */}
           </form>
-          <Image
-            className="cursor-pointer"
-            src="/assets/icons/cart.svg"
-            width={30}
-            height={30}
-            onClick={() => handleLinkTo("/cart")}
-          />
+          <div className={"relative py-2"}>
+            <div className="t-0 absolute left-5 bottom-6">
+              <p className="flex h-1 w-1 items-center justify-center rounded-full bg-rose-500 p-3 text-black bold">
+                {items?.length}
+              </p>
+            </div>
+
+            <Image
+              className={classNames(styles.cart, "cart cursor-pointer")}
+              src="/assets/icons/cart.svg"
+              width={30}
+              height={30}
+              onClick={() => handleLinkTo("/cart")}
+            />
+          </div>
           <Image
             className="cursor-pointer"
             src="/assets/icons/heart.svg"

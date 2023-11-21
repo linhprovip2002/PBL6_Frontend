@@ -11,7 +11,6 @@ const productsSlice = createSlice({
   initialState: initialState,
   reducers: {
     getProductListSuccess: (state, action) => {
-      console.log(action.payload);
       state.productList = action.payload.products;
       state.categoryList = action.payload.categories;
     },

@@ -1,6 +1,7 @@
-import { getToken } from '@utils/LocalStorageHandle';
-import axios from 'axios';
-
+import { logout } from "@redux/reducers";
+import { store } from "@redux/store";
+import { getToken } from "@utils/LocalStorageHandle";
+import axios from "axios";
 
 const baseURL = `https://docker-pratice-production.up.railway.app/api`;
 
@@ -33,20 +34,23 @@ const instance = axios.create({
 //   }
 // };
 
-instance.interceptors.response.use(function (response) {
-  return response;
-},
-function (error) {
-  if (error?.response?.status === 401) {
-    localStorage.clear();
-    window.location.href = "/login";
-    return;
+instance.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error?.response?.status === 401) {
+      localStorage.clear();
+      store.dispatch(logout());
+      window.location.href = "/login";
+      return;
+    }
+    return Promise.reject(error);
   }
-  return Promise.reject(error);
-});
+);
 const request = (options = {}) => {
   const token = getToken();
-  if(token) {
+  if (token) {
     instance.defaults.headers.common["Authorization"] = `Bearer ${getToken()}`;
   } else {
     delete instance.defaults.headers.common.Authorization;

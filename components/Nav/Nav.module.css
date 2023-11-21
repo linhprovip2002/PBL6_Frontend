@@ -1,3 +1,13 @@
+.navHeader {
+  position: fixed;
+  margin: auto;
+  max-width: 1280px;
+  top: 0px;
+  z-index: 1;
+  background-color: white;
+  padding: 0.75rem 4rem 1rem;
+}
+
 .navLink {
   text-decoration: inherit;
   color: inherit;
@@ -5,4 +15,13 @@
 
 .p {
   margin-bottom: -1rem;
+}
+.cart{
+  z-index: 1000;
+  outline: 0.5rem solid transparent;
+  transition: 0.5s ease-in-out;
+  border-radius: 10%;
+}
+.cart:hover {
+  outline: 0.5rem solid rgb(195, 199, 203);
 }

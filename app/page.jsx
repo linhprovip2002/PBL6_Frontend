@@ -37,7 +37,7 @@ const Home = () => {
 
   return (
     <>
-      <section className="w-full flex-center flex-col rounded-2xl overflow-hidden">
+      <section className="w-full flex-center flex-col rounded-2xl overflow-hidden mt-32">
         <SliderCarousel autoSlide autoSlideInterval={1500} />
       </section>
       <section className="w-full flex-center flex-col">
