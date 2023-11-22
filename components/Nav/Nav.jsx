@@ -42,7 +42,11 @@ const Nav = ({ hiddenSearch }) => {
       </div>
       <div className="flex gap-6 font-satoshi flex-center max-md:text-sm">
         {navMenuList?.map((item, index) => (
-          <Link id={index} href="" className={cn("categories", styles.navLink)}>
+          <Link
+            key={index}
+            href=""
+            className={cn("categories", styles.navLink)}
+          >
             {item}
           </Link>
         ))}
@@ -62,7 +66,7 @@ const Nav = ({ hiddenSearch }) => {
             />
           </form> */}
           <form className="flex items-center">
-            <label for="voice-search" className="sr-only">
+            <label htmlFor="voice-search" className="sr-only">
               Search
             </label>
             <div className="relative w-full">
@@ -74,9 +78,9 @@ const Nav = ({ hiddenSearch }) => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
@@ -98,9 +102,9 @@ const Nav = ({ hiddenSearch }) => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </button>
@@ -140,6 +144,7 @@ const Nav = ({ hiddenSearch }) => {
               width={30}
               height={30}
               onClick={() => handleLinkTo("/cart")}
+              alt=""
             />
           </div>
           <Image
@@ -147,6 +152,7 @@ const Nav = ({ hiddenSearch }) => {
             src="/assets/icons/heart.svg"
             width={30}
             height={30}
+            alt=""
           />
           <div className="relative self-center">
             {loggedin ? (

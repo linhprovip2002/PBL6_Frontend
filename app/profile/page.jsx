@@ -29,7 +29,7 @@ const Profile = () => {
                   alt=""
                 />
                 <label
-                  for="file-input"
+                  htmlFor="file-input"
                   className="group w-full h-full p-5 hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500"
                 >
                   <img
@@ -46,7 +46,7 @@ const Profile = () => {
           <div className="flex flex-col items-start gap-3 w-full px-4">
             {navList.map((item, idx) => (
               <div
-                id={idx}
+                key={idx}
                 onClick={() => {
                   setCurrent(item);
                 }}

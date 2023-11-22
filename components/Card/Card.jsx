@@ -44,6 +44,7 @@ const Card = () => {
                   width={230}
                   height={300}
                   layout="responsive"
+                  alt=""
                 />
               )}
               {isHovered && (
@@ -53,6 +54,7 @@ const Card = () => {
                   width={10}
                   height={10}
                   layout="responsive"
+                  alt=""
                 />
               )}
             </Link>
@@ -70,9 +72,15 @@ const Card = () => {
                   src="/assets/icons/heartsolid.svg"
                   width={20}
                   height={20}
+                  alt=""
                 />
               ) : (
-                <Image src="/assets/icons/heart.svg" width={20} height={20} />
+                <Image
+                  src="/assets/icons/heart.svg"
+                  width={20}
+                  height={20}
+                  alt=""
+                />
               )}
             </button>
             <button type="button" onClick={() => {}} className={styles.addBtn}>

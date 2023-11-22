@@ -81,6 +81,7 @@ const Signup = () => {
         <img
           src={"assets/images/slide0.jpg"}
           className="w-full h-full object-cover"
+          alt=""
         />
       </div>
       <div className="w-1/2 h-full flex flex-col p-20 items-center gap-7  z-10">

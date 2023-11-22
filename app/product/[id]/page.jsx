@@ -42,6 +42,7 @@ export default function Product() {
           width={230}
           height={300}
           layout="responsive"
+          alt=""
         />
       </div>
       <div className={styles.details}>
