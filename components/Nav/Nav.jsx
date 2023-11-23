@@ -131,9 +131,9 @@ const Nav = ({ hiddenSearch }) => {
               Search
             </button> */}
           </form>
-          <div className={"relative py-2"}>
+          <div id="shopping-cart" className={"relative  py-2"}>
             <div className="t-0 absolute left-5 bottom-6">
-              <p className="flex h-1 w-1 items-center justify-center rounded-full bg-rose-500 p-3 text-black bold">
+              <p className="flex h-1 w-1 items-center justify-center rounded-full bg-rose-500 p-3 text-neutral-200 bg-rose-600 font-semibold">
                 {items?.length}
               </p>
             </div>
@@ -144,6 +144,9 @@ const Nav = ({ hiddenSearch }) => {
               width={30}
               height={30}
               onClick={() => handleLinkTo("/cart")}
+              // onClick={() => {
+              //   dispatch(toggleCartSideBar());
+              // }}
               alt=""
             />
           </div>
