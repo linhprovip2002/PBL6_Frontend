@@ -1,24 +1,29 @@
 "use client";
 
 import styles from "@app/product/[id]/page.module.css";
+import Loading from "@components/Loading/Loading";
 import {
   getProductDetailsSuccess,
+  getProductPending,
   productSelector,
 } from "@redux/reducers/product.reducer";
 import { ProductApi } from "@services/api/product.api";
+import arrayToSTring from "@utils/arrayToString";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Product() {
-  const { productList, productDetailsCurrent } = useSelector(productSelector);
+  const { productList, productDetailsCurrent, isLoading } =
+    useSelector(productSelector);
   const pathname = usePathname();
   const dispatch = useDispatch();
   const paths = pathname.split("/");
   const id = paths[paths.length - 1];
   const getProductDetailPreView = useCallback(async (id) => {
     try {
+      dispatch(getProductPending());
       const res = await ProductApi.getReviewProduct(id);
       dispatch(
         getProductDetailsSuccess({
@@ -45,47 +50,33 @@ export default function Product() {
           alt=""
         />
       </div>
-      <div className={styles.details}>
-        <span>Analog</span>
-        <div className={styles.nameProduct}>
-          {productDetailsCurrent?.nameProduct}
+      {isLoading ? (
+        <Loading size={20} />
+      ) : (
+        <div className={styles.details}>
+          <span>Analog</span>
+          <div className={styles.nameProduct}>
+            {productDetailsCurrent?.nameProduct}
+          </div>
+          <div className={styles.priceProduct}>
+            {productDetailsCurrent?.price} $
+          </div>
+          <div className={styles.colors}>
+            <span>Colors: {arrayToSTring(productDetailsCurrent?.color)}</span>
+            <br />
+            <span>Size: {arrayToSTring(productDetailsCurrent?.size)}</span>
+          </div>
+          <div className={styles.description}>
+            <span>{productDetailsCurrent?.description}</span>
+          </div>
+          <button type="button" className={styles.addToBasket}>
+            Thêm vào giỏ hàng
+          </button>
+          <button type="button" className={styles.favourite}>
+            Ưa thích
+          </button>
         </div>
-        <div className={styles.priceProduct}>
-          {productDetailsCurrent?.price} $
-        </div>
-        <div className={styles.colors}>
-          <span>
-            Colors:{" "}
-            {productDetailsCurrent?.color.reduce((acc, cur) => {
-              if (acc !== null) {
-                return String(acc + ", " + cur);
-              } else {
-                return String(cur);
-              }
-            }, null)}
-          </span>
-          <br />
-          <span>
-            Size:{" "}
-            {productDetailsCurrent?.size.reduce((acc, cur) => {
-              if (acc !== null) {
-                return String(acc + ", " + cur);
-              } else {
-                return String(cur);
-              }
-            }, null)}
-          </span>
-        </div>
-        <div className={styles.description}>
-          <span>{productDetailsCurrent?.description}</span>
-        </div>
-        <button type="button" className={styles.addToBasket}>
-          Thêm vào giỏ hàng
-        </button>
-        <button type="button" className={styles.favourite}>
-          Ưa thích
-        </button>
-      </div>
+      )}
     </section>
   );
 }

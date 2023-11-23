@@ -18,10 +18,10 @@
 }
 .cart{
   z-index: 1000;
-  outline: 0.5rem solid transparent;
-  transition: 0.5s ease-in-out;
+  background-color:transparent;
+  transition: 0.1s ease-in-out;
   border-radius: 10%;
 }
 .cart:hover {
-  outline: 0.5rem solid rgb(195, 199, 203);
+  background-color:  rgb(195, 199, 203);
 }

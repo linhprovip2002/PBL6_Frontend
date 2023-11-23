@@ -1,5 +1,6 @@
 "use client";
 import ProtectedRoute from "@HOCs/ProtectedRoute";
+import ModalExample from "@components/Modals/NotificationModal";
 import Nav from "@components/Nav/Nav";
 import { Providers } from "@redux/reducer";
 import "@styles/globals.css";
@@ -28,7 +29,7 @@ const RootLayout = ({ children }) => {
           ) : router.includes("signup") ? (
             <Signup />
           ) : (
-            <main className="app">
+            <main id="itemList" className="app">
               <ProtectedRoute>
                 <Nav hiddenSearch={router.includes("cart")} />
                 {/* <VoiceSearchBox /> */}
@@ -36,6 +37,8 @@ const RootLayout = ({ children }) => {
               </ProtectedRoute>
             </main>
           )}
+          <ModalExample />
+          {/* <Sidebar /> */}
         </Providers>
       </body>
     </html>
