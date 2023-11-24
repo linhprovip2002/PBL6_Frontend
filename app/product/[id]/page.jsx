@@ -71,8 +71,8 @@ export default function Product() {
             modules={[FreeMode, Navigation, Thumbs]}
             className="mySwiper2"
           >
-            {productDetailsCurrent.pictureLinks?.map((item) => (
-              <SwiperSlide>
+            {productDetailsCurrent?.pictureLinks?.map((item) => (
+              <SwiperSlide key={item?._id}>
                 {" "}
                 <img
                   className="object-cover"

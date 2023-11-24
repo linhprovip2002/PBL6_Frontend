@@ -88,11 +88,11 @@ export default function Sidebar() {
                     }}
                   >
                     {items?.map((item) => (
-                      <div key={item.id} className="flex gap-4">
+                      <div key={item?.id} className="flex gap-4">
                         <div className="flex items-center">
                           <img
                             className="object-cover w-28 h-28"
-                            src={item.pictureLinks[0]}
+                            src={item?.pictureLinks[0]}
                             // width={75}
                             // height={25}
                             alt=""

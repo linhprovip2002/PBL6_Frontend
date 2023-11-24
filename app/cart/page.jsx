@@ -58,11 +58,11 @@ const Home = () => {
         <section className="w-3/5">
           <div className="flex flex-col gap-5">
             {items?.map((item) => (
-              <div key={item.id} className="flex px-5 mb-12 gap-4">
+              <div key={item?.id} className="flex px-5 mb-12 gap-4">
                 <div className="flex items-center">
                   <img
                     className="object-cover w-40 h-40"
-                    src={item.pictureLinks[0]}
+                    src={item?.pictureLinks[0]}
                     alt=""
                   />
                 </div>

@@ -146,9 +146,9 @@ const Card = () => {
           </div>
           <div className="content">
             <Link href="" className={styles.itemName}>
-              {item.nameProduct}
+              {item?.nameProduct}
             </Link>
-            <div className="text-gray-400">{item.price}</div>
+            <div className="text-gray-400">{item?.price}</div>
             <button
               type="button"
               className="uppercase font-bold text-sm sm:hidden"

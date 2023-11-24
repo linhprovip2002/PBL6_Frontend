@@ -1,11 +1,14 @@
 "use client";
 import AccountDetails from "@components/Profiles/AccountDetails/AccountDetails";
 import OrdersHistory from "@components/Profiles/OrdersHistory/OrdersHistory";
+import { authSelector } from "@redux/reducers";
 import classNames from "classnames";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styles from "./page.module.scss";
 
 const Profile = () => {
+  const { user } = useSelector(authSelector);
   const [current, setCurrent] = useState("Account");
   const navList = ["Account", "Address", "Orders", "Wishlist", "Log out"];
   return (
@@ -41,7 +44,7 @@ const Profile = () => {
                 </label>
               </div>
             </div>
-            <p className={styles.username}>Sofia Havertz</p>
+            <p className={styles.username}>{user?.userName}</p>
           </div>
           <div className="flex flex-col items-start gap-3 w-full px-4">
             {navList.map((item, idx) => (
