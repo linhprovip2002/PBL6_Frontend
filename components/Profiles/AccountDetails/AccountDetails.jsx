@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styles from "./AccountDetails.module.scss";
 
 const AccountDetails = () => {
-  const userProfile = useSelector(authSelector);
+  const { user } = useSelector(authSelector);
   return (
     <form className="flex gap-10 flex-col items-start px-16">
       <div className={classNames(styles.form, "inline-flex flex-col gap-6")}>
@@ -19,6 +19,7 @@ const AccountDetails = () => {
               id="input-1"
               placeholder="First name"
               type="text"
+              defaultValue={user?.email}
             />
           </div>
         </div>
@@ -32,6 +33,7 @@ const AccountDetails = () => {
               id="input-2"
               placeholder="Last name"
               type="text"
+              defaultValue={user?.email}
             />
           </div>
         </div>
@@ -42,6 +44,7 @@ const AccountDetails = () => {
               className={styles["icon-input"]}
               placeholder="Display name"
               type="text"
+              defaultValue={user?.userName}
             />
           </div>
           <p className={styles.p}>
@@ -59,6 +62,7 @@ const AccountDetails = () => {
               id="input-3"
               placeholder="Email"
               type="email"
+              defaultValue={user?.email}
             />
           </div>
         </div>
