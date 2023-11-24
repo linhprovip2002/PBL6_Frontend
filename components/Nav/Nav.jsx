@@ -26,7 +26,12 @@ const Nav = ({ hiddenSearch }) => {
     router.push(path, { scroll: true });
   };
   return (
-    <nav className={classNames(styles.navHeader, "flex-between w-full mb-16")}>
+    <nav
+      style={{
+        zIndex: 10000,
+      }}
+      className={classNames(styles.navHeader, "flex-between w-full mb-16 ")}
+    >
       <div className="md:mr-3">
         <Link
           href="/"

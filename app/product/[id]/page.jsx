@@ -11,17 +11,28 @@ import {
 import { ProductApi } from "@services/api/product.api";
 import arrayToSTring from "@utils/arrayToString";
 import { toastSuccess } from "@utils/toastHelper";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+// Import Swiper styles
+import "@styles/swiper.css";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+
+// import required modules
 export default function Product() {
   const { productList, productDetailsCurrent, isLoading } =
     useSelector(productSelector);
   const pathname = usePathname();
   const dispatch = useDispatch();
   const paths = pathname.split("/");
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   const id = paths[paths.length - 1];
   const getProductDetailPreView = useCallback(async (id) => {
     try {
@@ -44,17 +55,37 @@ export default function Product() {
   useEffect(() => {
     getProductDetailPreView(id);
   }, [id]);
-
   return (
-    <section className="w-full max-w-full flex  mt-32">
+    <section className="w-full max-w-full flex  mt-32 justify-between	">
       <div className={styles.imageContainer}>
-        <Image
-          src="/assets/images/watch1.jpg"
-          width={230}
-          height={300}
-          layout="responsive"
-          alt=""
-        />
+        <>
+          <Swiper
+            style={{
+              "--swiper-navigation-color": "#fff",
+              "--swiper-pagination-color": "#fff",
+            }}
+            loop={true}
+            spaceBetween={10}
+            navigation={true}
+            thumbs={{ swiper: thumbsSwiper }}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper2"
+          >
+            {productDetailsCurrent.pictureLinks?.map((item) => (
+              <SwiperSlide>
+                {" "}
+                <img
+                  className="object-cover"
+                  src={item}
+                  // width={230}
+                  // height={`100%`}
+                  layout="responsive"
+                  alt=""
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </>
       </div>
       {isLoading ? (
         <Loading size={20} />

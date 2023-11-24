@@ -11,7 +11,6 @@ import {
 } from "@redux/reducers";
 import { modalSelector } from "@redux/reducers/modal.reducer";
 import arrayToSTring from "@utils/arrayToString";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
@@ -57,20 +56,19 @@ const Home = () => {
     <PaymentLayout>
       <section className="w-full flex">
         <section className="w-3/5">
-          <div>
+          <div className="flex flex-col gap-5">
             {items?.map((item) => (
               <div key={item.id} className="flex px-5 mb-12 gap-4">
-                <div>
-                  <Image
-                    src="/assets/images/watch1.jpg"
-                    width={150}
-                    height={50}
+                <div className="flex items-center">
+                  <img
+                    className="object-cover w-40 h-40"
+                    src={item.pictureLinks[0]}
                     alt=""
                   />
                 </div>
                 <div className="flex-1 flex justify-between">
                   <div className="flex flex-col justify-between">
-                    <p className="text-lg font-medium leading-none">
+                    <p className="text-lg h-6 truncate w-64  font-medium leading-none">
                       {item?.nameProduct}
                     </p>
                     <div>

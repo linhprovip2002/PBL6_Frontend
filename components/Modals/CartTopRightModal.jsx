@@ -9,7 +9,6 @@ import {
 import { closeCartSideBar, modalSelector } from "@redux/reducers/modal.reducer";
 import arrayToSTring from "@utils/arrayToString";
 import classNames from "classnames";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Fragment, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -90,17 +89,18 @@ export default function Sidebar() {
                   >
                     {items?.map((item) => (
                       <div key={item.id} className="flex gap-4">
-                        <div>
-                          <Image
-                            src="/assets/images/watch1.jpg"
-                            width={75}
-                            height={25}
+                        <div className="flex items-center">
+                          <img
+                            className="object-cover w-28 h-28"
+                            src={item.pictureLinks[0]}
+                            // width={75}
+                            // height={25}
                             alt=""
                           />
                         </div>
                         <div className="flex-1 flex justify-between">
                           <div className="flex flex-col justify-between">
-                            <p className="text-sm font-medium leading-none">
+                            <p className="h-4 truncate w-44 text-sm font-medium leading-none">
                               {item?.nameProduct}
                             </p>
                             <div>

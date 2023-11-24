@@ -1,5 +1,6 @@
 .imageContainer {
-  @apply max-w-md overflow-hidden mb-1 rounded-lg shadow-lg;
+  max-height: 704px;
+  @apply w-2/4 flex justify-center overflow-hidden mb-1 rounded-lg shadow-lg object-cover;
 }
 
 .details {
@@ -18,7 +19,7 @@
 }
 
 .addToBasket {
-  @apply mt-3 w-full bg-orange-500 text-white p-3 hover:bg-orange-400 transition ease-out duration-500;
+  @apply mt-3 w-full text-white my-2 bg-[#141718] hover:-translate-y-1 hover:scale-110 py-3 px-10 text-center cursor-pointer transition ease-out duration-500;
 }
 
 .favourite {
