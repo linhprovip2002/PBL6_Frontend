@@ -1,5 +1,6 @@
 "use client";
 import ProtectedRoute from "@HOCs/ProtectedRoute";
+import Sidebar from "@components/Modals/CartTopRightModal";
 import ModalExample from "@components/Modals/NotificationModal";
 import Nav from "@components/Nav/Nav";
 import { Providers } from "@redux/reducer";
@@ -38,7 +39,7 @@ const RootLayout = ({ children }) => {
             </main>
           )}
           <ModalExample />
-          {/* <Sidebar /> */}
+          <Sidebar />
         </Providers>
       </body>
     </html>

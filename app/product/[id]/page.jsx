@@ -2,6 +2,7 @@
 
 import styles from "@app/product/[id]/page.module.css";
 import Loading from "@components/Loading/Loading";
+import { addToCart } from "@redux/reducers";
 import {
   getProductDetailsSuccess,
   getProductPending,
@@ -9,6 +10,7 @@ import {
 } from "@redux/reducers/product.reducer";
 import { ProductApi } from "@services/api/product.api";
 import arrayToSTring from "@utils/arrayToString";
+import { toastSuccess } from "@utils/toastHelper";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect } from "react";
@@ -35,6 +37,10 @@ export default function Product() {
       console.log(error);
     }
   }, []);
+  const addProductToCart = () => {
+    dispatch(addToCart(productDetailsCurrent));
+    toastSuccess("Thêm 1 sản phẩm vào giỏ hàng thành công");
+  };
   useEffect(() => {
     getProductDetailPreView(id);
   }, [id]);
@@ -69,7 +75,11 @@ export default function Product() {
           <div className={styles.description}>
             <span>{productDetailsCurrent?.description}</span>
           </div>
-          <button type="button" className={styles.addToBasket}>
+          <button
+            onClick={() => addProductToCart()}
+            type="button"
+            className={styles.addToBasket}
+          >
             Thêm vào giỏ hàng
           </button>
           <button type="button" className={styles.favourite}>

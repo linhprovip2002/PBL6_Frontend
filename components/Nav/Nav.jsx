@@ -1,6 +1,11 @@
 "use client";
 
-import { authSelector, cartSelector, logout } from "@redux/reducers";
+import {
+  authSelector,
+  cartSelector,
+  logout,
+  toggleCartSideBar,
+} from "@redux/reducers";
 import { deleteToken } from "@utils/LocalStorageHandle";
 import { navMenuList } from "@utils/data";
 import { default as classNames, default as cn } from "classnames";
@@ -143,10 +148,10 @@ const Nav = ({ hiddenSearch }) => {
               src="/assets/icons/cart.svg"
               width={30}
               height={30}
-              onClick={() => handleLinkTo("/cart")}
-              // onClick={() => {
-              //   dispatch(toggleCartSideBar());
-              // }}
+              // onClick={() => handleLinkTo("/cart")}
+              onClick={() => {
+                dispatch(toggleCartSideBar());
+              }}
               alt=""
             />
           </div>

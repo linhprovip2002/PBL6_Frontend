@@ -11,7 +11,10 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       if (state.items?.map((item) => item._id).includes(action.payload._id)) {
         state.items = state.items?.map((item) => {
-          if (item._id === action.payload._id) {
+          if (
+            item._id === action.payload._id &&
+            item?.quantityInCart < item.quantity
+          ) {
             return {
               ...item,
               quantityInCart: item?.quantityInCart + 1,

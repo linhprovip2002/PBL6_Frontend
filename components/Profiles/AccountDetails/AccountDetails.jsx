@@ -106,7 +106,7 @@ const AccountDetails = () => {
         </div>
         <button
           type="submit"
-          className="w-fit text-white my-2 bg-[#141718] rounded-md py-3 px-10 text-center cursor-pointer"
+          className="w-fit text-white my-2 bg-[#141718] hover:-translate-y-1 hover:scale-110 rounded-md py-3 px-10 text-center cursor-pointer transition ease-out duration-500"
         >
           Save Changes
         </button>
