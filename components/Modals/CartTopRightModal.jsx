@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import {
   addToCart,
   cartSelector,
@@ -74,6 +74,12 @@ export default function Sidebar() {
                   "bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col justify-between h-full"
                 )}
               >
+                <XCircleIcon
+                  onClick={() => {
+                    onCloseModal();
+                  }}
+                  className="absolute  h-9 w-9 right-5 top-5 object-cover cursor-pointer transition-transform transform hover:scale-110 ease-out duration-500  "
+                />
                 <div className={styles.cartContainer}>
                   <span className={styles["text-wrapper"]}>Cart</span>
                   <div
