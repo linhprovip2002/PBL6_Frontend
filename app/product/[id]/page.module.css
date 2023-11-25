@@ -1,6 +1,6 @@
 .imageContainer {
-  max-height: 704px;
-  @apply w-2/4 flex justify-center overflow-hidden mb-1 rounded-lg shadow-lg object-cover;
+  height: 630px;
+  @apply w-2/4 bg-orange-200		 flex items-center justify-center rounded-lg shadow-lg;
 }
 
 .details {
