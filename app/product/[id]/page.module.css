@@ -11,6 +11,11 @@
 }
 
 .nameProduct {
+  width: 100%;
+  height: 79px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: pretty;
   @apply mt-3 lg:text-3xl md:text-2xl sm:text-xl font-extrabold text-black;
 }
 
