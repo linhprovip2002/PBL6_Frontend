@@ -8,23 +8,22 @@ import { jwtDecode } from "jwt-decode";
 //   credential?: ICredential;
 //   fcmToken?: string;
 // };
-const  getUserInfFromToken = (token) => {
-  const {user} = jwtDecode(token);
+const getUserInfFromToken = (token) => {
+  const { user } = jwtDecode(token);
   return {
     ...user?.account,
-    roles: user?.Roles
-  }
-} 
+    roles: user?.Roles,
+  };
+};
 const initialState = {
   loggedin: getToken() ? true : false,
-  user: getToken() ? getUserInfFromToken(getToken()) : null,
+  user: null,
   credential: getToken()
     ? {
         token: getToken(),
       }
     : null,
 };
-
 
 const authSlice = createSlice({
   name: "auth",
@@ -36,10 +35,10 @@ const authSlice = createSlice({
       state.credential = action.payload;
     },
     setUser: (state, action) => {
-      const userInf= action.payload?.account;
-      const userRoles = action.payload?.Roles;
+      const userInf = action.payload;
+      // const userRoles = action.payload?.Roles;
       state.loggedin = true;
-      state.user = {...userInf, roles: userRoles};
+      state.user = { ...userInf };
     },
     logout: (state, action) => {
       state.loggedin = false;

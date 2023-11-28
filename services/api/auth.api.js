@@ -1,9 +1,10 @@
-import request from './axios';
+import request from "./axios";
 
 const ENDPOINTS = {
-  LOGIN: '/auth/login',
-  PROFILE: '/user/me',
-  REGISTER: '/auth/register',
+  LOGIN: "/auth/login",
+  PROFILE: "/user/me",
+  REGISTER: "/auth/register",
+  UPDATEME: "/user",
 };
 
 const login = (data) => {
@@ -20,9 +21,13 @@ const getProfile = () => {
 const register = (data) => {
   return request().post(ENDPOINTS.REGISTER, data);
 };
-
+const updateMe = (id, data) => {
+  console.log(id, data);
+  return request().put(`${ENDPOINTS.UPDATEME}/${id}`, data);
+};
 export const AuthApi = {
   login,
   getProfile,
   register,
+  updateMe,
 };

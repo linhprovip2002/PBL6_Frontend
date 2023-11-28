@@ -55,13 +55,6 @@ const Home = () => {
         </p>
       </section>
 
-      <section className="app-max-width w-full h-full flex flex-col justify-center mt-16 mb-20">
-        <p className="text-lg mb-5 font-bold underline">Bán chạy nhất</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 lg:gap-x-12 gap-y-6 mb-10 app-x-padding">
-          <Card />
-        </div>
-      </section>
-
       <section className="w-full h-auto py-10">
         <p className="text-lg mb-5 font-bold underline">
           Chọn loại đồng hồ phù hợp
@@ -76,6 +69,13 @@ const Home = () => {
               </OverlayContainer>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="app-max-width w-full h-full flex flex-col justify-center mt-16 mb-20">
+        <p className="text-lg mb-5 font-bold underline">Bán chạy nhất</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 lg:gap-x-12 gap-y-6 mb-10 app-x-padding">
+          <Card />
         </div>
       </section>
     </>
