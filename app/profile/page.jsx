@@ -11,6 +11,9 @@ const Profile = () => {
   const { user } = useSelector(authSelector);
   const [current, setCurrent] = useState("Account");
   const navList = ["Account", "Address", "Orders", "Wishlist", "Log out"];
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
+
   return (
     <section className="w-full pb-20 mt-32">
       <div className={styles.profileHeader}>

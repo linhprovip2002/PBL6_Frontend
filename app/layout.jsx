@@ -10,10 +10,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./login/page";
 import Signup from "./signup/page";
-export const metadata = {
-  title: "PBL6",
-  description: "Đồ án PBL6",
-};
+// export const metadata = {
+//   title: "PBL6",
+//   description: "Đồ án PBL6",
+// };
 
 const RootLayout = ({ children }) => {
   const router = usePathname();

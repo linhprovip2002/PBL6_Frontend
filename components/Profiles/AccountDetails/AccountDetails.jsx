@@ -56,9 +56,7 @@ const AccountDetails = () => {
     onSubmit: handleSubmit,
     validationSchema: UpdateProfileSchema,
   });
-  console.log(formik.values.dayOfBirth);
-  console.log(formatDate(formik.values.dayOfBirth));
-
+  console.log(user);
   return (
     <form
       onSubmit={formik.handleSubmit}
