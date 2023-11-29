@@ -120,7 +120,7 @@ const Profile = () => {
                 )}
               </div>
             </div>
-            <p className={styles.username}>{user?.userName}</p>
+            <p className={styles.username}>{user?.account?.userName}</p>
           </div>
           <div className="flex flex-col items-start gap-3 w-full px-4">
             {navList.map((item, idx) => (
