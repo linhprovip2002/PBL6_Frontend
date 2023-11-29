@@ -18,7 +18,6 @@ const AccountDetails = () => {
     try {
       if (user._id) {
         setIsLoading(true);
-        console.log(data);
         const res = await AuthApi.updateMe(user?._id, {
           firstName: data.firstName,
           lastName: data.lastName,
@@ -29,8 +28,8 @@ const AccountDetails = () => {
         }).then(async () => {
           const user = await AuthApi.getProfile();
           dispatch(setUser(user?.data));
+          toastSuccess("Cập nhật tài khoản thành công");
         });
-        toastSuccess("Cập nhật tài khoản thành công");
         // router.push("/login", { scroll: true });
         // }
       }
@@ -56,7 +55,6 @@ const AccountDetails = () => {
     onSubmit: handleSubmit,
     validationSchema: UpdateProfileSchema,
   });
-  console.log(user);
   return (
     <form
       onSubmit={formik.handleSubmit}
