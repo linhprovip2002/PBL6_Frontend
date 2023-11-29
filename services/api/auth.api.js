@@ -22,7 +22,6 @@ const register = (data) => {
   return request().post(ENDPOINTS.REGISTER, data);
 };
 const updateMe = (id, data) => {
-  console.log(id, data);
   return request().put(`${ENDPOINTS.UPDATEME}/${id}`, data);
 };
 export const AuthApi = {

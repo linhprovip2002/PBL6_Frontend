@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Nav.module.css";
 const Nav = ({ hiddenSearch }) => {
   const router = useRouter();
-  const { loggedin } = useSelector(authSelector);
+  const { loggedin, user } = useSelector(authSelector);
   const { items } = useSelector(cartSelector);
 
   const dispatch = useDispatch();
@@ -171,19 +171,31 @@ const Nav = ({ hiddenSearch }) => {
             {loggedin ? (
               <Image
                 className="cursor-pointer rounded-full"
-                src="/assets/images/watch1.jpg"
+                src={
+                  user?.profilePicture
+                    ? user?.profilePicture
+                    : "/assets/images/avatar-default-circle.png"
+                }
                 alt="Rounded avatar"
-                width={30}
-                height={30}
+                width={25}
+                height={25}
                 onClick={() => setOpen(!open)}
+                style={{
+                  width: "38px",
+                  height: "38px",
+                }}
               />
             ) : (
               <Image
                 className="cursor-pointer"
-                src="/assets/icons/user.svg"
+                src={"/assets/images/avatar-default-circle.png"}
                 width={25}
                 height={25}
                 onClick={() => setOpen(!open)}
+                style={{
+                  width: "38px",
+                  height: "38px",
+                }}
               />
             )}
             <ul

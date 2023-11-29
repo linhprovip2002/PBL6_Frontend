@@ -7,10 +7,10 @@ const nextConfig = {
   images: {
     domains: [
       "lh3.googleusercontent.com",
-      "www.fastfashionbd.com",
       "rukminim1.flixcart.com",
       "i.ebayimg.com",
       "watchard.com",
+      "res.cloudinary.com",
     ],
   },
   webpack(config) {
