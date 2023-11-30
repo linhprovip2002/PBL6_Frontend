@@ -1,9 +1,11 @@
 "use client";
+import styles from "@app/cart/page.module.scss";
 import { CONSTANTS } from "@constants/status";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import PaymentLayout from "@layouts/PaymentLayout/PaymentLayout";
 import {
   addToCart,
+  authSelector,
   cartSelector,
   decreaseQuantityProduct,
   deleteCartItem,
@@ -15,6 +17,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
   const { items } = useSelector(cartSelector);
+  const { user, loggedin } = useSelector(authSelector);
   const { open: openModal, modalID } = useSelector(modalSelector);
   const [productActive, setProductActive] = useState(null);
   const dispatch = useDispatch();
@@ -41,6 +44,27 @@ const Home = () => {
       dispatch(decreaseQuantityProduct(item));
     }
     if (!openModal) {
+    }
+  };
+  const onClickPayment = () => {
+    if (items?.length === 0) {
+      return dispatch(
+        toggleModal({
+          status: CONSTANTS.status.WARNING,
+          modalID: CONSTANTS.modalID.NAVIGATE_TO_HOMEPAGE,
+          message: "Hình như bạn chưa chọn sản phẩm ?",
+        })
+      );
+    }
+    if (user?._id && loggedin) {
+    } else {
+      dispatch(
+        toggleModal({
+          status: CONSTANTS.status.WARNING,
+          modalID: CONSTANTS.modalID.NAVIGATE_TO_LOGIN,
+          message: "Hình như bạn chưa đăng nhập ?",
+        })
+      );
     }
   };
   useEffect(() => {
@@ -125,8 +149,8 @@ const Home = () => {
             ))}
           </div>
         </section>
-        <section className="w-2/5 flex justify-end">
-          <div className="w-11/12 p-3 bg-zinc-100	 h-fit">
+        <section className="w-2/5 flex flex-col">
+          <div className="w-11/12 ml-3 bg-zinc-100	 h-fit">
             {/* <p>Gift card or discount code</p> */}
             <div className="mb-6">
               <label
@@ -154,6 +178,13 @@ const Home = () => {
             <hr className="h-px my-8 bg-gray-700 border-0 dark:bg-gray-700"></hr>
             <hr className="h-px my-8 bg-gray-700 border-0 dark:bg-gray-700"></hr>
           </div>
+          <button
+            onClick={() => onClickPayment()}
+            type="button"
+            className={styles.addToBasket}
+          >
+            Thanh toán
+          </button>
         </section>
       </section>
     </PaymentLayout>

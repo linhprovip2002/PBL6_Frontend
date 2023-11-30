@@ -4,6 +4,8 @@ const status = {
 };
 const modalID = {
   DELETE_PRODUCT: "DELETE_PRODUCT",
+  NAVIGATE_TO_LOGIN: "NAVIGATE_TO_LOGIN",
+  NAVIGATE_TO_HOMEPAGE: "NAVIGATE_TO_HOMEPAGE",
 };
 export const CONSTANTS = {
   status,

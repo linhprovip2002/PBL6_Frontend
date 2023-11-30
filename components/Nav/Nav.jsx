@@ -3,6 +3,7 @@
 import {
   authSelector,
   cartSelector,
+  clearCartLogout,
   logout,
   toggleCartSideBar,
 } from "@redux/reducers";
@@ -181,20 +182,20 @@ const Nav = ({ hiddenSearch }) => {
                 height={25}
                 onClick={() => setOpen(!open)}
                 style={{
-                  width: "38px",
-                  height: "38px",
+                  width: "30px",
+                  height: "30px",
                 }}
               />
             ) : (
               <Image
                 className="cursor-pointer"
-                src={"/assets/images/avatar-default-circle.png"}
+                src={"/assets/icons/user.svg"}
                 width={25}
                 height={25}
                 onClick={() => setOpen(!open)}
                 style={{
-                  width: "38px",
-                  height: "38px",
+                  width: "30px",
+                  height: "30px",
                 }}
               />
             )}
@@ -219,6 +220,7 @@ const Nav = ({ hiddenSearch }) => {
                     onClick={() => {
                       deleteToken();
                       dispatch(logout());
+                      dispatch(clearCartLogout());
                       handleLinkTo("/login");
                       setOpen(false);
                     }}

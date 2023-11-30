@@ -1,5 +1,4 @@
 "use client";
-import ProtectedRoute from "@HOCs/ProtectedRoute";
 import Sidebar from "@components/Modals/CartTopRightModal";
 import ModalExample from "@components/Modals/NotificationModal";
 import Nav from "@components/Nav/Nav";
@@ -31,11 +30,11 @@ const RootLayout = ({ children }) => {
             <Signup />
           ) : (
             <main id="itemList" className="app">
-              <ProtectedRoute>
-                <Nav hiddenSearch={router.includes("cart")} />
-                {/* <VoiceSearchBox /> */}
-                {children}
-              </ProtectedRoute>
+              {/* <ProtectedRoute> */}
+              <Nav hiddenSearch={router.includes("cart")} />
+              {/* <VoiceSearchBox /> */}
+              {children}
+              {/* </ProtectedRoute> */}
             </main>
           )}
           <ModalExample />

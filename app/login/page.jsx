@@ -1,13 +1,14 @@
 "use client";
 import Loading from "@components/Loading/Loading";
-import { setCredential, setUser } from "@redux/reducers";
+import { logout, setCredential, setUser } from "@redux/reducers";
 import { AuthApi } from "@services/api";
 import { LoginSchema } from "@services/validators";
+import { deleteToken } from "@utils/LocalStorageHandle";
 import { toastError, toastSuccess } from "@utils/toastHelper";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
@@ -48,10 +49,10 @@ const Login = () => {
     setIsPasswordVisible((prevState) => !prevState);
     e.stopPropagation();
   };
-  // useEffect(() => {
-  //   dispatch(logout());
-  //   deleteToken();
-  // }, []);
+  useEffect(() => {
+    dispatch(logout());
+    deleteToken();
+  }, []);
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">

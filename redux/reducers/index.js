@@ -10,6 +10,7 @@ export {
   addToCart,
   cartSelector,
   default as cartSlice,
+  clearCartLogout,
   decreaseQuantityProduct,
   deleteCartItem,
   updateCart,

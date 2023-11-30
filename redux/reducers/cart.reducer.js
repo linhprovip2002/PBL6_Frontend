@@ -50,6 +50,9 @@ const cartSlice = createSlice({
         (item) => item._id !== action.payload._id
       );
     },
+    clearCartLogout: (state, action) => {
+      state.items = [];
+    },
   },
 });
 
@@ -60,5 +63,6 @@ export const {
   deleteCartItem,
   updateCart,
   decreaseQuantityProduct,
+  clearCartLogout,
 } = cartSlice.actions;
 export default cartSlice.reducer;

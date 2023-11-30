@@ -10,14 +10,21 @@ import {
   resetModal,
 } from "@redux/reducers/modal.reducer";
 import classNames from "classnames";
+import { useRouter } from "next/navigation";
 import { Fragment, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ModalExample() {
-  const { open, message, status } = useSelector(modalSelector);
+  const { open, message, status, modalID } = useSelector(modalSelector);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const onAccept = () => {
+    if (modalID == CONSTANTS.modalID.NAVIGATE_TO_LOGIN) {
+      router.push("/login", { scroll: true });
+    } else if (modalID == CONSTANTS.modalID.NAVIGATE_TO_HOMEPAGE) {
+      router.push("/", { scroll: true });
+    }
     dispatch(closeModal());
   };
   const onResetModal = () => {
@@ -78,8 +85,8 @@ export default function ModalExample() {
                         className="text-base font-semibold leading-6 text-gray-900"
                       >
                         {status === CONSTANTS.status.WARNING
-                          ? "Deactivate"
-                          : "Activate"}
+                          ? "Cảnh báo"
+                          : "Xác nhận"}
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">{message}</p>
@@ -102,8 +109,8 @@ export default function ModalExample() {
                     onClick={onAccept}
                   >
                     {status === CONSTANTS.status.WARNING
-                      ? "Deactivate"
-                      : "Activate"}
+                      ? "Xác nhận"
+                      : "Đồng ý"}
                   </button>
                   <button
                     type="button"
