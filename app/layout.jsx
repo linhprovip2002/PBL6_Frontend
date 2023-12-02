@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@components/Footer/Footer";
 import Sidebar from "@components/Modals/CartTopRightModal";
 import ModalExample from "@components/Modals/NotificationModal";
 import Nav from "@components/Nav/Nav";
@@ -9,7 +10,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./login/page";
 import Signup from "./signup/page";
-import Footer from "@components/Footer/Footer";
 // export const metadata = {
 //   title: "PBL6",
 //   description: "Đồ án PBL6",
@@ -19,7 +19,7 @@ const RootLayout = ({ children }) => {
   const router = usePathname();
   return (
     <html lang="en">
-      <body>
+      <body className="relative">
         <Providers>
           <ToastContainer />
           <div className="main">
@@ -35,11 +35,11 @@ const RootLayout = ({ children }) => {
               <Nav hiddenSearch={router.includes("cart")} />
               {/* <VoiceSearchBox /> */}
               {children}
-              <Footer />
               {/* </ProtectedRoute> */}
             </main>
           )}
           <ModalExample />
+          <Footer />
           <Sidebar />
         </Providers>
       </body>

@@ -49,7 +49,7 @@ const Nav = ({ hiddenSearch }) => {
               height={30}
               className="object-contain flex-shrink-0"
             />
-            <p className="logo_text">PBL6</p>
+            <p className="logo_text">SUNNY WATCH</p>
           </Link>
         </div>
         <div className="flex gap-6 font-satoshi flex-center max-md:text-sm">

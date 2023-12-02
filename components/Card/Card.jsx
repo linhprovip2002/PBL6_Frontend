@@ -101,7 +101,7 @@ const Card = () => {
               {isHovered && (
                 <img
                   src={`${item.pictureLinks[0]}`}
-                  className="card-img card-img transition-transform transform hover:scale-110 duration-1000"
+                  className="card-img transition-transform transform hover:scale-110 duration-1000"
                   style={{
                     objectFit: "cover",
                     width: "100%",

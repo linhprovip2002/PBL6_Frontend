@@ -376,7 +376,8 @@
 
 .flying-img {
   position: absolute;
-  animation: fly_to_cart 1.5s ease-in-out;
+  z-index: 1000;
+  animation: fly_to_cart 1.2s ease-in-out;
 }
 
 @keyframes fly_to_cart {
