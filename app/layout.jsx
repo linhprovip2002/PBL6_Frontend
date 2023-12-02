@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./login/page";
 import Signup from "./signup/page";
+import Footer from "@components/Footer/Footer";
 // export const metadata = {
 //   title: "PBL6",
 //   description: "Đồ án PBL6",
@@ -34,6 +35,7 @@ const RootLayout = ({ children }) => {
               <Nav hiddenSearch={router.includes("cart")} />
               {/* <VoiceSearchBox /> */}
               {children}
+              <Footer />
               {/* </ProtectedRoute> */}
             </main>
           )}

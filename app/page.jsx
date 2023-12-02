@@ -35,6 +35,10 @@ const Home = () => {
     handelGetAll();
   }, []);
 
+  console.log(categoryList);
+
+  console.log(categoryList.map((item) => item.IDProduct[0]?.pictureLinks[0]));
+
   return (
     <>
       <section className="w-full flex-center flex-col rounded-2xl overflow-hidden mt-32">
@@ -62,7 +66,7 @@ const Home = () => {
         <div className="app-max-width app-x-padding h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {categoryList.map((item, idx) => (
             <div key={idx} className="w-full">
-              <OverlayContainer imgSrc={"/assets/images/men.jpg"}>
+              <OverlayContainer imgSrc="/assets/images/slide0.jpg">
                 <LinkButton href="" extraClass="absolute bottom-2 z-20">
                   {item.CategoryName}
                 </LinkButton>

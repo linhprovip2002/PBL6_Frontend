@@ -5,6 +5,10 @@
 
 .imageContainer {
   @apply mb-1 rounded-lg shadow-lg;
+  width: 100%; /* Set a fixed width for the container */
+  height: 0; /* Set initial height to 0 for aspect ratio preservation */
+  padding-bottom: 100%; /* Set a padding-bottom for aspect ratio preservation */
+  overflow: hidden; /* Hide overflowing content */
 }
 
 .addBtn {
@@ -22,3 +26,4 @@
 .itemName {
   @apply text-xs sm:text-base block no-underline text-gray-500 mb-1 truncate;
 }
+

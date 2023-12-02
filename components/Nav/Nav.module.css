@@ -1,5 +1,5 @@
 .navHeader {
-  position: fixed;
+  /* position: fixed; */
   margin: auto;
   max-width: 1280px;
   top: 0px;
@@ -16,12 +16,12 @@
 .p {
   margin-bottom: -1rem;
 }
-.cart{
+.cart {
   z-index: 1000;
-  background-color:transparent;
+  background-color: transparent;
   transition: 0.1s ease-in-out;
   border-radius: 10%;
 }
 .cart:hover {
-  background-color:  rgb(195, 199, 203);
+  background-color: rgb(195, 199, 203);
 }

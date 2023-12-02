@@ -88,23 +88,25 @@ const Card = () => {
               onMouseLeave={() => setIsHovered(false)}
             >
               {!isHovered && (
-                <Image
-                  className="card-img z-50"
-                  src="/assets/images/watch1.jpg"
-                  width={230}
-                  height={300}
-                  layout="responsive"
-                  alt=""
+                <img
+                  src={`${item.pictureLinks[0]}`}
+                  className="card-img"
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "300px",
+                  }}
                 />
               )}
               {isHovered && (
-                <Image
-                  className="card-img transition-transform transform hover:scale-110 duration-1000 z-50"
-                  src="/assets/images/watch1.jpg"
-                  width={10}
-                  height={10}
-                  layout="responsive"
-                  alt=""
+                <img
+                  src={`${item.pictureLinks[0]}`}
+                  className="card-img card-img transition-transform transform hover:scale-110 duration-1000"
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "300px",
+                  }}
                 />
               )}
             </Link>

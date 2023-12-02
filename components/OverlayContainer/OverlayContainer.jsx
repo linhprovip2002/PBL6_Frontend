@@ -6,31 +6,37 @@ const OverlayContainer = ({ imgSrc, imgSrc2, imgAlt, children }) => (
     {imgSrc2 ? (
       <>
         <div className="hidden sm:block w-full">
-          <Image
+          <img
+            src={`${imgSrc}`}
             className={styles.img}
-            src={imgSrc}
-            alt={imgAlt}
-            width={858}
-            height={414}
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: "300px",
+            }}
           />
         </div>
         <div className="block sm:hidden w-full">
-          <Image
+          <img
+            src={`${imgSrc2}`}
             className={styles.img}
-            src={imgSrc2}
-            alt={imgAlt}
-            width={710}
-            height={710}
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: "300px",
+            }}
           />
         </div>
       </>
     ) : (
-      <Image
+      <img
+        src={`${imgSrc}`}
         className={styles.img}
-        src={imgSrc}
-        alt={imgAlt}
-        width={710}
-        height={710}
+        style={{
+          objectFit: "cover",
+          width: "100%",
+          height: "300px",
+        }}
       />
     )}
 
