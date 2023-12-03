@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -8,14 +9,21 @@ const Footer = () => {
           <div className="flex items-center justify-between relative">
             <div className="flex w-[544px] items-center gap-[32px] relative">
               <div className="relative w-[105px] h-[24px]">
-                <p className="absolute -top-px left-0 font-medium  text-center ">
+                <Image
+                  src="/assets/images/logo_home.svg"
+                  alt="logo"
+                  width={40}
+                  height={40}
+                  className="abosolute mt-3"
+                />
+                <p className="absolute -top-px left-12 font-medium  text-center ">
                   <span className="text-white text-2xl">SUNNY WATCH</span>
                 </p>
               </div>
             </div>
             <div className="inline-flex items-start gap-[40px] relative flex-[0_0_auto] text-end">
               <div className="relative w-[80px] mt-[-1.00px] font-caption-1">
-                Home
+                <Link href="/">Home</Link>
               </div>
               <div className="relative w-[80px] mt-[-1.00px] font-caption-1">
                 Shop
@@ -41,8 +49,24 @@ const Footer = () => {
             <div className="relative w-[100px]">Terms of Use</div>
           </div>
           <div className="inline-flex items-start gap-[24px] relative flex-[0_0_auto]">
-            <Image src="/assets/icons/instagram.svg" width={20} height={20} />
-            <Image src="/assets/icons/facebook.svg" width={20} height={20} />
+            <a
+              href="https://www.instagram.com/sunnywatch2002/?utm_source=ig_web_button_share_sheet&igshid=YzAwZjE1ZTI0Zg=="
+              target="_blank"
+            >
+              <Image src="/assets/icons/instagram.svg" width={20} height={20} />
+            </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=61553800418323&locale=vi_VN"
+              target="_blank"
+            >
+              <Image src="/assets/icons/facebook.svg" width={20} height={20} />
+            </a>
+            <a
+              href="https://www.tiktok.com/@sunnywatch2002?_t=8hsVBKYfGD9&_r=1"
+              target="_blank"
+            >
+              <Image src="/assets/icons/tiktok.svg" width={20} height={20} />
+            </a>
           </div>
         </div>
       </div>

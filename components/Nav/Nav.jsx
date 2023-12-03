@@ -43,7 +43,7 @@ const Nav = ({ hiddenSearch }) => {
             )}
           >
             <Image
-              src="/assets/images/logo.svg"
+              src="/assets/images/logo_home.svg"
               alt="logo"
               width={30}
               height={30}

@@ -111,6 +111,15 @@ const Card = () => {
               )}
             </Link>
 
+            <div className="absolute top-2 left-2  rouded-full">
+              <Image
+                src="/assets/images/logo_home.svg"
+                alt="logo"
+                width={25}
+                height={25}
+              />
+            </div>
+
             <button
               type="button"
               className="absolute top-2 right-2 p-1 rounded-full"
