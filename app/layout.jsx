@@ -30,7 +30,11 @@ const RootLayout = ({ children }) => {
           ) : router.includes("signup") ? (
             <Signup />
           ) : (
-            <main id="itemList" className="app">
+            <main
+              id="itemList"
+              className="app"
+              style={{ minHeight: "1000px", paddingBottom: "320px" }}
+            >
               {/* <ProtectedRoute> */}
               <Nav hiddenSearch={router.includes("cart")} />
               {/* <VoiceSearchBox /> */}
@@ -39,7 +43,9 @@ const RootLayout = ({ children }) => {
             </main>
           )}
           <ModalExample />
-          <Footer />
+          {!(router.includes("signup") || router.includes("login")) && (
+            <Footer />
+          )}
           <Sidebar />
         </Providers>
       </body>

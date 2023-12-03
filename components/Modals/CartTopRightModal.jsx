@@ -42,6 +42,7 @@ export default function Sidebar() {
       <Dialog
         as="div"
         className="relative z-10"
+        style={{ zIndex: "1000" }}
         initialFocus={cancelButtonRef}
         onClose={onCloseModal}
       >

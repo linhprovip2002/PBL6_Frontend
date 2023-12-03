@@ -37,6 +37,7 @@ export default function ModalExample() {
       <Dialog
         as="div"
         className="relative z-10"
+        style={{ zIndex: "1000" }}
         initialFocus={cancelButtonRef}
         onClose={onResetModal}
       >

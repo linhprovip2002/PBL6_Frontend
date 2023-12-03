@@ -7,16 +7,16 @@ const Footer = () => {
       <div className="inline-flex flex-col items-start gap-[49px] pt-[50px] pb-[32px] px-[160px] absolute right-0 left-0 bottom-0 bg-black text-white mt-20 z-50">
         <div className="relative w-full h-[32px]">
           <div className="flex items-center justify-between relative">
-            <div className="flex w-[544px] items-center gap-[32px] relative">
-              <div className="relative w-[105px] h-[24px]">
+            <div className=" w-[544px] gap-[32px] relative">
+              <div className="relative flex flex-row">
                 <Image
                   src="/assets/images/logo_home.svg"
                   alt="logo"
                   width={40}
                   height={40}
-                  className="abosolute mt-3"
+                  className="abosolute"
                 />
-                <p className="absolute -top-px left-12 font-medium  text-center ">
+                <p className="-top-px left-12 font-medium w-[220px] flex justify-center items-center ">
                   <span className="text-white text-2xl">SUNNY WATCH</span>
                 </p>
               </div>
