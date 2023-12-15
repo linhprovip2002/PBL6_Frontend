@@ -20,6 +20,7 @@ import "@styles/swiper.css";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { EffectCards, Navigation } from "swiper/modules";
+import Review from "@components/Review/Review";
 
 export default function Product() {
   const { productList, productDetailsCurrent, isLoading } =
@@ -51,60 +52,65 @@ export default function Product() {
     getProductDetailPreView(id);
   }, [id]);
   return (
-    <section className="w-full max-w-full flex  mt-32 justify-between	">
-      <div className={styles.imageContainer}>
-        <>
-          <Swiper
-            effect={"cards"}
-            // loop
-            grabCursor={true}
-            modules={[EffectCards, Navigation]}
-            className="mySwiper"
-          >
-            {productDetailsCurrent?.pictureLinks?.map((item) => (
-              <SwiperSlide key={item?._id}>
-                <img
-                  className="object-cover h-full w-full"
-                  src={item}
-                  layout="responsive"
-                  alt=""
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </>
-      </div>
-      {isLoading ? (
-        <Loading size={20} />
-      ) : (
-        <div className={styles.details}>
-          <span>Analog</span>
-          <div className={styles.nameProduct}>
-            {productDetailsCurrent?.nameProduct}
-          </div>
-          <div className={styles.priceProduct}>
-            {productDetailsCurrent?.price} $
-          </div>
-          <div className={styles.colors}>
-            <span>Colors: {arrayToSTring(productDetailsCurrent?.color)}</span>
-            <br />
-            <span>Size: {arrayToSTring(productDetailsCurrent?.size)}</span>
-          </div>
-          <div className={styles.description}>
-            <span>{productDetailsCurrent?.description}</span>
-          </div>
-          <button
-            onClick={() => addProductToCart()}
-            type="button"
-            className={styles.addToBasket}
-          >
-            Thêm vào giỏ hàng
-          </button>
-          <button type="button" className={styles.favourite}>
-            Ưa thích
-          </button>
+    <div className="container">
+      <div className="w-full max-w-full flex mt-32 justify-between">
+        <div className={styles.imageContainer}>
+          <>
+            <Swiper
+              effect={"cards"}
+              // loop
+              grabCursor={true}
+              modules={[EffectCards, Navigation]}
+              className="mySwiper"
+            >
+              {productDetailsCurrent?.pictureLinks?.map((item) => (
+                <SwiperSlide key={item?._id}>
+                  <img
+                    className="object-cover h-full w-full"
+                    src={item}
+                    layout="responsive"
+                    alt=""
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </>
         </div>
-      )}
-    </section>
+        {isLoading ? (
+          <Loading size={20} />
+        ) : (
+          <div className={styles.details}>
+            <span>{productDetailsCurrent?.type}</span>
+            <div className={styles.nameProduct}>
+              {productDetailsCurrent?.nameProduct}
+            </div>
+            <div className={styles.priceProduct}>
+              {productDetailsCurrent?.price} $
+            </div>
+            <div className={styles.colors}>
+              <span>Colors: {arrayToSTring(productDetailsCurrent?.color)}</span>
+              <br />
+              <span>Size: {arrayToSTring(productDetailsCurrent?.size)}</span>
+            </div>
+            <div className={styles.description}>
+              <span>{productDetailsCurrent?.description}</span>
+            </div>
+            <button
+              onClick={() => addProductToCart()}
+              type="button"
+              className={styles.addToBasket}
+            >
+              Thêm vào giỏ hàng
+            </button>
+            <button type="button" className={styles.favourite}>
+              Ưa thích
+            </button>
+          </div>
+        )}
+      </div>
+      <div>
+        <Review productDetailsCurrent={productDetailsCurrent}/>
+      </div>
+    </div>
   );
 }

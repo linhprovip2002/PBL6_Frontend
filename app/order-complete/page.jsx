@@ -1,37 +1,12 @@
 "use client";
 
 import PaymentLayout from "@layouts/PaymentLayout/PaymentLayout";
-import React from "react";
-import Image from "next/image";
-
-const complete = [
-  {
-    id: 1,
-    imgSrc: "/assets/images/watch1.jpg",
-    quantity: 2,
-  },
-  {
-    id: 2,
-    imgSrc: "/assets/images/watch1.jpg",
-    quantity: 10,
-  },
-  {
-    id: 3,
-    imgSrc: "/assets/images/watch1.jpg",
-    quantity: 2,
-  },
-];
-
-const order = [
-  {
-    code: "#0123_45678",
-    date: "October 19, 2023",
-    total: "1,354.00",
-    payment_method: "Credit card",
-  },
-];
+import { cartSelector } from "@redux/reducers";
+import { useSelector } from "react-redux";
 
 const OrderComplete = () => {
+  const { items } = useSelector(cartSelector);
+
   return (
     <PaymentLayout>
       <section className="inline-flex w-full justify-center ">
@@ -44,11 +19,16 @@ const OrderComplete = () => {
               Your order has been received
             </div>
             <div className="flex w-full justify-center space-x-4 my-5">
-              {complete?.map((item) => (
+              {items?.map((item) => (
                 <div className="relative border border-black">
-                  <Image src={item.imgSrc} width={100} height={100} />
-                  <div className="absolute flex w-[26px] h-[26px] top-[-6px] left-[85px] bg-black rounded-[80px] justify-center">
-                    <div className="text-white">{item.quantity}</div>
+                  <img
+                    className="object-cover"
+                    src={item?.pictureLinks[0]}
+                    alt=""
+                    style={{ width: "70px", height: "75px" }}
+                  />
+                  <div className="absolute flex justify-center top-[-6px] right-[-10px] rounded-[80px] bg-black w-5 h-5 text-white">
+                    <div className="">{item.quantityInCart}</div>
                   </div>
                 </div>
               ))}
@@ -77,10 +57,10 @@ const OrderComplete = () => {
                   </div>
                 </div>
               </div>
-              {order?.map((item) => (
+              {items?.map((item) => (
                 <div className="flex-col justify-start items-start gap-5 inline-flex">
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
-                    {item.code}
+                    {item?.id}
                   </div>
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
                     {item.date}

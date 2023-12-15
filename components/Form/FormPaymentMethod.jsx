@@ -10,13 +10,15 @@ export const FormPaymentMethod = () => {
       </div>
 
       <div className="flex-col items-start relative w-full">
-        <div class="flex items-center mb-4 w-full rounded-md border p-3">
+        <div class="flex items-center mb-4 w-full rounded-md border p-3 bg-gray-400">
           <input
             id="default-radio-1"
             type="radio"
             value=""
             name="default-radio"
             class="w-4 h-4"
+            checked
+            disabled
           />
           <label for="default-radio-1" class="ms-2">
             Pay by card credit
@@ -27,25 +29,11 @@ export const FormPaymentMethod = () => {
             src="https://c.animaapp.com/mYtjeddF/img/finance-and-payment-outline-money-1.svg"
           />
         </div>
-
-        <div class="flex items-center mb-4 w-full rounded-md border p-3">
-          <input
-            checked
-            id="default-radio-2"
-            type="radio"
-            value=""
-            name="default-radio"
-            class="w-4 h-4"
-          />
-          <label for="default-radio-2" class="ms-2">
-            Checked state
-          </label>
-        </div>
       </div>
 
       <div className="flex flex-col w-full items-start gap-3 relative">
         <label className="relative w-fit font-hairline-2" htmlFor="input-3">
-          CARD NUMBER
+          CARD NUMBER *
         </label>
         <div className="flex h-10 px-3 items-center relative w-full bg-white rounded-md border border-black-300">
           <input
