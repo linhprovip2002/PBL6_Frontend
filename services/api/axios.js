@@ -1,13 +1,16 @@
 import axios from 'axios';
 
 
-const baseURL = `${process.env.BASE_URL}/api`;
-
+// const baseURL = `${process.env.BASE_URL}/api`;
+const baseURL = 'https://docker-pratice-production.up.railway.app/api';
 const instance = axios.create({
   baseURL: baseURL,
-  // headers: {
-  //   'Content-Type': 'application/x-www-form-urlencoded',
-  // },
+  headers: {
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+  },
   withCredentials: true,
 });
 
