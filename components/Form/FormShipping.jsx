@@ -6,11 +6,11 @@ export const FormShipping = ({ user }) => {
   return (
     <div className="flex flex-col rounded-md gap-4 px-6 py-9 items-start border-2 border-black bg-white">
       <div className="relative w-fit text-xl font-semibold text-black">
-        Shipping Address
+        ĐỊA CHỈ GIAO HÀNG
       </div>
       <div className="flex flex-col w-full items-start gap-3 relative">
         <label className="relative w-fit font-hairline-2" htmlFor="input-1">
-          ADDRESS *
+          ĐỊA CHỈ *
         </label>
         <div className="flex h-10 px-3 items-center relative w-full bg-white rounded-md border border-black-300">
           <input
