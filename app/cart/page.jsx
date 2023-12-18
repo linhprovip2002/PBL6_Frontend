@@ -13,6 +13,7 @@ import {
 } from "@redux/reducers";
 import { modalSelector } from "@redux/reducers/modal.reducer";
 import arrayToSTring from "@utils/arrayToString";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
@@ -21,7 +22,7 @@ const Home = () => {
   const { open: openModal, modalID } = useSelector(modalSelector);
   const [productActive, setProductActive] = useState(null);
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const onClickAddQuantityProduct = (item) => {
     if (item.quantityInCart < item.quantity) {
       dispatch(addToCart(item));
@@ -57,6 +58,7 @@ const Home = () => {
       );
     }
     if (user?._id && loggedin) {
+      router.push("/checkout");
     } else {
       dispatch(
         toggleModal({

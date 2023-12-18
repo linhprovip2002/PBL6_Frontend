@@ -3,6 +3,7 @@ import {
   cartSlice,
   modalSlice,
   productSlice,
+  orderSlice,
 } from "@redux/reducers";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   cart: cartSlice,
   product: productSlice,
   modal: modalSlice,
+  order: orderSlice,
 });
 
 const persistConfig = {

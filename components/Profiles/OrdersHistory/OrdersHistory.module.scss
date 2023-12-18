@@ -10,9 +10,10 @@
     position: relative;
     white-space: nowrap;
     width: fit-content;
+    text-align: center;
   }
   table {
-    align-items: flex-start;
+    align-items: center;
     display: inline-flex;
     flex: 0 0 auto;
     flex-direction: column;
@@ -22,16 +23,16 @@
     align-items: center;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-color: var(--neutral-03100);
+    border-color: black;
     display: flex;
     flex: 0 0 auto;
     justify-content: space-between;
     width: 707px;
-    border-bottom: 3px solid var(--neutral-03100);
+    border-bottom: 3px solid black;
   }
   th,
   td {
-    text-align: left;
+    text-align: center;
     font-family: var(--caption-1-font-family);
     font-size: var(--caption-1-font-size);
     font-style: var(--caption-1-font-style);
@@ -47,6 +48,8 @@
     }
     th {
       color: var(--neutral-04100);
+      font-size: large;
+      font-weight: bold;
     }
   }
   tbody {

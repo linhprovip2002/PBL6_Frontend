@@ -2,9 +2,6 @@ import { Rating } from "@material-tailwind/react/components/Rating/index";
 import { useEffect, useState } from "react";
 
 const Review = ({ productDetailsCurrent }) => {
-  useEffect(() => {
-    console.log(productDetailsCurrent);
-  }, []);
 
   const [review] = useState(productDetailsCurrent.review);
 

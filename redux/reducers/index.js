@@ -31,3 +31,7 @@ export {
   toggleCartSideBar,
   toggleModal,
 } from "./modal.reducer";
+
+export {
+  getOrderListSuccess, getOrderPending, default as orderSlice,
+} from "./order.reducer"
