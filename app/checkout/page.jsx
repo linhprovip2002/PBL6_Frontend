@@ -1,16 +1,12 @@
 "use client";
 
-import { FormPaymentMethod } from "@components/Form/FormPaymentMethod";
 import { FormShipping } from "@components/Form/FormShipping";
 import PaymentLayout from "@layouts/PaymentLayout/PaymentLayout";
 import { authSelector, cartSelector } from "@redux/reducers";
+import { OrderApi } from "@services/api/order.api";
 import arrayToSTring from "@utils/arrayToString";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { OrderApi } from "@services/api/order.api";
 
 const checkout = () => {
   const { items } = useSelector(cartSelector);
@@ -61,25 +57,19 @@ const checkout = () => {
       
     });
   };
-
-  useEffect(() => {
-    console.log(order);
-    console.log(items);
-  }, [order]);
-
   return (
     <PaymentLayout>
       <section className="w-full flex">
-        <form className="w-full flex" onSubmit={handleSubmit}>
           <section className="w-3/5 flex flex-col gap-5 pr-10">
             <FormShipping
               shippingForm={shippingForm}
               handleChange={(field, value) => handleChange(field, value)}
             />
-            <FormPaymentMethod />
+            {/* <FormPaymentMethod /> */}
             <button
               type="submit"
               class="text-white bg-black py-3 rounded-lg hover:bg-gray-800"
+              onClick={handleSubmit}
             >
               Đặt hàng
             </button>
@@ -168,7 +158,6 @@ const checkout = () => {
               </div>
             </div>
           </section>
-        </form>
       </section>
     </PaymentLayout>
   );

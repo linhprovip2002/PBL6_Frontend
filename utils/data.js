@@ -82,9 +82,15 @@ export const paymentStatus = [
     title : "Check Out",
     description :"Checkout details",
     path: "checkout"
-  },  
+  }, 
   {
     id : 3,
+    title : "Payment Order",
+    description :"Payment Order",
+    path: "payment"
+  }, 
+  {
+    id : 4,
     title : "Complete!",
     description :"Order complete",
     path: "order-complete"

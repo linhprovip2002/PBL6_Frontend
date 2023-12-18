@@ -8,8 +8,6 @@ import {
   getProductPending,
   productSelector,
 } from "@redux/reducers/product.reducer";
-import { ProductApi } from "@services/api/product.api";
-import arrayToSTring from "@utils/arrayToString";
 import { toastSuccess } from "@utils/toastHelper";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect } from "react";
@@ -20,7 +18,6 @@ import "@styles/swiper.css";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { EffectCards, Navigation } from "swiper/modules";
-import Review from "@components/Review/Review";
 
 export default function Product() {
   const { productList, productDetailsCurrent, isLoading } =
@@ -92,13 +89,13 @@ export default function Product() {
             <div className={styles.colors}>
               <span>Colors: </span>
               <select class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
-                <option selected>{productDetailsCurrent.color[0]}</option>
+                <option selected>{productDetailsCurrent?.color[0]}</option>
                 {(() => {
                   const options = [];
-                  for (let i = 1; i < productDetailsCurrent.color.length; i++) {
+                  for (let i = 1; i < productDetailsCurrent?.color.length; i++) {
                     options.push(
-                      <option key={i} value={productDetailsCurrent.color[i]}>
-                        {productDetailsCurrent.color[i]}
+                      <option key={i} value={productDetailsCurrent?.color[i]}>
+                        {productDetailsCurrent?.color[i]}
                       </option>
                     );
                   }
@@ -111,15 +108,15 @@ export default function Product() {
 
               <span>Size: </span>
               <select class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4 ml-5">
-                <option value={productDetailsCurrent.size[0]} selected>
-                  {productDetailsCurrent.size[0]}
+                <option value={productDetailsCurrent?.size[0]} selected>
+                  {productDetailsCurrent?.size[0]}
                 </option>
                 {(() => {
                   const options = [];
-                  for (let i = 1; i < productDetailsCurrent.size.length; i++) {
+                  for (let i = 1; i < productDetailsCurrent?.size.length; i++) {
                     options.push(
-                      <option key={i} value={productDetailsCurrent.size[i]}>
-                        {productDetailsCurrent.size[i]}
+                      <option key={i} value={productDetailsCurrent?.size[i]}>
+                        {productDetailsCurrent?.size[i]}
                       </option>
                     );
                   }
