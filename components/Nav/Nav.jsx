@@ -65,19 +65,7 @@ const Nav = ({ hiddenSearch }) => {
         </div>
         <div className="sm:flex">
           <div className="flex gap-3 md:gap-7">
-            {/* <form
-            className="input-container"
-            // hidden={hiddenSearch}
-          >
-            <input
-              type="text"
-              placeholder="Tìm sản phẩm"
-              className="search_input peer max-md:hidden"
-              required
-              disabled={hiddenSearch}
-            />
-          </form> */}
-            <form className="flex items-center">
+            {/* <form className="flex items-center">
               <label htmlFor="voice-search" className="sr-only">
                 Search
               </label>
@@ -120,29 +108,8 @@ const Nav = ({ hiddenSearch }) => {
                     ></path>
                   </svg>
                 </button>
-                {/* <VoiceSearchBox /> */}
               </div>
-              {/* <button
-              type="submit"
-              className="inline-flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              <svg
-                className="mr-2 -ml-1 w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-              Search
-            </button> */}
-            </form>
+            </form> */}
             <div id="shopping-cart" className={"relative  py-2"}>
               <div className="t-0 absolute left-5 bottom-6">
                 <p className="flex h-1 w-1 items-center justify-center rounded-full bg-rose-500 p-3 text-neutral-200 bg-rose-600 font-semibold">

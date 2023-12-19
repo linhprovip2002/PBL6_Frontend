@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   orderList: [],
   isLoading: false,
+  currentOrder: {},
 };
 
 const orderSlice = createSlice({
@@ -16,11 +17,15 @@ const orderSlice = createSlice({
     getOrderPending: (state, action) => {
       state.isLoading = true;
     },
+    setOrderCurrent: (state, action) => {
+      state.currentOrder = action.payload;
+    },
   },
 });
 
 export const orderSelector = (state) => state.order;
 
-export const { getOrderListSuccess, getOrderPending } = orderSlice.actions;
+export const { getOrderListSuccess, getOrderPending, setOrderCurrent } =
+  orderSlice.actions;
 
 export default orderSlice.reducer;

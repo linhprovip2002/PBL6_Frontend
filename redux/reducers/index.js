@@ -33,5 +33,8 @@ export {
 } from "./modal.reducer";
 
 export {
-  getOrderListSuccess, getOrderPending, default as orderSlice,
-} from "./order.reducer"
+  setOrderCurrent,
+  getOrderListSuccess,
+  getOrderPending,
+  default as orderSlice,
+} from "./order.reducer";
