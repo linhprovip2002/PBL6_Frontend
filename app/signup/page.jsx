@@ -1,19 +1,21 @@
 "use client";
 
+import { logout } from "@redux/reducers";
 import { AuthApi } from "@services/api";
 // import COVER_IMAGE from "./assets/images/watch1.jpg";
 // import GOOGLE_ICON from "./assets/images/watch1.jpg";
 
 import { RegisterSchema } from "@services/validators";
+import { deleteToken } from "@utils/LocalStorageHandle";
 import { toastError, toastSuccess } from "@utils/toastHelper";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
-  const stateReducer = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [checked, setChecked] = useState(false);
@@ -38,6 +40,7 @@ const Signup = () => {
             password: data.password,
           });
           toastSuccess("Tạo tài khoản thành công");
+          router.push("/login", { scroll: true });
         }
       } catch (error) {
         // Toast.show({
@@ -62,6 +65,10 @@ const Signup = () => {
     onSubmit: handleSubmit,
     validationSchema: RegisterSchema,
   });
+  useEffect(() => {
+    dispatch(logout());
+    deleteToken();
+  }, []);
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -76,6 +83,7 @@ const Signup = () => {
         <img
           src={"assets/images/slide0.jpg"}
           className="w-full h-full object-cover"
+          alt=""
         />
       </div>
       <div className="w-1/2 h-full flex flex-col p-20 items-center gap-7  z-10">
@@ -194,7 +202,6 @@ const Signup = () => {
           </div>
           <div className="w-full flex flex-col my-4">
             <button
-              onClick={() => formik.handleSubmit()}
               type="submit"
               className="w-full text-white my-2 font-semibold bg-[#141718] rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
             >
@@ -202,7 +209,7 @@ const Signup = () => {
                 <div role="status">
                   <svg
                     aria-hidden="true"
-                    class="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    className="w-6 h-6 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -216,7 +223,7 @@ const Signup = () => {
                       fill="currentFill"
                     />
                   </svg>
-                  <span class="sr-only">Loading...</span>
+                  <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 "Sign up"

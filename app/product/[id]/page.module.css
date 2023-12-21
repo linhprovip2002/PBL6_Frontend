@@ -1,0 +1,44 @@
+.imageContainer {
+  height: 630px;
+  @apply w-2/4 bg-orange-200		 flex items-center justify-center rounded-lg shadow-lg;
+}
+
+.details {
+  padding-left: 15%;
+  width: 50%;
+  justify-content: space-between;
+  @apply flex flex-col;
+}
+
+.nameProduct {
+  width: 100%;
+  height: 79px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @apply mt-3 lg:text-3xl md:text-2xl sm:text-xl font-bold text-black;
+}
+
+.priceProduct {
+  @apply mt-3 lg:text-2xl md:text-xl mb-3;
+}
+
+.addToBasket {
+  @apply mt-3 w-full text-white my-2 bg-[#141718] hover:-translate-y-1 hover:scale-110 py-3 px-10 text-center cursor-pointer transition ease-out duration-500;
+}
+
+.favourite {
+  @apply mt-3 w-full p-3 bg-gray-200 text-gray-500 hover:text-gray-500 hover:bg-gray-300 font-medium mx-auto duration-500;
+}
+
+.colors {
+  @apply border-t-2 mt-3 pt-3 mb-3 text-lg;
+}
+
+.description {
+  height: 161px;
+  display: block;
+  max-width: 98%;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  @apply border-t-2 mt-3 pt-3 mb-3 text-base ;
+}

@@ -1,28 +1,32 @@
-import instance from './axios';
+import request from "./axios";
 
 const ENDPOINTS = {
-  LOGIN: '/auth/login',
-  PROFILE: '/user',
-  REGISTER: '/auth/register',
+  LOGIN: "/auth/login",
+  PROFILE: "/user/me",
+  REGISTER: "/auth/register",
+  UPDATEME: "/user",
 };
 
 const login = (data) => {
-  return instance.post(ENDPOINTS.LOGIN, {
+  return request().post(ENDPOINTS.LOGIN, {
     username: data.username,
     password: data.password,
   });
 };
 
 const getProfile = () => {
-  return instance.get(ENDPOINTS.PROFILE);
+  return request().get(ENDPOINTS.PROFILE);
 };
 
 const register = (data) => {
-  return instance.post(ENDPOINTS.REGISTER, data);
+  return request().post(ENDPOINTS.REGISTER, data);
 };
-
+const updateMe = (id, data) => {
+  return request().put(`${ENDPOINTS.UPDATEME}/${id}`, data);
+};
 export const AuthApi = {
   login,
   getProfile,
   register,
+  updateMe,
 };

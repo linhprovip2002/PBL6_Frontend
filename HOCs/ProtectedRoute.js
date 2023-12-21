@@ -1,16 +1,21 @@
-import React from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { connect } from "react-redux";
-import Link from "next/link";
 
-const ProtectedRoute = ({ children, isLoggedIn }) => {
-  if (isLoggedIn) {
+const ProtectedRoute = ({ children, loggedin }) => {
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (!loggedin) {
+      push("/login");
+    }
+  }, [loggedin]);
+  if (loggedin) {
     return children;
-  } else {
-    return <Link href="/login" replace />;
   }
 };
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.users.isLoggedIn,
+  loggedin: state.auth.loggedin,
 });
 
 export default connect(mapStateToProps)(ProtectedRoute);
