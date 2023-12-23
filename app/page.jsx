@@ -34,11 +34,6 @@ const Home = () => {
   useEffect(() => {
     handelGetAll();
   }, []);
-
-  console.log(categoryList);
-
-  console.log(categoryList.map((item) => item.IDProduct[0]?.pictureLinks[0]));
-
   return (
     <>
       <section className="w-full flex-center flex-col rounded-2xl overflow-hidden mt-32">

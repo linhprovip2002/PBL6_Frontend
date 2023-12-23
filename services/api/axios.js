@@ -3,7 +3,7 @@ import { store } from "@redux/store";
 import { getToken } from "@utils/LocalStorageHandle";
 import axios from "axios";
 
-const baseURL = `http://localhost:3001/api`;
+const baseURL = `http://localhost:3000/api`;
 
 const instance = axios.create({
   baseURL: baseURL,

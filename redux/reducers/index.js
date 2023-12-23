@@ -3,7 +3,7 @@ export {
   default as authSlice,
   logout,
   setCredential,
-  setUser,
+  setUser
 } from "./auth.reducer";
 
 export {
@@ -12,29 +12,28 @@ export {
   default as cartSlice,
   clearCartLogout,
   decreaseQuantityProduct,
-  deleteCartItem,
-  updateCart,
+  deleteCartItem, setLinkPayment, setLoading, updateCart
 } from "./cart.reducer";
 
 export {
   getProductDetailsSuccess,
   getProductListSuccess,
   getProductPending,
-  default as productSlice,
+  default as productSlice
 } from "./product.reducer";
 
 export {
   closeCartSideBar,
-  closeModal,
-  default as modalSlice,
+  closeModal, closePaymentModal, default as modalSlice,
   resetModal,
   toggleCartSideBar,
   toggleModal,
+  togglePaymentModal
 } from "./modal.reducer";
 
 export {
-  setOrderCurrent,
   getOrderListSuccess,
   getOrderPending,
-  default as orderSlice,
+  default as orderSlice, setOrderCurrent
 } from "./order.reducer";
+

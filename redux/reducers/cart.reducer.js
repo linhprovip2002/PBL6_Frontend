@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
+  linkPayment : null,
+  isLoading: false
 };
 
 const cartSlice = createSlice({
@@ -53,6 +55,13 @@ const cartSlice = createSlice({
     clearCartLogout: (state, action) => {
       state.items = [];
     },
+    setLinkPayment : (state,action) => {
+      state.linkPayment = action.payload;
+      state.isLoading = false;
+    },
+    setLoading: (state) => {
+      state.isLoading = true;
+    }
   },
 });
 
@@ -64,5 +73,7 @@ export const {
   updateCart,
   decreaseQuantityProduct,
   clearCartLogout,
+  setLinkPayment,
+  setLoading
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -22,10 +22,14 @@ const nextConfig = {
   },
   async rewrites() {
     return [
+      // {
+      //   source: "/api/:path*",
+      //   destination:
+      //     "https://docker-pratice-production.up.railway.app/api/:path*",
+      // },
       {
         source: "/api/:path*",
-        destination:
-          "https://docker-pratice-production.up.railway.app/api/:path*",
+        destination: "http://localhost:3000/:path*",
       },
     ];
   },

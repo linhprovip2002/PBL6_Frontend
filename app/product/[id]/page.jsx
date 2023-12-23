@@ -49,7 +49,6 @@ export default function Product() {
     getProductDetailPreView(id);
   }, [id]);
 
-  console.log(productDetailsCurrent);
   return (
     <div className="container">
       <div className="w-full max-w-full flex mt-32 justify-between">
