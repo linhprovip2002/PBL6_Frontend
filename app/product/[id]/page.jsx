@@ -8,9 +8,9 @@ import {
   getProductPending,
   productSelector,
 } from "@redux/reducers/product.reducer";
-import { toastSuccess } from "@utils/toastHelper";
+import { toastError, toastSuccess } from "@utils/toastHelper";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -18,6 +18,8 @@ import "@styles/swiper.css";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { EffectCards, Navigation } from "swiper/modules";
+import Review from "@components/Review/Review";
+import { ProductApi } from "@services/api/product.api";
 
 export default function Product() {
   const { productList, productDetailsCurrent, isLoading } =
@@ -30,25 +32,55 @@ export default function Product() {
   const getProductDetailPreView = useCallback(async (id) => {
     try {
       dispatch(getProductPending());
-      // const res = await ProductApi.getReviewProduct(id);
+      const res = await ProductApi.getReviewProduct(id);
       dispatch(
         getProductDetailsSuccess({
           ...productList?.find((item) => item._id === id),
-          // review: res?.data,
+          review: res?.data,
         })
       );
     } catch (error) {
       console.log(error);
     }
   }, []);
-  const addProductToCart = () => {
-    dispatch(addToCart(productDetailsCurrent));
-    toastSuccess("Thêm 1 sản phẩm vào giỏ hàng thành công");
-  };
+
   useEffect(() => {
     getProductDetailPreView(id);
   }, [id]);
 
+  const addProductToCart = () => {
+    dispatch(addToCart(productDetailsCurrent));
+    toastSuccess("Thêm 1 sản phẩm vào giỏ hàng thành công");
+  };
+
+  const [comment, setComment] = useState({
+    rating: 0,
+    comment: "",
+  });
+
+  const handleChange = (field, value) => {
+    setComment((prevComment) => ({
+      ...prevComment,
+      [field]: value,
+    }));
+  };
+
+  const submitComment = async () => {
+    try {
+      await ProductApi.createReview(id, comment);
+      window.location.reload();
+    } catch (error) {
+      toastError("Bạn đã review sản phẩm này");
+    }
+  };
+
+
+  useEffect(() => {
+    console.log(comment)
+  }, [comment])
+
+  console.log(productDetailsCurrent);
+  console.log(productDetailsCurrent.review);
   return (
     <div className="container">
       <div className="w-full max-w-full flex mt-32 justify-between">
@@ -87,11 +119,15 @@ export default function Product() {
             </div>
             <div className={styles.colors}>
               <span>Colors: </span>
-              <select class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
+              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
                 <option selected>{productDetailsCurrent?.color[0]}</option>
                 {(() => {
                   const options = [];
-                  for (let i = 1; i < productDetailsCurrent?.color.length; i++) {
+                  for (
+                    let i = 1;
+                    i < productDetailsCurrent?.color.length;
+                    i++
+                  ) {
                     options.push(
                       <option key={i} value={productDetailsCurrent?.color[i]}>
                         {productDetailsCurrent?.color[i]}
@@ -106,7 +142,7 @@ export default function Product() {
               <br />
 
               <span>Size: </span>
-              <select class="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4 ml-5">
+              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4 ml-5">
                 <option value={productDetailsCurrent?.size[0]} selected>
                   {productDetailsCurrent?.size[0]}
                 </option>
@@ -139,7 +175,13 @@ export default function Product() {
           </div>
         )}
       </div>
-      <div>{/* <Review productDetailsCurrent={productDetailsCurrent}/> */}</div>
+      <div>
+        <Review
+          review={productDetailsCurrent?.review || []}
+          handleChange={(field, value) => handleChange(field, value)}
+          submitComment={submitComment} 
+        />
+      </div>
     </div>
   );
 }
