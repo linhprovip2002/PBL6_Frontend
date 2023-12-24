@@ -13,6 +13,9 @@ const getOrderByUserID = () => {
   return request().get(ENDPOINTS.ORDER);
 };
 
+const getOrderByID = (id) => {
+  return request().get(`${ENDPOINTS.ORDER}/${id}`);
+}
 const createPayment = (orderId) => {
   return request().post(`${ENDPOINTS.PAYMENT}/${orderId}`, {
     name: "Chiếc bánh",
@@ -26,4 +29,5 @@ export const OrderApi = {
   createOrder,
   getOrderByUserID,
   createPayment,
+  getOrderByID
 };

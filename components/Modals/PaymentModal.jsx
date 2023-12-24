@@ -1,14 +1,10 @@
-import { STATUS_ORDER } from "@constants/status";
 import { Dialog, Transition } from "@headlessui/react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { cartSelector } from "@redux/reducers";
 import { closePaymentModal, modalSelector } from "@redux/reducers/modal.reducer";
 import { orderSelector } from "@redux/reducers/order.reducer";
-import { OrderApi } from "@services/api/order.api";
-import { toastSuccess } from "@utils/toastHelper";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Fragment, useCallback, useRef } from "react";
+import { Fragment, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const PaymentModal = () => {
@@ -27,29 +23,33 @@ const PaymentModal = () => {
   //     }
   //     dispatch(closeModal());
   //   };
-  const interval = setInterval(() => {
-    handelGetAll();
-  }, 5000);
+
   const onResetModal = () => {
     dispatch(closePaymentModal());
   };
-  const handelGetAll = useCallback(async () => {
-    try {
-      const res = await OrderApi.getOrderByUserID().then((res) => {
-        const orderComplete = res?.data.find(order => order?._id === currentOrder?._id);
-
-        if (orderComplete?.statusOrder === STATUS_ORDER.PAYMENT_SUCCESS) {
-          onResetModal();
-          clearInterval(interval)
-          // dispatch(setOrderCurrent(null));
-          router.push("/order-complete");
-          toastSuccess("Bạn đã thanh toán thành công!!!!!");
-        }
-      })
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  const onPayment = () => {
+    onResetModal();
+    window.open(linkPayment, "_self");
+  }
+  // const interval = setInterval(() => {
+  //   handelGetAll();
+  // }, 5000);
+  // const handelGetAll = useCallback(async () => {
+  //   try {
+  //     await OrderApi.getOrderByUserID().then((res) => {
+  //       const orderComplete = res?.data.find(order => order?._id === currentOrder?._id);
+  //       if (orderComplete?.statusOrder === STATUS_ORDER.PAYMENT_SUCCESS) {
+  //         onResetModal();
+  //         clearInterval(interval)
+  //         // dispatch(setOrderCurrent(null));
+  //         // router.push("/order-complete");
+  //         toastSuccess("Bạn đã thanh toán thành công!!!!!");
+  //       }
+  //     })
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
 
   const cancelButtonRef = useRef(null);
   return (
@@ -92,14 +92,14 @@ const PaymentModal = () => {
                   className="absolute h-9 w-9 right-5 top-5 object-cover cursor-pointer transition-transform transform hover:scale-110 ease-out duration-500  "
                 />
                 <h3>{currentOrder?.feedbackSupplier}</h3>
-                <Link
-                  href={linkPayment}
-                  target="_blank"
+                <button
+                  // target="_blank"
                   type="submit"
+                  onClick={onPayment}
                   className="font-medium border-slate-950 border-2 hover:text-white my-2 hover:bg-[#141718] hover:-translate-y-1 hover:scale-110 rounded-md py-3 px-10 text-center cursor-pointer transition ease-out duration-500"
                 >
                   Thanh toán bằng Paypal
-                </Link >
+                </button >
               </Dialog.Panel>
             </Transition.Child>
           </div>
