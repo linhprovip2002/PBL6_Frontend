@@ -57,17 +57,17 @@ const OrderComplete = () => {
               <div className="flex-col justify-start items-start gap-5 inline-flex">
                 <div className="justify-center items-center gap-3 inline-flex">
                   <div className="text-zinc-500 text-sm font-semibold font-['Inter'] leading-snug">
-                    Order code:
+                    Order code: {currentOrder?._id.substring(19, 24)}
                   </div>
                 </div>
                 <div className="justify-center items-center gap-3 inline-flex">
                   <div className="text-zinc-500 text-sm font-semibold font-['Inter'] leading-snug">
-                    Date:
+                    Date: {currentOrder?.orderDate.substring(0, 10)}
                   </div>
                 </div>
                 <div className="justify-center items-center gap-3 inline-flex">
                   <div className="text-zinc-500 text-sm font-semibold font-['Inter'] leading-snug">
-                    Total:
+                    Total: {currentOrder?.total}
                   </div>
                 </div>
                 <div className="justify-center items-center gap-3 inline-flex">
