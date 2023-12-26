@@ -17,8 +17,18 @@ const getCategories = () => {
   return request().get(ENDPOINTS.CATEGORY);
 };
 
+const createReview = (id, comment) => {
+  return request().post(`${ENDPOINTS.LISTPRODUCT}/${id}/review`, comment);
+}
+
+const deleteReview = (id) => {
+  return request().delete(`${ENDPOINTS.LISTPRODUCT}/review/${id}`);
+}
+
 export const ProductApi = {
   getListProduct,
   getReviewProduct,
   getCategories,
+  createReview,
+  deleteReview,
 };

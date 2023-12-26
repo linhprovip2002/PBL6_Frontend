@@ -34,11 +34,6 @@ const Home = () => {
   useEffect(() => {
     handelGetAll();
   }, []);
-
-  console.log(categoryList);
-
-  console.log(categoryList.map((item) => item.IDProduct[0]?.pictureLinks[0]));
-
   return (
     <>
       <section className="w-full flex-center flex-col rounded-2xl overflow-hidden mt-32">
@@ -46,7 +41,7 @@ const Home = () => {
       </section>
       <section className="w-full flex-center flex-col">
         <h1 className="head_text text-center">
-          {/* Đồ án PBL6 */}Sunny Watch
+          Sunny Watch
           <br className="max-md:hidden" />
           <span className="orange_gradient text-center">
             {" "}

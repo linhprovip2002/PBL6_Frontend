@@ -2,18 +2,22 @@
 
 import { FormShipping } from "@components/Form/FormShipping";
 import PaymentLayout from "@layouts/PaymentLayout/PaymentLayout";
-import { authSelector, cartSelector } from "@redux/reducers";
+import { authSelector, cartSelector, clearCartLogout } from "@redux/reducers";
 import { OrderApi } from "@services/api/order.api";
 import arrayToSTring from "@utils/arrayToString";
 import { toastError, toastSuccess } from "@utils/toastHelper";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const checkout = () => {
   const { items } = useSelector(cartSelector);
   const { user } = useSelector(authSelector);
-  const [total, setTotal] = useState(0);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
+  const [total, setTotal] = useState(0);
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     let total = 0;
     for (let i = 0; i < items.length; i++) {
@@ -22,7 +26,6 @@ const checkout = () => {
     setTotal(total);
   }, [items]);
 
-  console.log(user);
 
   const [shippingForm, setShippingForm] = useState({
     address: user?.Address,
@@ -53,14 +56,18 @@ const checkout = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    OrderApi.createOrder(order)
+  const handleSubmit = async () => {
+    setLoading(true);
+    await OrderApi.createOrder(order)
       .then(() => {
         toastSuccess("Tạo order thành công");
+        dispatch(clearCartLogout());
+        router.push("/");
       })
       .catch((err) => {
-        toastError("Tạo order thấ t bại");
+        toastError("Tạo order thất bại");
       });
+    setLoading(false);
   };
   return (
     <PaymentLayout>
@@ -76,7 +83,7 @@ const checkout = () => {
             class="text-white bg-black py-3 rounded-lg hover:bg-gray-800"
             onClick={handleSubmit}
           >
-            Đặt hàng
+            {isLoading ? "......" : "Đặt hàng"}
           </button>
         </section>
 

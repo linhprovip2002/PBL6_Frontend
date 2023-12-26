@@ -32,7 +32,7 @@ const Home = () => {
     dispatch(
       toggleModal({
         status: CONSTANTS.status.WARNING,
-        modalID: CONSTANTS.modalID.DELETE_PRODUCT,
+        modalID: CONSTANTS.modalID.MODAL_DELETE_PRODUCT,
         message: "Bạn có muốn xóa sản phẩm khỏi giỏ hàng ?",
       })
     );
@@ -63,7 +63,7 @@ const Home = () => {
       dispatch(
         toggleModal({
           status: CONSTANTS.status.WARNING,
-          modalID: CONSTANTS.modalID.NAVIGATE_TO_LOGIN,
+          modalID: CONSTANTS.modalID.MODAL_NOT_LOGIN,
           message: "Hình như bạn chưa đăng nhập ?",
         })
       );
@@ -71,7 +71,7 @@ const Home = () => {
   };
   useEffect(() => {
     if (
-      modalID === CONSTANTS.modalID.DELETE_PRODUCT &&
+      modalID === CONSTANTS.modalID.MODAL_DELETE_PRODUCT &&
       !openModal &&
       productActive
     ) {

@@ -1,18 +1,23 @@
 "use client";
-
 import { FormPaymentMethod } from "@components/Form/FormPaymentMethod";
+import PaymentModal from "@components/Modals/PaymentModal";
 import PaymentLayout from "@layouts/PaymentLayout/PaymentLayout";
+import { cartSelector, setLinkPayment, setLoading, togglePaymentModal } from "@redux/reducers";
+import { modalSelector } from "@redux/reducers/modal.reducer";
 import { orderSelector } from "@redux/reducers/order.reducer";
-import { useSelector } from "react-redux";
 import { OrderApi } from "@services/api/order.api";
+import { toastError } from "@utils/toastHelper";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import VnpayPage from "./vnpay";
 
-
-const Checkout = () => {
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+const checkout = () => {
   const router = useRouter();
   const { currentOrder } = useSelector(orderSelector);
+  const { isLoading } = useSelector(cartSelector);
+  const { openPaymentModal } = useSelector(modalSelector);
   const [order, setOrder] = useState(currentOrder);
   const [selectedPaymentOption, setSelectedPaymentOption] = useState("");
   const [amount] = useState(order.IDProduct[0].price * order.IDProduct[0].quantity);
@@ -60,6 +65,7 @@ const Checkout = () => {
     if (selectedPaymentOption === "PayPal") {
       await OrderApi.createPayment(currentOrder?._id).then((res) => {
         router.push(`${res?.data.links[1]?.href}`);
+        dispatch(togglePaymentModal());
       });
     } else {
       await OrderApi.createPaymentVNPAY(currentOrder?._id, payment).then((res) => {
@@ -75,6 +81,8 @@ const Checkout = () => {
   };
 
   return (
+       currentOrder?._id ?
+    <>
     <PaymentLayout>
       <section className="w-full flex flex-col gap-3 ">
         <FormPaymentMethod onPaymentChange={handlePaymentChange} />
@@ -87,10 +95,12 @@ const Checkout = () => {
           className="text-white h-12 flex-1 bg-black py-3 rounded-lg hover:bg-gray-800"
           onClick={handleSubmit}
         >
-          Thanh toán
+           {isLoading ? "......" : "Thanh toán"}
         </button>
       </section>
     </PaymentLayout>
+    {openPaymentModal && <PaymentModal />}
+    </>: <></>
   );
 };
 

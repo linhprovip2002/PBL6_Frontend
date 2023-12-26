@@ -6,6 +6,7 @@ const initialState = {
   message: "",
   modalID: "",
   openCartModal: false,
+  openPaymentModal: false
 };
 
 const modalSlice = createSlice({
@@ -31,6 +32,12 @@ const modalSlice = createSlice({
     closeCartSideBar: (state, action) => {
       state.openCartModal = false;
     },
+    togglePaymentModal: (state, action) => {
+      state.openPaymentModal = true;
+    },
+    closePaymentModal: (state, action) => {
+      state.openPaymentModal = false;
+    },
   },
 });
 
@@ -42,5 +49,7 @@ export const {
   resetModal,
   toggleCartSideBar,
   closeCartSideBar,
+  togglePaymentModal,
+  closePaymentModal
 } = modalSlice.actions;
 export default modalSlice.reducer;

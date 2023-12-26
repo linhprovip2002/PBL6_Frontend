@@ -8,13 +8,22 @@ import classNames from "classnames";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./page.module.scss";
+import SupplierChanel from "@components/Profiles/SupplierChanel/SupplierChanel";
+import { deleteToken } from "@utils/LocalStorageHandle";
 
 const Profile = () => {
   const { user } = useSelector(authSelector);
   const dispatch = useDispatch();
 
-  const [current, setCurrent] = useState("Account");
-  const navList = ["Account", "Address", "Orders", "Wishlist", "Log out"];
+  const [current, setCurrent] = useState("Supplier chanel");
+  const navList = [
+    "Account",
+    "Address",
+    "Orders",
+    "Wishlist",
+    "Supplier chanel",
+    "Log out",
+  ];
   const [isLoading, setIsLoading] = useState(false);
   const uploadImage = async (event) => {
     const file = event.target.files[0];
@@ -143,10 +152,35 @@ const Profile = () => {
           </div>
         </div>
         <div className="w-3/4">
-          {current === "Account" ? (
+          {current === "Supplier chanel" ? (
+            <SupplierChanel />
+          ) : current === "Account" ? (
             <AccountDetails />
           ) : current === "Orders" ? (
             <OrdersHistory />
+          ) : current === "Log out" ? (
+            <>
+              <div
+                className="flex justify-center place-items-center bg-slate-200 rounded-lg border border-black shadow-lg"
+                style={{ height: "550px" }}
+              >
+                <div>
+                  <button
+                    type="button"
+                    className="bg-black rounded-lg py-5 px-5 text-white text-xl hover:bg-gray-600 shadow-lg"
+                    onClick={() => {
+                      deleteToken();
+                      dispatch(logout());
+                      dispatch(clearCartLogout());
+                      handleLinkTo("/login");
+                      setOpen(false);
+                    }}
+                  >
+                    Đăng xuất
+                  </button>
+                </div>
+              </div>
+            </>
           ) : (
             <></>
           )}

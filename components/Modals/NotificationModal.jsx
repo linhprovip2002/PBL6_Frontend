@@ -20,7 +20,7 @@ export default function ModalExample() {
   const router = useRouter();
 
   const onAccept = () => {
-    if (modalID == CONSTANTS.modalID.NAVIGATE_TO_LOGIN) {
+    if (modalID == CONSTANTS.modalID.MODAL_NOT_LOGIN) {
       router.push("/login", { scroll: true });
     } else if (modalID == CONSTANTS.modalID.NAVIGATE_TO_HOMEPAGE) {
       router.push("/", { scroll: true });

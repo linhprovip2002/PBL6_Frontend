@@ -2,11 +2,30 @@
 
 import PaymentLayout from "@layouts/PaymentLayout/PaymentLayout";
 import { cartSelector } from "@redux/reducers";
-import { useSelector } from "react-redux";
+import { orderSelector } from "@redux/reducers/order.reducer";
+import { OrderApi } from "@services/api/order.api";
+import { toastSuccess } from "@utils/toastHelper";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const OrderComplete = () => {
   const { items } = useSelector(cartSelector);
+  const { currentOrder } = useSelector(orderSelector);
+  const dispatch = useDispatch();
 
+  const handelGetAll = useCallback(async () => {
+    try {
+      await OrderApi.getOrderByID(currentOrder?._id).then((res) => {
+        dispatch(setOrderCurrent(res?.data));
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  useEffect(() => {
+    handelGetAll();
+    toastSuccess("Bạn đã thanh toán thành công!!!!!");
+  }, [])
   return (
     <PaymentLayout>
       <section className="inline-flex w-full justify-center ">

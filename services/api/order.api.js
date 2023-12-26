@@ -16,6 +16,9 @@ const getOrderByUserID = () => {
 const getOrderDetail = (orderId) => {
   console.log(orderId);
   return request().get(`${ENDPOINTS.ORDER}/${orderId}`);
+
+const getOrderByID = (id) => {
+  return request().get(`${ENDPOINTS.ORDER}/${id}`);
 }
 const createPayment = (orderId) => {
   return request().post(`${ENDPOINTS.PAYMENT}/${orderId}`, {
@@ -39,4 +42,5 @@ export const OrderApi = {
   createPayment,
   getOrderDetail,
   createPaymentVNPAY,
+  getOrderByID
 };
