@@ -148,7 +148,7 @@ export default function Sidebar() {
                           </div>
                           <div className="flex flex-col justify-between items-end	 pr-2.5">
                             <p className="text-sm font-medium  leading-none">
-                              {item.price}
+                              {item.price * item?.quantityInCart}
                             </p>
                             <div className="border-2 p-1 h-8 w-8">
                               <TrashIcon

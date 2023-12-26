@@ -137,7 +137,7 @@ const Home = () => {
                   </div>
                   <div className="flex flex-col justify-between items-end	">
                     <p className="text-lg font-medium  leading-none">
-                      {item.price}
+                      {item.price * item?.quantityInCart}
                     </p>
                     <div className="border-2 p-1 h-8 w-8">
                       <TrashIcon

@@ -58,7 +58,7 @@ const checkout = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    await OrderApi.createOrder(order)
+    await OrderApi.createOrder({ ...order, total: total, feedbackSupplier: "Đơn hàng đang chờ xác nhận" })
       .then(() => {
         toastSuccess("Tạo order thành công");
         dispatch(clearCartLogout());

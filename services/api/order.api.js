@@ -13,17 +13,13 @@ const createOrder = (orderData) => {
 const getOrderByUserID = () => {
   return request().get(ENDPOINTS.ORDER);
 };
-const getOrderDetail = (orderId) => {
-  console.log(orderId);
-  return request().get(`${ENDPOINTS.ORDER}/${orderId}`);
-
 const getOrderByID = (id) => {
   return request().get(`${ENDPOINTS.ORDER}/${id}`);
 }
-const createPayment = (orderId) => {
-  return request().post(`${ENDPOINTS.PAYMENT}/${orderId}`, {
-    name: "Chiếc bánh",
-    price: "30",
+const createPayment = (order) => {
+  return request().post(`${ENDPOINTS.PAYMENT}/${order?._id}`, {
+    name: order?._id,
+    price: order?.total,
     // "quantity":2,
     currency: "USD",
   });
@@ -40,7 +36,6 @@ export const OrderApi = {
   createOrder,
   getOrderByUserID,
   createPayment,
-  getOrderDetail,
   createPaymentVNPAY,
   getOrderByID
 };
