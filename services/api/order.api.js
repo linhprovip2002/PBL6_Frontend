@@ -3,6 +3,7 @@ import request from "./axios";
 const ENDPOINTS = {
   ORDER: "/order",
   PAYMENT: "/payment/pay",
+  PAYMENT_VNPAY: "/payment/vnpay",
 };
 
 const createOrder = (orderData) => {
@@ -12,6 +13,9 @@ const createOrder = (orderData) => {
 const getOrderByUserID = () => {
   return request().get(ENDPOINTS.ORDER);
 };
+const getOrderDetail = (orderId) => {
+  console.log(orderId);
+  return request().get(`${ENDPOINTS.ORDER}/${orderId}`);
 
 const getOrderByID = (id) => {
   return request().get(`${ENDPOINTS.ORDER}/${id}`);
@@ -24,10 +28,19 @@ const createPayment = (orderId) => {
     currency: "USD",
   });
 };
+const createPaymentVNPAY = (orderId,payment) => {
+  return request().post(`${ENDPOINTS.PAYMENT_VNPAY}?order_id=${orderId}`, {
+    "amount": payment.amount,
+    "bankCode": payment.bankCode,
+    "language": payment.language,
+  });
+}
 
 export const OrderApi = {
   createOrder,
   getOrderByUserID,
   createPayment,
+  getOrderDetail,
+  createPaymentVNPAY,
   getOrderByID
 };

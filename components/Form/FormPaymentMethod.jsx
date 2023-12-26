@@ -1,8 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
-export const FormPaymentMethod = () => {
+export const FormPaymentMethod = ({ onPaymentChange }) => {
+  const [selectedPayment, setSelectedPayment] = useState("");
+
+  const handlePaymentChange = (event) => {
+    setSelectedPayment(event.target.value);
+     onPaymentChange(event.target.value);
+  };
+
   return (
     <div className="flex flex-col rounded-md gap-4 px-6 py-9 items-start border-2 border-black bg-white">
       <div className="relative w-fit text-xl font-semibold text-black">
@@ -10,28 +17,32 @@ export const FormPaymentMethod = () => {
       </div>
 
       <div className="flex-col items-start relative w-full">
-        <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 my-2 hover:bg-gray-500 hover:text-white">
+        <div className="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 my-2 hover:bg-gray-500 hover:text-white">
           <input
             id="bordered-radio-1"
             type="radio"
-            value=""
+            value="VNPay"
             name="payment"
+            onChange={handlePaymentChange}
+            checked={selectedPayment === "VNPay"}
             className="w-4 h-4 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
             htmlFor="bordered-radio-1"
-            class="w-full py-4 ms-2 text-sm font-medium"
+            className="w-full py-4 ms-2 text-sm font-medium"
           >
             Thanh toán bằng VNPay
           </label>
         </div>
-        <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 my-2 hover:bg-gray-500 hover:text-white">
+        <div className="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 my-2 hover:bg-gray-500 hover:text-white">
           <input
             id="bordered-radio-2"
             type="radio"
-            value=""
+            value="PayPal"
             name="payment"
-            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+            onChange={handlePaymentChange}
+            checked={selectedPayment === "PayPal"}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
             htmlFor="bordered-radio-2"
@@ -42,7 +53,7 @@ export const FormPaymentMethod = () => {
         </div>
       </div>
 
-      <div className="flex flex-col w-full items-start gap-3 relative">
+      {/* <div className="flex flex-col w-full items-start gap-3 relative">
         <label className="relative w-fit font-hairline-2" htmlFor="input-3">
           Số thẻ *
         </label>
@@ -54,8 +65,8 @@ export const FormPaymentMethod = () => {
             type="text"
           />
         </div>
-      </div>
-
+      </div> */}
+{/* 
       <div className="w-full justify-between flex items-start relative">
         <div className="flex-col w-1/2 pr-2 gap-3 flex items-start relative">
           <label className="relative w-fit font-hairline-2" htmlFor="input-4">
@@ -83,7 +94,7 @@ export const FormPaymentMethod = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
