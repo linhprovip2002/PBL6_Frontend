@@ -9,10 +9,10 @@ import {
   cartSelector,
   decreaseQuantityProduct,
   deleteCartItem,
+  selectColorSize,
   toggleModal,
 } from "@redux/reducers";
 import { modalSelector } from "@redux/reducers/modal.reducer";
-import arrayToSTring from "@utils/arrayToString";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,12 +98,54 @@ const Home = () => {
                       {item?.nameProduct}
                     </p>
                     <div>
-                      <p className="m-0 text-gray-400 text-sm">
-                        Color: {arrayToSTring(item?.color)}
-                      </p>
-                      <p className="text-gray-400 text-sm mb-4">
-                        size: {arrayToSTring(item?.size)}
-                      </p>
+                      <div className="flex flex-col gap-2 my-3 w-28">
+                        <select
+                          onChange={(e) => {
+                            dispatch(selectColorSize({
+                              ...item,
+                              colorPick: e?.target.value,
+                              sizePick: item?.colorPick
+                            }))
+                          }}
+                          defaultValue={item?.colorPick} className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
+                          {(() => {
+                            const options = [];
+                            for (
+                              let i = 0;
+                              i < item?.color.length;
+                              i++
+                            ) {
+                              options.push(
+                                <option key={i} value={item?.color[i]}>
+                                  {item?.color[i]}
+                                </option>
+                              );
+                            }
+                            return options;
+                          })()}
+                        </select>
+                        <select
+                          onChange={(e) => {
+                            dispatch(selectColorSize({
+                              ...item,
+                              colorPick: item?.colorPick,
+                              sizePick: e?.target.value
+                            }))
+                          }}
+                          defaultValue={item?.sizePick} className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
+                          {(() => {
+                            const options = [];
+                            for (let i = 0; i < item?.size.length; i++) {
+                              options.push(
+                                <option key={i} value={item?.size[i]}>
+                                  {item?.size[i]}
+                                </option>
+                              );
+                            }
+                            return options;
+                          })()}
+                        </select>
+                      </div>
                       <div className="custom-number-input h-8  w-32">
                         <div className="flex flex-row w-full h-full rounded-lg relative bg-transparent mt-1 border-solid border-2 border-neutral-500">
                           <button

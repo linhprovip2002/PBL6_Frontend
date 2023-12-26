@@ -14,12 +14,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import Review from "@components/Review/Review";
+import { ProductApi } from "@services/api/product.api";
 import "@styles/swiper.css";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { EffectCards, Navigation } from "swiper/modules";
-import Review from "@components/Review/Review";
-import { ProductApi } from "@services/api/product.api";
 
 export default function Product() {
   const { productList, productDetailsCurrent, isLoading } =
@@ -27,6 +27,8 @@ export default function Product() {
   const pathname = usePathname();
   const dispatch = useDispatch();
   const paths = pathname.split("/");
+  const [sizePick, setSizePick] = useState()
+  const [colorPick, setColorPick] = useState()
 
   const id = paths[paths.length - 1];
   const getProductDetailPreView = useCallback(async (id) => {
@@ -49,7 +51,11 @@ export default function Product() {
   }, [id]);
 
   const addProductToCart = () => {
-    dispatch(addToCart(productDetailsCurrent));
+    dispatch(addToCart({
+      ...productDetailsCurrent,
+      colorPick: colorPick,
+      sizePick: sizePick
+    }));
     toastSuccess("Thêm 1 sản phẩm vào giỏ hàng thành công");
   };
 
@@ -76,11 +82,11 @@ export default function Product() {
 
 
   useEffect(() => {
-    console.log(comment)
-  }, [comment])
-
-  console.log(productDetailsCurrent);
-  console.log(productDetailsCurrent.review);
+    if (productDetailsCurrent?._id) {
+      setColorPick(productDetailsCurrent?.color[0])
+      setSizePick(productDetailsCurrent?.size[0])
+    }
+  }, [productDetailsCurrent])
   return (
     <div className="container">
       <div className="w-full max-w-full flex mt-32 justify-between">
@@ -119,12 +125,15 @@ export default function Product() {
             </div>
             <div className={styles.colors}>
               <span>Colors: </span>
-              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
-                <option selected>{productDetailsCurrent?.color[0]}</option>
+              <select
+                onChange={(e) => {
+                  dispatch(setColorPick(e.target.value))
+                }}
+                defaultValue={colorPick} className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
                 {(() => {
                   const options = [];
                   for (
-                    let i = 1;
+                    let i = 0;
                     i < productDetailsCurrent?.color.length;
                     i++
                   ) {
@@ -137,18 +146,17 @@ export default function Product() {
                   return options;
                 })()}
               </select>
-
               <br />
               <br />
-
               <span>Size: </span>
-              <select className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4 ml-5">
-                <option value={productDetailsCurrent?.size[0]} selected>
-                  {productDetailsCurrent?.size[0]}
-                </option>
+              <select
+                onChange={(e) => {
+                  dispatch(setSizePick(e.target.value))
+                }}
+                defaultValue={sizePick} className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4 ml-5">
                 {(() => {
                   const options = [];
-                  for (let i = 1; i < productDetailsCurrent?.size.length; i++) {
+                  for (let i = 0; i < productDetailsCurrent?.size.length; i++) {
                     options.push(
                       <option key={i} value={productDetailsCurrent?.size[i]}>
                         {productDetailsCurrent?.size[i]}
@@ -179,7 +187,7 @@ export default function Product() {
         <Review
           review={productDetailsCurrent?.review || []}
           handleChange={(field, value) => handleChange(field, value)}
-          submitComment={submitComment} 
+          submitComment={submitComment}
         />
       </div>
     </div>

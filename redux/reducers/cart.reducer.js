@@ -20,6 +20,8 @@ const cartSlice = createSlice({
             return {
               ...item,
               quantityInCart: item?.quantityInCart + 1,
+              colorPick: action.payload.colorPick ??  item?.color[0],
+              sizePick: action.payload.sizePick ?? item?.size[0]
             };
           } else {
             return item;
@@ -61,6 +63,19 @@ const cartSlice = createSlice({
     },
     setLoading: (state) => {
       state.isLoading = true;
+    },
+    selectColorSize : (state,action) => {
+      state.items = state.items.map((item) => {
+        if (item._id === action.payload._id) {
+          return {
+            ...item,
+            colorPick: action.payload?.colorPick,
+            sizePick: action.payload?.colorPick
+          };
+        } else {
+          return item;
+        }
+      });
     }
   },
 });
@@ -74,6 +89,7 @@ export const {
   decreaseQuantityProduct,
   clearCartLogout,
   setLinkPayment,
-  setLoading
+  setLoading,
+  selectColorSize
 } = cartSlice.actions;
 export default cartSlice.reducer;

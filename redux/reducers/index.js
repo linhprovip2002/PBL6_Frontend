@@ -12,7 +12,7 @@ export {
   default as cartSlice,
   clearCartLogout,
   decreaseQuantityProduct,
-  deleteCartItem, setLinkPayment, setLoading, updateCart
+  deleteCartItem, selectColorSize, setLinkPayment, setLoading, updateCart
 } from "./cart.reducer";
 
 export {
