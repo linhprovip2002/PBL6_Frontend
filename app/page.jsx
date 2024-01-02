@@ -126,7 +126,16 @@ const Home = () => {
       </section>
 
       <section className="app-max-width w-full h-full flex flex-col justify-center mt-[150px]">
-        <p className="text-2xl mb-5 font-bold underline">Bán chạy nhất</p>
+        <div className="flex mb-5" style={{ justifyContent: "space-between" }}>
+          <p className="text-2xl mb-5 font-bold underline">Bán chạy nhất</p>
+          <a
+            href="/products/all"
+            className="hover:decoration-solid hover:underline"
+          >
+            Tất cả sản phẩm <span>&#8594;</span>
+          </a>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 lg:gap-x-12 gap-y-6 mb-10 app-x-padding">
           <Card />
         </div>
@@ -142,7 +151,10 @@ const Home = () => {
       <section className="w-full h-[350px] mt-[100px] mb-[100px]">
         <div className="flex mb-5" style={{ justifyContent: "space-between" }}>
           <p className="text-2xl mb-5 font-bold underline">Các nhà cung cấp</p>
-          <a href="/suppliers" className="hover:decoration-solid hover:underline">
+          <a
+            href="/suppliers"
+            className="hover:decoration-solid hover:underline"
+          >
             Tìm hiểu thêm <span>&#8594;</span>
           </a>
         </div>
