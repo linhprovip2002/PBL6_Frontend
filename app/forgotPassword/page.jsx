@@ -3,7 +3,7 @@
 import { logout } from "@redux/reducers";
 import { AuthApi } from "@services/api";
 
-import { RegisterSchema } from "@services/validators";
+import { ForgotPassSchema, RegisterSchema } from "@services/validators";
 import { deleteToken } from "@utils/LocalStorageHandle";
 import { toastError, toastSuccess } from "@utils/toastHelper";
 import { useFormik } from "formik";
@@ -12,51 +12,40 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-const Signup = () => {
+const ForgotPassword = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const [checked, setChecked] = useState(false);
 
-  const handleSubmit = useCallback(
-    async (data) => {
-      try {
-        setIsLoading(true);
-        if (!checked) {
-          toastError(
-            "Bạn phải đồng ý với các điều khoản và điều kiện. Vui lòng đồng ý"
-          );
-        } else {
-          const res = await AuthApi.register({
-            username: data.username,
-            email: data.email,
-            password: data.password,
-          });
-          toastSuccess("Tạo tài khoản thành công");
-          router.push("/login", { scroll: true });
-        }
-      } catch (error) {
-        toastError("Tạo tài khoản thất bại. Vui lòng thử lại.");
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [checked]
-  );
+  const handleSubmit = useCallback(async (data) => {
+    try {
+      setIsLoading(true);
+      const res = await AuthApi.forgotPassword({
+        email: data.email,
+      });
+      toastSuccess("Tin nhắn đã được gửi đến email, vui lòng kiểm tra");
+      router.push("/newPassword", { scroll: true });
+    } catch (error) {
+      toastError("Nhập email sai, vui lòng nhập lại.");
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   const formik = useFormik({
     initialValues: {
-      username: "",
-      password: "",
       email: "",
-      re_password: "",
     },
     onSubmit: handleSubmit,
-    validationSchema: RegisterSchema,
+    validationSchema: ForgotPassSchema,
   });
+
   useEffect(() => {
     dispatch(logout());
     deleteToken();
   }, []);
+
   return (
     <div className="w-full h-screen flex items-start">
       <div className="relative w-1/2 h-full flex flex-col">
@@ -69,7 +58,7 @@ const Signup = () => {
           </p>
         </div>
         <img
-          src={"assets/images/slide0.jpg"}
+          src={"assets/images/slide2.jpg"}
           className="w-full h-full object-cover"
           alt=""
         />
@@ -80,17 +69,9 @@ const Signup = () => {
           className="w-full flex flex-col w-[500px]"
         >
           <div className="w-full flex flex-col mb-2">
-            <h3 className="text-3xl font-semibold mb-2">Đăng ký</h3>
+            <h3 className="text-3xl font-semibold mb-2">Quên mật khẩu</h3>
             <div className="flex flex-row gap-1 ">
-              <p className="text-base mb-2">Bạn đã có tài khoản?</p>
-              <Link href="/login">
-                <p
-                  className="text-base whitespace-nowrap cursor-pointer text-green-400
-              "
-                >
-                  Đăng nhập
-                </p>
-              </Link>
+              <p className="text-base mb-2">Điền email của bạn dưới đây để cấp lại mật khẩu</p>
             </div>
           </div>
           <div className="w-full flex flex-col">
@@ -105,86 +86,8 @@ const Signup = () => {
                 className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
               />
               {formik.errors.email && (
-                <span
-                  className="text-red-500	
-"
-                >
-                  {formik.errors.email}
-                </span>
+                <span className="text-red-500">{formik.errors.email}</span>
               )}
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Tài khoản"
-                name="username"
-                value={formik.values.username}
-                onBlur={formik.handleBlur("username")}
-                onChange={formik.handleChange}
-                className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
-              />
-              {formik.errors.username && (
-                <span
-                  className="text-red-500	
-"
-                >
-                  {formik.errors.username}
-                </span>
-              )}
-            </div>
-
-            <div>
-              <input
-                type="password"
-                placeholder="Mật khẩu"
-                name="password"
-                value={formik.values.password}
-                onBlur={formik.handleBlur("password")}
-                onChange={formik.handleChange}
-                className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
-              />
-              {formik.errors.password && (
-                <span
-                  className="text-red-500	
-"
-                >
-                  {formik.errors.password}
-                </span>
-              )}
-            </div>
-            <div>
-              <input
-                type="password"
-                placeholder="Nhập lại mật khẩu"
-                name="re_password"
-                value={formik.values.re_password}
-                onBlur={formik.handleBlur("re_password")}
-                onChange={formik.handleChange}
-                className="w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none"
-              />
-              {formik.errors.re_password && (
-                <span
-                  className="text-red-500	
-"
-                >
-                  {formik.errors.re_password}
-                </span>
-              )}
-            </div>
-          </div>
-          <div className="w-full flex items-center justify-between">
-            <div className="w-full flex items-center mt-1">
-              <input
-                type="checkbox"
-                className="w-4 h-4 mr-2"
-                value={checked}
-                onChange={(e) => {
-                  setChecked(e.target.checked);
-                }}
-              />
-              <p className="text-sm">
-                Tôi đồng ý với <b>Điều khoản</b> và <b>dịch vụ</b>
-              </p>
             </div>
           </div>
           <div className="w-full flex flex-col my-4">
@@ -213,13 +116,20 @@ const Signup = () => {
                   <span className="sr-only">Loading...</span>
                 </div>
               ) : (
-                "Đăng ký"
+                "Gửi"
               )}
             </button>
           </div>
         </form>
+        <div className="w-full flex items-center justify-center">
+          <p className="text-sm font-normal text-[#141718]">
+            <Link href="/signup">Chưa có tài khoản? </Link>
+            <span className="font-semibold underline underline-offset"></span>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
-export default Signup;
+
+export default ForgotPassword;

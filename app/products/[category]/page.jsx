@@ -17,7 +17,7 @@ const Products = () => {
 
   const router = useRouter();
   const [selectedOption, setSelectedOption] = useState("");
-  const [prices, setPrices] = useState("");
+  const [prices, setPrices] = useState("Tất cả mức giá");
 
   const handleOptionChange = (event) => {
     const selectedValue = event.target.value;
@@ -35,7 +35,7 @@ const Products = () => {
       const res = await ProductApi.getListProduct();
       if (categoryName === "all") {
         const productCategory1 = res?.data;
-        if (prices === "less than 200000") {
+        if (prices === "Nhỏ hơn 200000") {
           const productLessThan1000 = productCategory1.filter(
             (product) => product.price < 200000
           );
@@ -49,7 +49,7 @@ const Products = () => {
           dispatch(
             getProductByCategorySuccess({ products: productLessThan10000 })
           );
-        } else if (prices === "more than 500000") {
+        } else if (prices === "Lớn hơn 500000") {
           const productMoreThan10000 = productCategory1.filter(
             (product) => product.price > 500000
           );
@@ -65,7 +65,7 @@ const Products = () => {
             (category) => category.CategoryName === categoryName
           )
         );
-        if (prices === "less than 200000") {
+        if (prices === "Nhỏ hơn 200000") {
           const productLessThan1000 = productCategory2.filter(
             (product) => product.price < 200000
           );
@@ -79,7 +79,7 @@ const Products = () => {
           dispatch(
             getProductByCategorySuccess({ products: productLessThan10000 })
           );
-        } else if (prices === "more than 500000") {
+        } else if (prices === "Lớn hơn 500000") {
           const productMoreThan10000 = productCategory2.filter(
             (product) => product.price > 500000
           );
@@ -128,9 +128,7 @@ const Products = () => {
               value={selectedOption}
               onChange={handleOptionChange}
             >
-              <option value="" disabled selected>
-                Chọn loại đồng hồ
-              </option>
+              <option value="" selected disabled>Chọn loại đồng hồ</option>
               <option value="/products/all">Tất cả</option>
               <option value="/products/Men's Watches">Đồng hồ nam</option>
               <option value="/products/Women's Watches">Đồng hồ nữ</option>
@@ -150,15 +148,13 @@ const Products = () => {
             </div>
             <select
               className="w-[200px] bg-white border border-gray-300 text-gray-900 text-md rounded-lg px-4 py-2 mb-[30px] shadow-md"
-              value={selectedOption}
+              value={prices}
               onChange={handlePriceChange}
             >
-              <option value="" disabled selected>
-                Chọn mức giá
-              </option>
-              <option value="less than 200000">Nhỏ hơn 200000</option>
+              <option value="Tất cả mức giá">Tất cả mức giá</option>
+              <option value="Nhỏ hơn 200000">Nhỏ hơn 200000</option>
               <option value="200000 - 500000">Từ 200000 tới 500000</option>
-              <option value="more than 500000">Lớn hơn 500000</option>
+              <option value="Lớn hơn 500000">Lớn hơn 500000</option>
             </select>
           </div>
         </div>

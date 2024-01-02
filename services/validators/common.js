@@ -22,6 +22,9 @@ const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const phone = Yup.string().matches(phoneRegExp, "Phone number is not valid");
 // const dayOfBirth = Yup.date().min("1969-11-13", "Date is too early");
+const access_token = Yup.string().required("Vui lòng nhập token");
+
+const new_password = Yup.string().required("Vui lòng nhập mật khẩu mới");
 export {
   Address,
   // dayOfBirth,
@@ -33,4 +36,6 @@ export {
   phone,
   re_password,
   username,
+  access_token,
+  new_password,
 };

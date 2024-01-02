@@ -79,7 +79,6 @@ export const OrdersHistory = () => {
               <th>Mã đơn hàng</th>
               <th>Ngày mua</th>
               <th>Trạng thái</th>
-              {/* <th>Địa chỉ</th> */}
               <th>Phản hồi</th>
               <th>Hành động</th>
             </tr>

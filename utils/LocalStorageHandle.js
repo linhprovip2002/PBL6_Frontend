@@ -1,11 +1,20 @@
 export const saveToken = (token) => {
-  localStorage.setItem("userToken", token);
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    localStorage.setItem("userToken", token);
+  }
 };
 
 export const getToken = () => {
-  return localStorage.getItem("userToken");
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    return localStorage.getItem("userToken");
+  }
 };
 
 export const deleteToken = () => {
-  return localStorage.removeItem("userToken");
+  if (typeof window !== "undefined") {
+    // Perform localStorage action
+    return localStorage.removeItem("userToken");
+  }
 };

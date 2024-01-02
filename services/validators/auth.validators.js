@@ -8,6 +8,8 @@ import {
   phone,
   re_password,
   username,
+  access_token,
+  new_password,
 } from "./common";
 
 export const LoginSchema = Yup.object().shape({
@@ -20,6 +22,15 @@ export const RegisterSchema = Yup.object().shape({
   email,
   password,
   re_password,
+});
+
+export const ForgotPassSchema = Yup.object().shape({
+  email,
+})
+
+export const NewPasswordSchema = Yup.object().shape({
+  access_token,
+  new_password,
 });
 
 export const UpdateProfileSchema = Yup.object().shape({

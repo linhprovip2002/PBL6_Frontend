@@ -5,6 +5,16 @@ const ENDPOINTS = {
   PROFILE: "/user/me",
   REGISTER: "/auth/register",
   UPDATEME: "/user",
+  FORGOTPASSWORD: "/auth/forgot-password",
+  NEWPASSWORD: "/auth/reset-password/",
+};
+
+const forgotPassword = (data) => {
+  return request().post(ENDPOINTS.FORGOTPASSWORD, data);
+};
+
+const resetPassword = (data) => {
+  return request().post(ENDPOINTS.NEWPASSWORD, data);
 };
 
 const login = (data) => {
@@ -29,4 +39,6 @@ export const AuthApi = {
   getProfile,
   register,
   updateMe,
+  forgotPassword,
+  resetPassword,
 };

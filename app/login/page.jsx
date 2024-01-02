@@ -77,7 +77,7 @@ const Login = () => {
           className="w-full flex flex-col w-[500px]"
         >
           <div className="w-full flex flex-col mb-2">
-            <h3 className="text-3xl font-semibold mb-2">Sign in</h3>
+            <h3 className="text-3xl font-semibold mb-2">Đăng nhập</h3>
             <div className="flex flex-row gap-1 ">
               <p className="text-base mb-2">Bạn chưa có tài khoản?</p>
               <Link href="/signup">
@@ -85,7 +85,7 @@ const Login = () => {
                   className="text-base whitespace-nowrap cursor-pointer text-green-400
               "
                 >
-                  Sign up
+                  Đăng ký
                 </p>
               </Link>
             </div>
@@ -172,13 +172,13 @@ const Login = () => {
           <div className="w-full flex items-center justify-between">
             <div className="w-full flex items-center mt-1">
               <input type="checkbox" className="w-4 h-4 mr-2" />
-              <p className="text-sm">Remember me</p>
+              <p className="text-sm">Nhớ tài khoản</p>
             </div>
             <p
               className="text-sm font-medium whitespace-nowrap cursor-pointer
               underline underline-offset-2"
             >
-              Forgot Password ?
+              <Link href="/forgotPassword">Quên mật khẩu?</Link>
             </p>
           </div>
           <div className="w-full flex flex-col my-4">
@@ -186,24 +186,13 @@ const Login = () => {
               type="submit"
               className="w-full text-white my-2 font-semibold bg-[#141718] rounded-md p-4 text-center flex items-center justify-center cursor-pointer"
             >
-              {isLoading ? <Loading /> : "Log in"}
+              {isLoading ? <Loading /> : "Đăng nhập"}
             </button>
-            {/* <button className="w-full text-[#141718] my-2 font-semibold bg-white border-2 border-black rounded-md p-4 flex items-center justify-center cursor-pointer">
-              Register
-            </button> */}
           </div>
-          {/* <div className="w-full flex items-center justify-center relative py-2">
-            <div className="w-full h-[1px] bg-black"></div>
-            <p className="text-lg absolute text-black/80 bg-[#f5f5f5]">or</p>
-          </div>
-          <button className="w-full text-[#141718] my-2 font-semibold bg-white border-2 border-black/40 rounded-md p-4 flex items-center justify-center cursor-pointer">
-            <img src={"/assets/images/watch1.jpg"} className="h-6 mr-2" />
-            Sign in With Google
-          </button> */}
         </form>
         <div className="w-full flex items-center justify-center">
           <p className="text-sm font-normal text-[#141718]">
-            Don't have a account?{" "}
+            <Link href="/signup">Chưa có tài khoản? </Link>
             <span className="font-semibold underline underline-offset"></span>
           </p>
         </div>
