@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { authSelector } from "@redux/reducers";
 import { SupplierApi } from "@services/api/supplier.api";
 import { toastError, toastSuccess } from "@utils/toastHelper";
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { authSelector } from "@redux/reducers";
+import * as yup from "yup";
 
 const schema = yup.object().shape({
   companyName: yup.string().required("Company Name is required"),
@@ -28,6 +28,7 @@ const SupplierChanel = () => {
   const [supplier, setSupplier] = useState({});
 
   const [isSupplier, setIsSupplier] = useState(false);
+  const { user } = useSelector(authSelector);
 
   const handelGetAll = useCallback(async () => {
     try {
@@ -48,13 +49,6 @@ const SupplierChanel = () => {
     }
   }, []);
 
-  useEffect(() => {
-    handelGetAll();
-  }, []);
-
-  useEffect(() => {
-    console.log(supplier);
-  }, [supplier]);
 
   const {
     register,
@@ -65,7 +59,6 @@ const SupplierChanel = () => {
     resolver: yupResolver(schema),
   });
 
-  const { user } = useSelector(authSelector);
 
   const onSubmitHandler = async (data) => {
     try {
@@ -90,14 +83,14 @@ const SupplierChanel = () => {
     data.append("file", file);
     data.append(
       "upload_preset",
-      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+      "bayisjyn"
     );
-    data.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME);
+    data.append("cloud_name", "dnstdrtwz");
     data.append("folder", "Cloudinary-React");
 
     try {
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/dnstdrtwz/image/upload`,
         {
           method: "POST",
           body: data,
@@ -121,18 +114,20 @@ const SupplierChanel = () => {
 
     setValue(field, value);
   };
-
+  useEffect(() => {
+    handelGetAll();
+  }, [user]);
   return (
     <form className="px-16" onSubmit={handleSubmit(onSubmitHandler)}>
       <div className="">
         <div className="font-bold text-2xl">Supplier chanel</div>
-        {supplier.logoImage ? (
+        {(supplier.logoImage || imageLink !== "") ? (
           <>
             <div className="flex justify-center">
               <div className="w-20 h-20">
                 <div className="relative w-full h-full">
                   <img
-                    src={supplier.logoImage}
+                    src={imageLink !== "" ? imageLink : supplier.logoImage}
                     className="absolute border border-black rounded-full w-full h-full"
                   />
                 </div>
@@ -214,21 +209,17 @@ const SupplierChanel = () => {
           <p className="text-red-700">{errors.description?.message}</p>
         </div>
 
-        {!isSupplier ? (
-          <>
-            <div className="w-full my-4">
-              <label className="text-xs font-sans">LOGO IMAGE *</label>
-              <input
-                class="block w-full text-md text-gray-400 border border-gray-800 py-1 px-1
+        <>
+          <div className="w-full my-4">
+            <label className="text-xs font-sans">LOGO IMAGE *</label>
+            <input
+              class="block w-full text-md text-gray-400 border border-gray-800 py-1 px-1
                         rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                type="file"
-                onChange={uploadImage}
-              />
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
+              type="file"
+              onChange={uploadImage}
+            />
+          </div>
+        </>
 
         {isSupplier ? (
           <>
