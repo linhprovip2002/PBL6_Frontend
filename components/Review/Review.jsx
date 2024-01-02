@@ -126,7 +126,7 @@ const Review = ({ review, handleChange, submitComment }) => {
                 <p>{reviewed.updatedAt.substring(0, 10)}</p>
                 <button className="text-xs ml-5 hover:text-blue-400 hover:font-semibold">Thích </button>
                 <button className="text-xs ml-5 hover:text-gray-400 hover:font-semibold">Phản hồi</button>
-                {user._id === reviewed.IDcustomer._id ? (
+                {user?._id === reviewed.IDcustomer._id ? (
                   <>
                     <button
                       className="text-xs ml-5 hover:text-red-500"

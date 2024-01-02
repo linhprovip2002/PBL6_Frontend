@@ -1,6 +1,6 @@
 .imgContainer {
   transition: opacity 5s;
-  @apply relative overflow-hidden flex justify-center items-center rounded-lg;
+  @apply relative overflow-hidden flex justify-center items-center rounded-lg h-full;
 }
 
 .imgContainer:hover .imgOverlay {

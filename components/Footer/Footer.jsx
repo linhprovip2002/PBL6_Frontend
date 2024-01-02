@@ -22,21 +22,13 @@ const Footer = () => {
               </div>
             </div>
             <div className="inline-flex items-start gap-[40px] relative flex-[0_0_auto] text-end">
-              <div className="relative w-[80px] mt-[-1.00px] font-caption-1">
+              <div className="relative  mt-[-1.00px] font-caption-1">
                 <Link href="/">Home</Link>
               </div>
-              <div className="relative w-[80px] mt-[-1.00px] font-caption-1">
-                Shop
-              </div>
-              <div className="relative w-[80px] mt-[-1.00px] font-caption-1">
-                Product
-              </div>
-              <div className="relative w-[80px] mt-[-1.00px] font-caption-1">
-                Blog
-              </div>
-              <div className="relative w-[80px] mt-[-1.00px] font-caption-1">
-                Contact Us
-              </div>
+              <div className="relative mt-[-1.00px] font-caption-1">Shop</div>
+              <div className="relative mt-[-1.00px] font-caption-1">Product</div>
+              <div className="relative mt-[-1.00px] font-caption-1">Blog</div>
+              <div className="relative mt-[-1.00px] font-caption-1">Contact Us</div>
             </div>
           </div>
         </div>
@@ -45,8 +37,8 @@ const Footer = () => {
             <p className="relative w-fit">
               Copyright © 2023 PBL6. All rights reserved
             </p>
-            <div className="relative w-[100px]">Privacy Policy</div>
-            <div className="relative w-[100px]">Terms of Use</div>
+            <div className="relative">Privacy Policy</div>
+            <div className="relative">Terms of Use</div>
           </div>
           <div className="inline-flex items-start gap-[24px] relative flex-[0_0_auto]">
             <a

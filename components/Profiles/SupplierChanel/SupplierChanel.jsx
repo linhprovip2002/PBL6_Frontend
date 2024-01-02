@@ -3,7 +3,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SupplierApi } from "@services/api/supplier.api";
-import { toastSuccess } from "@utils/toastHelper";
+import { toastError, toastSuccess } from "@utils/toastHelper";
+import { useSelector } from "react-redux";
+import { authSelector } from "@redux/reducers";
 
 const schema = yup.object().shape({
   companyName: yup.string().required("Company Name is required"),
@@ -21,26 +23,64 @@ const schema = yup.object().shape({
 });
 
 const SupplierChanel = () => {
+  const [imageLink, setImageLink] = useState("");
+
+  const [supplier, setSupplier] = useState({});
+
+  const [isSupplier, setIsSupplier] = useState(false);
+
+  const handelGetAll = useCallback(async () => {
+    try {
+      if (user.Roles.some((role) => role.roleName === "Seller")) {
+        const resSupplier = await SupplierApi.getSupplierByUserId();
+        const data = resSupplier.data;
+        setSupplier(data);
+        setValue("companyName", data.companyName);
+        setValue("contactEmail", data.contactEmail);
+        setValue("contactPhone", data.contactPhone);
+        setValue("address", data.address);
+        setValue("description", data.description);
+        setValue("imageLink", data.imageLink);
+        setIsSupplier(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    handelGetAll();
+  }, []);
+
+  useEffect(() => {
+    console.log(supplier);
+  }, [supplier]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandler = (data) => {
-    data.imageLink = imageLink;
+  const { user } = useSelector(authSelector);
+
+  const onSubmitHandler = async (data) => {
     try {
-      SupplierApi.registerSupplier(data);
-      toastSuccess("Bạn đã đăng ký supplier thành công");
+      if (isSupplier) {
+        await SupplierApi.updateSupplierByUserId(supplier._id, data);
+        toastSuccess("Cập nhật supplier thành công");
+      } else {
+        data.imageLink = imageLink;
+        await SupplierApi.registerSupplier(data);
+        toastSuccess("Bạn đã đăng ký supplier thành công");
+      }
     } catch (error) {
       console.log(error);
       toastError("Có gì đó sai, hãy nhập lại");
     }
-
-    reset();
   };
 
   const uploadImage = async (event) => {
@@ -65,7 +105,7 @@ const SupplierChanel = () => {
       );
       const res = await response.json();
       setImageLink(res.url);
-      if(!!supplier) {
+      if (!!supplier) {
         handleChange("logoImage", res.url);
       }
     } catch (error) {
@@ -73,29 +113,14 @@ const SupplierChanel = () => {
     }
   };
 
-  const [imageLink, setImageLink] = useState("");
-
-  const [supplier, setSupplier] = useState({});
-
   const handleChange = (field, value) => {
     setSupplier((prevSupplier) => ({
       ...prevSupplier,
       [field]: value,
     }));
+
+    setValue(field, value);
   };
-
-  const handelGetAll = useCallback(async () => {
-    try {
-      const res = await SupplierApi.getSupplierByUserId();
-      setSupplier(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    handelGetAll();
-  }, []);
 
   return (
     <form className="px-16" onSubmit={handleSubmit(onSubmitHandler)}>
@@ -110,22 +135,6 @@ const SupplierChanel = () => {
                     src={supplier.logoImage}
                     className="absolute border border-black rounded-full w-full h-full"
                   />
-                  <label
-                    htmlFor="file-input"
-                    className="group w-full h-full p-5 hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500"
-                  >
-                    <img
-                      className="invisible group-hover:visible"
-                      src="https://www.svgrepo.com/show/33565/upload.svg"
-                      alt=""
-                    />
-                    <input
-                      type="file"
-                      id="file-input"
-                      accept="image/*"
-                      onChange={uploadImage}
-                    />
-                  </label>
                 </div>
               </div>
             </div>
@@ -142,7 +151,6 @@ const SupplierChanel = () => {
               className="w-full px-2 py-2 rounded-lg border border-gray-800"
               placeholder="Company Name"
               {...register("companyName")}
-              value={supplier.companyName}
               onChange={(e) => handleChange("companyName", e.target.value)}
               type="text"
             />
@@ -157,7 +165,6 @@ const SupplierChanel = () => {
               className="w-full px-2 py-2 rounded-lg border border-gray-800"
               placeholder="Contact Email"
               {...register("contactEmail")}
-              value={supplier.contactEmail}
               onChange={(e) => handleChange("contactEmail", e.target.value)}
               type="email"
             />
@@ -172,7 +179,6 @@ const SupplierChanel = () => {
               className="w-full px-2 py-2 rounded-lg border border-gray-800"
               placeholder="Contact Phone"
               {...register("contactPhone")}
-              value={supplier.contactPhone}
               onChange={(e) => handleChange("contactPhone", e.target.value)}
               type="text"
             />
@@ -187,7 +193,6 @@ const SupplierChanel = () => {
               className="w-full px-2 py-2 rounded-lg border border-gray-800"
               placeholder="Address"
               {...register("address")}
-              value={supplier.address}
               onChange={(e) => handleChange("address", e.target.value)}
               type="text"
             />
@@ -202,7 +207,6 @@ const SupplierChanel = () => {
               className="w-full px-2 py-2 rounded-lg border border-gray-800"
               placeholder="Description"
               {...register("description")}
-              value={supplier.description}
               onChange={(e) => handleChange("description", e.target.value)}
               type="text"
             />
@@ -210,7 +214,7 @@ const SupplierChanel = () => {
           <p className="text-red-700">{errors.description?.message}</p>
         </div>
 
-        {!supplier ? (
+        {!isSupplier ? (
           <>
             <div className="w-full my-4">
               <label className="text-xs font-sans">LOGO IMAGE *</label>
@@ -226,7 +230,7 @@ const SupplierChanel = () => {
           <></>
         )}
 
-        {supplier ? (
+        {isSupplier ? (
           <>
             <div className="flex justify-center my-5">
               <button

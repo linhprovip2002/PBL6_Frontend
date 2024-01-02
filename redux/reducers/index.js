@@ -19,6 +19,7 @@ export {
   getProductDetailsSuccess,
   getProductListSuccess,
   getProductPending,
+  getProductByCategorySuccess,
   default as productSlice
 } from "./product.reducer";
 

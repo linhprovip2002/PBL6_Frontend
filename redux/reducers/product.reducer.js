@@ -21,6 +21,10 @@ const productsSlice = createSlice({
       state.productDetailsCurrent = action.payload;
       state.isLoading = false;
     },
+    getProductByCategorySuccess: (state, action) => {
+      state.productList = action.payload.products;
+      state.isLoading = false;
+    },
     getProductPending: (state, action) => {
       state.isLoading = true;
     },
@@ -33,5 +37,6 @@ export const {
   getProductListSuccess,
   getProductDetailsSuccess,
   getProductPending,
+  getProductByCategorySuccess
 } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -1,11 +1,32 @@
 export const navMenuList = [
-  "Thương hiệu",
-  "Nam",
-  "Nữ",
-  "Cặp đôi",
-  "Phụ kiện",
-  "Dịch vụ",
-  "Liên hệ",
+  {
+    name: "Nam",
+    src: "/products/Men's Watches",
+  },
+  {
+    name: "Nữ",
+    src: "/products/Women's Watches",
+  },
+  {
+    name: "Trẻ em",
+    src: "/products/Children's Watches",
+  },
+  {
+    name: "Cao cấp",
+    src: "/products/Luxury Watches",
+  },
+  {
+    name: "Thông minh",
+    src: "/products/Smart Watches",
+  },
+  {
+    name: "Về chúng tôi",
+    src: "/about",
+  },
+  {
+    name: "Liên hệ",
+    src: "/contact",
+  },
 ];
 
 export const cardList = [
@@ -33,7 +54,7 @@ export const cardList = [
     price: "23.000.000 đ",
     image: "/assets/images/watch1.jpg",
   },
-]
+];
 
 export const linkButtonList = [
   {
@@ -68,31 +89,31 @@ export const linkButtonList = [
     name: "Đồng Hồ Lậu",
     image: "/assets/images/men.jpg",
   },
-]
+];
 
 export const paymentStatus = [
   {
-    id : 1,
-    title : "Cart",
-    description :"Shopping cart",
-    path: "cart"
-  },  
+    id: 1,
+    title: "Cart",
+    description: "Shopping cart",
+    path: "cart",
+  },
   {
-    id : 2,
-    title : "Check Out",
-    description :"Checkout details",
-    path: "checkout"
-  }, 
+    id: 2,
+    title: "Check Out",
+    description: "Checkout details",
+    path: "checkout",
+  },
   {
-    id : 3,
-    title : "Payment Order",
-    description :"Payment Order",
-    path: "payment"
-  }, 
+    id: 3,
+    title: "Payment Order",
+    description: "Payment Order",
+    path: "payment",
+  },
   {
-    id : 4,
-    title : "Complete!",
-    description :"Order complete",
-    path: "order-complete"
-  }
-]
+    id: 4,
+    title: "Complete!",
+    description: "Order complete",
+    path: "order-complete",
+  },
+];

@@ -56,10 +56,10 @@ const Nav = ({ hiddenSearch }) => {
           {navMenuList?.map((item, index) => (
             <Link
               key={index}
-              href=""
+              href={item.src}
               className={cn("categories", styles.navLink)}
             >
-              {item}
+              {item.name}
             </Link>
           ))}
         </div>

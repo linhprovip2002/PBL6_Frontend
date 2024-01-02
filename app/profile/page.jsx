@@ -10,12 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./page.module.scss";
 import SupplierChanel from "@components/Profiles/SupplierChanel/SupplierChanel";
 import { deleteToken } from "@utils/LocalStorageHandle";
+import AddressComponent from "@components/Profiles/Address/page";
 
 const Profile = () => {
   const { user } = useSelector(authSelector);
   const dispatch = useDispatch();
 
-  const [current, setCurrent] = useState("Supplier chanel");
+  const [current, setCurrent] = useState("Account");
   const navList = [
     "Account",
     "Address",
@@ -156,6 +157,8 @@ const Profile = () => {
             <SupplierChanel />
           ) : current === "Account" ? (
             <AccountDetails />
+          ) : current === "Address" ? (
+            <AddressComponent />
           ) : current === "Orders" ? (
             <OrdersHistory />
           ) : current === "Log out" ? (
