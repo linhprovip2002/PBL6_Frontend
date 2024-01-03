@@ -12,7 +12,9 @@ const getListProduct = () => {
 const getReviewProduct = (id) => {
   return request().get(`${ENDPOINTS.LISTPRODUCT}/${id}/review`);
 };
-
+const getDiscountProduct = (id) => {
+  return request().get(`${ENDPOINTS.LISTPRODUCT}/${id}/discount`);
+};
 const getCategories = () => {
   return request().get(ENDPOINTS.CATEGORY);
 };
@@ -31,4 +33,5 @@ export const ProductApi = {
   getCategories,
   createReview,
   deleteReview,
+  getDiscountProduct
 };

@@ -8,10 +8,10 @@ import "@styles/globals.css";
 import { usePathname } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./login/page";
-import Signup from "./signup/page";
 import ForgotPassword from "./forgotPassword/page";
+import Login from "./login/page";
 import NewPassword from "./newPassword/page";
+import Signup from "./signup/page";
 // export const metadata = {
 //   title: "PBL6",
 //   description: "Đồ án PBL6",
@@ -49,9 +49,9 @@ const RootLayout = ({ children }) => {
             </main>
           )}
           <ModalExample />
-          {!(router.includes("signup") || router.includes("login")) ||
+          {!(router.includes("signup") || router.includes("login") ||
             router.includes("forgotPassword") ||
-            (router.includes("newPassword") && <Footer />)}
+            router.includes("newPassword")) && <Footer />}
           <Sidebar />
         </Providers>
       </body>

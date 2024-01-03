@@ -21,7 +21,11 @@ const checkout = () => {
   useEffect(() => {
     let total = 0;
     for (let i = 0; i < items.length; i++) {
-      total += parseFloat(items[i].price * items[i].quantityInCart);
+      if (items[i].discount) {
+        total += parseFloat(items[i]?.price * items[i]?.quantityInCart * (1 - items[i]?.discount));
+      } else {
+        total += parseFloat(items[i]?.price * items[i]?.quantityInCart);
+      }
     }
     setTotal(total);
   }, [items]);

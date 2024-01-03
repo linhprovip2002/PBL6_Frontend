@@ -2,8 +2,7 @@ import { logout } from "@redux/reducers";
 import { store } from "@redux/store";
 import { getToken } from "@utils/LocalStorageHandle";
 import axios from "axios";
-
-const baseURL = `http://localhost:3001/api`;
+const baseURL = `https://docker-pratice-production-82a3.up.railway.app/api`;
 
 const instance = axios.create({
   baseURL: baseURL,

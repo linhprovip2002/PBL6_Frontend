@@ -27,20 +27,27 @@ export default function Product() {
   const pathname = usePathname();
   const dispatch = useDispatch();
   const paths = pathname.split("/");
-  const [sizePick, setSizePick] = useState()
-  const [colorPick, setColorPick] = useState()
-
+  const [sizePick, setSizePick] = useState();
+  const [colorPick, setColorPick] = useState();
+  const [discount, setDiscount] = useState(null);
   const id = paths[paths.length - 1];
   const getProductDetailPreView = useCallback(async (id) => {
     try {
       dispatch(getProductPending());
-      const res = await ProductApi.getReviewProduct(id);
+      const res = await Promise.all([
+        ProductApi.getReviewProduct(id),
+        ProductApi.getDiscountProduct(id),
+      ]);
+
       dispatch(
         getProductDetailsSuccess({
           ...productList?.find((item) => item._id === id),
-          review: res?.data,
+          review: res[0]?.data,
         })
       );
+      if (res[1]?.data.length !== 0) {
+        setDiscount(res[1]?.data[0]?.discount);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -51,11 +58,13 @@ export default function Product() {
   }, [id]);
 
   const addProductToCart = () => {
-    dispatch(addToCart({
-      ...productDetailsCurrent,
-      colorPick: colorPick,
-      sizePick: sizePick
-    }));
+    dispatch(
+      addToCart({
+        ...productDetailsCurrent,
+        colorPick: colorPick,
+        sizePick: sizePick,
+      })
+    );
     toastSuccess("Thêm 1 sản phẩm vào giỏ hàng thành công");
   };
 
@@ -80,13 +89,12 @@ export default function Product() {
     }
   };
 
-
   useEffect(() => {
     if (productDetailsCurrent?._id) {
-      setColorPick(productDetailsCurrent?.color[0])
-      setSizePick(productDetailsCurrent?.size[0])
+      setColorPick(productDetailsCurrent?.color[0]);
+      setSizePick(productDetailsCurrent?.size[0]);
     }
-  }, [productDetailsCurrent])
+  }, [productDetailsCurrent]);
   return (
     <div className="container">
       <div className="w-full max-w-full flex mt-32 justify-between">
@@ -121,20 +129,33 @@ export default function Product() {
               {productDetailsCurrent?.nameProduct}
             </div>
             <div className={styles.priceProduct}>
-              {productDetailsCurrent?.price} $
+              {discount ? (
+                <span>
+                  <span
+                    className="line-through"
+                  >
+                    {productDetailsCurrent?.price} VNĐ
+                  </span>
+                  {` ->`} {productDetailsCurrent?.price * (1 - discount)} $
+                </span>
+              ) : (
+                <span>{productDetailsCurrent?.price} VNĐ</span>
+              )}
             </div>
             <div className={styles.colors}>
               <span>Colors: </span>
               <select
                 onChange={(e) => {
-                  dispatch(setColorPick(e.target.value))
+                  dispatch(setColorPick(e.target.value));
                 }}
-                defaultValue={colorPick} className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4">
+                defaultValue={colorPick}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4"
+              >
                 {(() => {
                   const options = [];
                   for (
                     let i = 0;
-                    i < productDetailsCurrent?.color.length;
+                    i < productDetailsCurrent?.color?.length;
                     i++
                   ) {
                     options.push(
@@ -151,12 +172,18 @@ export default function Product() {
               <span>Size: </span>
               <select
                 onChange={(e) => {
-                  dispatch(setSizePick(e.target.value))
+                  dispatch(setSizePick(e.target.value));
                 }}
-                defaultValue={sizePick} className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4 ml-5">
+                defaultValue={sizePick}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg px-4 ml-5"
+              >
                 {(() => {
                   const options = [];
-                  for (let i = 0; i < productDetailsCurrent?.size.length; i++) {
+                  for (
+                    let i = 0;
+                    i < productDetailsCurrent?.size?.length;
+                    i++
+                  ) {
                     options.push(
                       <option key={i} value={productDetailsCurrent?.size[i]}>
                         {productDetailsCurrent?.size[i]}

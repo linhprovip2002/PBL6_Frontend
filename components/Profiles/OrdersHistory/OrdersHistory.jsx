@@ -1,4 +1,7 @@
 import { STATUS_ORDER } from "@constants/status";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 import {
   getOrderListSuccess,
   orderSelector,
@@ -10,9 +13,6 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./OrdersHistory.module.scss";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 
 const style = {
   position: "absolute",
@@ -85,74 +85,70 @@ export const OrdersHistory = () => {
           </thead>
           <tbody style={{ overflowX: "unset", overflowY: "scroll" }}>
             {orderList.map((orderListItem) => (
-              <>
-                <tr key={orderListItem._id}>
-                  <td>{orderListItem?._id.substring(19, 24)}</td>
-                  <td>{orderListItem?.orderDate.substring(0, 10)}</td>
-                  <td
-                    className={`${
-                      [
-                        STATUS_ORDER.ACCEPTED,
-                        STATUS_ORDER.PAYMENT_SUCCESS,
+              <tr key={orderListItem._id}>
+                <td>{orderListItem?._id.substring(19, 24)}</td>
+                <td>{orderListItem?.orderDate.substring(0, 10)}</td>
+                <td
+                  className={`${[
+                      STATUS_ORDER.ACCEPTED,
+                      STATUS_ORDER.PAYMENT_SUCCESS,
+                    ].includes(orderListItem?.statusOrder)
+                      ? "text-green-500"
+                      : [
+                        STATUS_ORDER.REJECTED,
+                        STATUS_ORDER.PENDING,
                       ].includes(orderListItem?.statusOrder)
-                        ? "text-green-500"
-                        : [
-                            STATUS_ORDER.REJECTED,
-                            STATUS_ORDER.PENDING,
-                          ].includes(orderListItem?.statusOrder)
                         ? "text-red-500"
                         : ""
                     }`}
-                  >
-                    {orderListItem?.statusOrder}
-                  </td>
-                  <td>{orderListItem?.feedbackSupplier}</td>
-                  <td className="flex justify-around">
-                    <button
-                      type="button"
-                      className={`w-[6.25rem] ${
-                        [
-                          STATUS_ORDER.ACCEPTED,
-                          STATUS_ORDER.PAYMENT_SUCCESS,
+                >
+                  {orderListItem?.statusOrder}
+                </td>
+                <td>{orderListItem?.feedbackSupplier}</td>
+                <td className="flex justify-around">
+                  <button
+                    type="button"
+                    className={`w-[6.25rem] ${[
+                        STATUS_ORDER.ACCEPTED,
+                        STATUS_ORDER.PAYMENT_SUCCESS,
+                      ].includes(orderListItem?.statusOrder)
+                        ? "bg-green-600"
+                        : [
+                          STATUS_ORDER.REJECTED,
+                          STATUS_ORDER.PENDING,
                         ].includes(orderListItem?.statusOrder)
-                          ? "bg-green-600"
-                          : [
-                              STATUS_ORDER.REJECTED,
-                              STATUS_ORDER.PENDING,
-                            ].includes(orderListItem?.statusOrder)
                           ? "bg-yellow-600"
                           : ""
                       } px-2 py-2 text-white rounded-md`}
-                      onClick={() =>
-                        orderListItem?.statusOrder === STATUS_ORDER.ACCEPTED
-                          ? handlePayment(orderListItem)
-                          : orderListItem.statusOrder === "PAYMENT_SUCCESS"
+                    onClick={() =>
+                      orderListItem?.statusOrder === STATUS_ORDER.ACCEPTED
+                        ? handlePayment(orderListItem)
+                        : orderListItem.statusOrder === "PAYMENT_SUCCESS"
                           ? handleOpen(
-                              orderListItem,
-                              orderListItem?.IDProduct,
-                              orderListItem?.IDProduct[0]?.pictureLinks
-                            )
+                            orderListItem,
+                            orderListItem?.IDProduct,
+                            orderListItem?.IDProduct[0]?.pictureLinks
+                          )
                           : null
-                      }
-                      disabled={[
-                        STATUS_ORDER.REJECTED,
-                        STATUS_ORDER.PENDING,
-                      ].includes(orderListItem?.statusOrder)}
-                    >
-                      {orderListItem?.statusOrder === STATUS_ORDER.ACCEPTED
-                        ? "Thanh toán"
-                        : orderListItem?.statusOrder === STATUS_ORDER.REJECTED
+                    }
+                    disabled={[
+                      STATUS_ORDER.REJECTED,
+                      STATUS_ORDER.PENDING,
+                    ].includes(orderListItem?.statusOrder)}
+                  >
+                    {orderListItem?.statusOrder === STATUS_ORDER.ACCEPTED
+                      ? "Thanh toán"
+                      : orderListItem?.statusOrder === STATUS_ORDER.REJECTED
                         ? "Đã hủy"
                         : orderListItem?.statusOrder === STATUS_ORDER.PENDING
-                        ? "Đang chờ"
-                        : orderListItem?.statusOrder ===
-                          STATUS_ORDER.PAYMENT_SUCCESS
-                        ? "Xem"
-                        : ""}
-                    </button>
-                  </td>
-                </tr>
-              </>
+                          ? "Đang chờ"
+                          : orderListItem?.statusOrder ===
+                            STATUS_ORDER.PAYMENT_SUCCESS
+                            ? "Xem"
+                            : ""}
+                  </button>
+                </td>
+              </tr>
             ))}
             <>
               <div>

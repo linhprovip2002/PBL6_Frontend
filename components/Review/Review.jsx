@@ -32,11 +32,11 @@ const Review = ({ review, handleChange, submitComment }) => {
           value={
             reviews.length !== 0
               ? Math.round(
-                  reviews.reduce(
-                    (acc, review) => acc + parseInt(review.rating),
-                    0
-                  ) / reviews.length
-                )
+                reviews.reduce(
+                  (acc, review) => acc + parseInt(review.rating),
+                  0
+                ) / reviews.length
+              )
               : 0
           }
           readOnly
@@ -76,70 +76,68 @@ const Review = ({ review, handleChange, submitComment }) => {
         {reviews.length} bình luận
       </p>
 
-      {reviews.map((reviewed) => (
-        <>
-          <div className="flex mt-5">
-            <div style={{ width: "10%" }} className="flex justify-center">
-              <img
-                src={
-                  reviewed.IDcustomer.profilePicture
-                    ? reviewed.IDcustomer.profilePicture
-                    : "/assets/images/avatar-default-circle.png"
-                }
-                style={{
-                  objectFit: "cover",
-                  width: "60px",
-                  height: "60px",
-                }}
-                alt="ava"
-                className="rounded-full flex-shrink-0"
-              />
+      {reviews.map((reviewed, idx) => (
+        <div key={idx} className="flex mt-5">
+          <div style={{ width: "10%" }} className="flex justify-center">
+            <img
+              src={
+                reviewed.IDcustomer.profilePicture
+                  ? reviewed.IDcustomer.profilePicture
+                  : "/assets/images/avatar-default-circle.png"
+              }
+              style={{
+                objectFit: "cover",
+                width: "60px",
+                height: "60px",
+              }}
+              alt="ava"
+              className="rounded-full flex-shrink-0"
+            />
+          </div>
+          <div style={{ width: "90%" }}>
+            <div
+              style={{
+                fontFamily: "Inter",
+                fontSize: "20px",
+                fontStyle: "normal",
+                fontWeight: "600",
+                lineHeight: "26px",
+              }}
+            >
+              {reviewed.IDcustomer.firstName} {reviewed.IDcustomer.lastName}
             </div>
-            <div style={{ width: "90%" }}>
-              <div
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: "20px",
-                  fontStyle: "normal",
-                  fontWeight: "600",
-                  lineHeight: "26px",
-                }}
-              >
-                {reviewed.IDcustomer.firstName} {reviewed.IDcustomer.lastName}
-              </div>
-              <div className="mt-3">
-                <Rating value={reviewed.rating} readOnly size="small" />
-              </div>
-              <div
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: "16px",
-                  fontStyle: "normal",
-                  fontWeight: "400",
-                  lineHeight: "26px",
-                  marginTop: "5px",
-                }}
-              >
-                {reviewed.comment}
-              </div>
-              <div className="text-xs mt-2 flex">
-                <p>{reviewed.updatedAt.substring(0, 10)}</p>
-                <button className="text-xs ml-5 hover:text-blue-400 hover:font-semibold">Thích </button>
-                <button className="text-xs ml-5 hover:text-gray-400 hover:font-semibold">Phản hồi</button>
-                {user?._id === reviewed.IDcustomer._id ? (
-                  <>
-                    <button
-                      className="text-xs ml-5 hover:text-red-500"
-                      // onClick={() => deleteReview(reviewed._id)}
-                    >
-                      Xóa
-                    </button>
-                  </>
-                ) : null}
-              </div>
+            <div className="mt-3">
+              <Rating value={reviewed.rating} readOnly size="small" />
+            </div>
+            <div
+              style={{
+                fontFamily: "Inter",
+                fontSize: "16px",
+                fontStyle: "normal",
+                fontWeight: "400",
+                lineHeight: "26px",
+                marginTop: "5px",
+              }}
+            >
+              {reviewed.comment}
+            </div>
+            <div className="text-xs mt-2 flex">
+              <p>{reviewed.updatedAt.substring(0, 10)}</p>
+              <button className="text-xs ml-5 hover:text-blue-400 hover:font-semibold">Thích </button>
+              <button className="text-xs ml-5 hover:text-gray-400 hover:font-semibold">Phản hồi</button>
+              {user?._id === reviewed.IDcustomer._id ? (
+                <>
+                  <button
+                    className="text-xs ml-5 hover:text-red-500"
+                  // onClick={() => deleteReview(reviewed._id)}
+                  >
+                    Xóa
+                  </button>
+                </>
+              ) : null}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

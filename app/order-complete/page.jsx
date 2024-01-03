@@ -38,8 +38,8 @@ const OrderComplete = () => {
               Your order has been received
             </div>
             <div className="flex w-full justify-center space-x-4 my-5">
-              {items?.map((item) => (
-                <div className="relative border border-black">
+              {items?.map((item, idx) => (
+                <div key={idx} className="relative border border-black">
                   <img
                     className="object-cover"
                     src={item?.pictureLinks[0]}
