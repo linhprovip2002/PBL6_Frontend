@@ -43,7 +43,7 @@ const Home = () => {
       </section>
       <section className="w-full flex-center flex-col mt-[70px]">
         <h1 className="head_text text-center">
-          Sunny Watch
+          WATCH WORLD
           <br className="max-md:hidden" />
           <span className="orange_gradient text-center">
             {" "}
@@ -114,12 +114,12 @@ const Home = () => {
         <h1 className="head_text text-center">
           Trang web mang đến sự đa dạng với nhiều lựa chọn đồng hồ độc đáo.
           <br className="max-md:hidden" />
-          <span className="orange_gradient text-center"> - Sunny Watch -</span>
+          <span className="orange_gradient text-center"> - WATCH WORLD -</span>
         </h1>
       </section>
 
       <section className="w-full mt-[100px]">
-        <video width="100%" height="360" autoPlay loop>
+        <video width="100%" height="360" autoPlay>
           <source src="assets/images/video_watches.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>

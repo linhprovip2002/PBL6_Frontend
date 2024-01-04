@@ -49,7 +49,7 @@ const Nav = ({ hiddenSearch }) => {
               height={30}
               className="object-contain flex-shrink-0"
             />
-            <p className="logo_text">SUNNY WATCH</p>
+            <p className="logo_text">WATCH WORLD</p>
           </Link>
         </div>
         <div className="flex gap-6 font-satoshi flex-center max-md:text-sm">
@@ -168,9 +168,8 @@ const Nav = ({ hiddenSearch }) => {
                 />
               )}
               <ul
-                className={`absolute right-0 w-40 py-2 mt-2 rounded-lg bg-white	 shadow-xl border border-slate-200 z-10 ${
-                  open ? "block" : "hidden"
-                }`}
+                className={`absolute right-0 w-40 py-2 mt-2 rounded-lg bg-white	 shadow-xl border border-slate-200 z-10 ${open ? "block" : "hidden"
+                  }`}
               >
                 {loggedin ? (
                   <>

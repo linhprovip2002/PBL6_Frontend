@@ -194,6 +194,14 @@ export default function Product() {
                 })()}
               </select>
             </div>
+            <div className="flex gap-3">
+              <span>Số lượng đã bán:</span>
+              <span>{productDetailsCurrent?.soldNumber}</span>
+            </div>
+            <div className="flex gap-3">
+              <span>Số lượng còn:</span>
+              <span>{productDetailsCurrent?.quantity - productDetailsCurrent?.soldNumber}</span>
+            </div>
             <div className={styles.description}>
               <span>{productDetailsCurrent?.description}</span>
             </div>

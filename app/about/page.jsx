@@ -11,17 +11,17 @@ const About = () => {
           <div className="text">
             <h2>Về chúng tôi</h2>
             <h5>
-              Thương hiệu đồng hồ <span>Sunny Watch</span>
+              Thương hiệu đồng hồ <span>WATCH WORLD</span>
             </h5>
             <p>
-              Chào mừng bạn đến với Sunny Watch, nơi tinh tế gặp gỡ đẳng cấp.
+              Chào mừng bạn đến với WATCH WORLD, nơi tinh tế gặp gỡ đẳng cấp.
               Chúng tôi tự hào là thương hiệu đồng hồ hàng đầu, mang đến cho
-              khách hàng trải nghiệm thời gian không giới hạn. Sunny Watch không
+              khách hàng trải nghiệm thời gian không giới hạn. WATCH WORLD không
               chỉ là một chiếc đồng hồ, mà là biểu tượng của phong cách và sự
               sang trọng. Với sự kết hợp hoàn hảo giữa chất lượng tốt nhất và
               thiết kế độc đáo, chúng tôi cam kết tạo nên những khoảnh khắc đặc
               biệt trong cuộc sống của bạn. Hãy đồng hành cùng chúng tôi, để mỗi
-              khoảnh khắc trở nên rạng ngời. Sunny Watch - Nắm bắt thời gian,
+              khoảnh khắc trở nên rạng ngời. WATCH WORLD - Nắm bắt thời gian,
               kiến tạo phong cách.
             </p>
           </div>
@@ -31,16 +31,16 @@ const About = () => {
           <div className="text">
             <h2 style={{ color: "#DAA520" }}>Những lý do</h2>
             <h5>
-              Bạn nên chọn <span>Sunny Watch</span>
+              Bạn nên chọn <span>WATCH WORLD</span>
             </h5>
             <p>
-              Sunny Watch là sự lựa chọn không thể phủ nhận với nhiều lý do hấp
+              WATCH WORLD là sự lựa chọn không thể phủ nhận với nhiều lý do hấp
               dẫn. Chúng tôi tự hào mang đến cho khách hàng trải nghiệm đồng hồ
               tuyệt vời nhất, bắt đầu từ chất lượng vô song. Mỗi sản phẩm của
               chúng tôi được chế tác tận tâm từ những nguyên liệu chọn lọc, đảm
               bảo độ bền và sự đẹp mắt vượt trội. Sự sáng tạo trong thiết kế là
-              điểm mạnh khác biệt, khiến Sunny Watch trở thành biểu tượng thời
-              trang và cái nhìn đẳng cấp. Đồng hành cùng Sunny Watch, bạn không
+              điểm mạnh khác biệt, khiến WATCH WORLD trở thành biểu tượng thời
+              trang và cái nhìn đẳng cấp. Đồng hành cùng WATCH WORLD, bạn không
               chỉ đeo một chiếc đồng hồ, mà còn trải nghiệm một phong cách sống
               đầy ấn tượng và sang trọng.
             </p>
@@ -53,13 +53,13 @@ const About = () => {
           <div className="text">
             <h2 style={{ color: "#87CEFA" }}>Giá trị cốt lõi</h2>
             <h5>
-              Của<span> Sunny Watch</span>
+              Của<span> WATCH WORLD</span>
             </h5>
             <p>
-              Sunny Watch tỏa sáng với giá trị cốt lõi: chất lượng, phối hợp
+              WATCH WORLD tỏa sáng với giá trị cốt lõi: chất lượng, phối hợp
               cùng với sự sáng tạo. Chúng tôi cam kết cung cấp đồng hồ không chỉ
               đẹp mắt và chính xác mà còn thể hiện đẳng cấp và phong cách cá
-              nhân. Sunny Watch không chỉ là sản phẩm, mà là biểu tượng của sự
+              nhân. WATCH WORLD không chỉ là sản phẩm, mà là biểu tượng của sự
               hoàn hảo và tinh tế.
             </p>
             <button type="button" className="hire mt-5"><a href="/">Mua hàng ngay</a></button>
@@ -68,7 +68,7 @@ const About = () => {
       </section>
 
       <section className="text-center mt-[20px] w-full text-5xl mb-5 font-bold">
-        <div>Sunny Watch</div>
+        <div>WATCH WORLD</div>
         <div className="orange_gradient py-2">Ánh sáng cho mọi khoảnh khắc</div>
       </section>
 

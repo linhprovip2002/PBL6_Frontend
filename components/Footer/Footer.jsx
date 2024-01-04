@@ -17,7 +17,7 @@ const Footer = () => {
                   className="abosolute"
                 />
                 <p className="-top-px left-12 font-medium w-[220px] flex justify-center items-center ">
-                  <span className="text-white text-2xl">SUNNY WATCH</span>
+                  <span className="text-white text-2xl">WATCH WORLD</span>
                 </p>
               </div>
             </div>

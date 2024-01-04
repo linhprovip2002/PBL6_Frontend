@@ -3,8 +3,7 @@
 import Card from "@components/Card/Card";
 import { getProductByCategorySuccess } from "@redux/reducers/product.reducer";
 import { ProductApi } from "@services/api/product.api";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -104,7 +103,7 @@ const Products = () => {
     <>
       <section className="w-full flex-center flex-col mt-[130px] mb-[80px]">
         <h1 className="head_text text-center">
-          Sunny Watch
+          WATCH WORLD
           <br className="max-md:hidden" />
           <span className="orange_gradient text-center">
             {" "}
@@ -163,16 +162,16 @@ const Products = () => {
           {categoryName === "all"
             ? `Tất cả loại đồng hồ`
             : categoryName === "Men's Watches"
-            ? `Đồng hồ nam`
-            : categoryName === "Women's Watches"
-            ? `Đồng hồ nữ`
-            : categoryName === "Children's Watches"
-            ? `Đồng hồ trẻ em`
-            : categoryName === "Luxury Watches"
-            ? `Đồng hồ cao cấp`
-            : categoryName === "Smart Watches"
-            ? `Đồng hồ thông minh`
-            : ""}
+              ? `Đồng hồ nam`
+              : categoryName === "Women's Watches"
+                ? `Đồng hồ nữ`
+                : categoryName === "Children's Watches"
+                  ? `Đồng hồ trẻ em`
+                  : categoryName === "Luxury Watches"
+                    ? `Đồng hồ cao cấp`
+                    : categoryName === "Smart Watches"
+                      ? `Đồng hồ thông minh`
+                      : ""}
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 lg:gap-x-12 gap-y-6 mb-10 app-x-padding">
           <Card />
