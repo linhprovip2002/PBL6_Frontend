@@ -47,7 +47,7 @@ const OrderComplete = () => {
                     style={{ width: "70px", height: "75px" }}
                   />
                   <div className="absolute flex justify-center top-[-6px] right-[-10px] rounded-[80px] bg-black w-5 h-5 text-white">
-                    <div className="">{item.quantityInCart}</div>
+                    <div className="">{item?.quantityInCart}</div>
                   </div>
                 </div>
               ))}
@@ -57,12 +57,12 @@ const OrderComplete = () => {
               <div className="flex-col justify-start items-start gap-5 inline-flex">
                 <div className="justify-center items-center gap-3 inline-flex">
                   <div className="text-zinc-500 text-sm font-semibold font-['Inter'] leading-snug">
-                    Order code: {currentOrder?._id.substring(19, 24)}
+                    Order code: {currentOrder?._id?.substring(19, 24)}
                   </div>
                 </div>
                 <div className="justify-center items-center gap-3 inline-flex">
                   <div className="text-zinc-500 text-sm font-semibold font-['Inter'] leading-snug">
-                    Date: {currentOrder?.orderDate.substring(0, 10)}
+                    Date: {currentOrder?.orderDate?.substring(0, 10)}
                   </div>
                 </div>
                 <div className="justify-center items-center gap-3 inline-flex">
@@ -82,13 +82,13 @@ const OrderComplete = () => {
                     {item?.id}
                   </div>
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
-                    {item.date}
+                    {item?.date}
                   </div>
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
-                    {item.total}
+                    {item?.total}
                   </div>
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
-                    {item.payment_method}
+                    {item?.payment_method}
                   </div>
                 </div>
               ))}
