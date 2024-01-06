@@ -47,7 +47,7 @@ const OrderComplete = () => {
                     style={{ width: "70px", height: "75px" }}
                   />
                   <div className="absolute flex justify-center top-[-6px] right-[-10px] rounded-[80px] bg-black w-5 h-5 text-white">
-                    <div className="">{item.quantityInCart}</div>
+                    <div className="">{item?.quantityInCart}</div>
                   </div>
                 </div>
               ))}
@@ -82,13 +82,13 @@ const OrderComplete = () => {
                     {item?.id}
                   </div>
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
-                    {item.date}
+                    {item?.date}
                   </div>
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
-                    {item.total}
+                    {item?.total}
                   </div>
                   <div className="text-neutral-900 text-sm font-semibold font-['Inter'] leading-snug">
-                    {item.payment_method}
+                    {item?.payment_method}
                   </div>
                 </div>
               ))}
