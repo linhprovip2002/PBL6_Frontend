@@ -41,7 +41,8 @@ const checkout = () => {
   const handleSubmit = async () => {
     try {
       if (selectedPaymentOption === "PayPal") {
-        await OrderApi.createPayment(currentOrder).then((res) => {
+        await OrderApi.createPayment({ ...currentOrder, total: (currentOrder?.total / 24400)?.toFixed(2) }).then((res) => {
+          console.log(currentOrder);
           dispatch(setLinkPayment(res?.data.links[1]?.href))
           dispatch(togglePaymentModal());
         });
@@ -60,7 +61,6 @@ const checkout = () => {
       toastError(err.response.data.error)
     }
   };
-
   return (
     currentOrder?._id ?
       <>
@@ -70,18 +70,19 @@ const checkout = () => {
 
             {/* Conditionally render VnpayPage based on the selectedPaymentOption */}
             {selectedPaymentOption === "VNPay" ? <VnpayPage order={currentOrder} payment={payment} onInputChange={handleInputChange} /> :
-              <div className="container mx-auto mt-8">
-                <h1 className="text-3xl font-bold mb-4">PAYPAL Checkout</h1>
-                <div className="mb-4">
-                  <label className="block text-sm font-semibold mb-2">Amount:</label>
-                  <input
-                    disabled
-                    type="number"
-                    defaultValue={currentOrder?.total}
-                    className="border p-2 w-full"
-                  />
-                </div>
-              </div>
+              selectedPaymentOption === "PayPal" ?
+                <div className="container mx-auto mt-8">
+                  <h1 className="text-3xl font-bold mb-4">PAYPAL Checkout</h1>
+                  <div className="mb-4">
+                    <label className="block text-sm font-semibold mb-2">Amount:</label>
+                    <input
+                      disabled
+                      type="text"
+                      defaultValue={`${(currentOrder?.total / 24400)?.toFixed(2)} $`}
+                      className="border p-2 w-full"
+                    />
+                  </div>
+                </div> : <></>
             }
 
             <button
